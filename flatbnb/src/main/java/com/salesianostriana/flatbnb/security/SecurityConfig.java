@@ -1,5 +1,8 @@
 package com.salesianostriana.flatbnb.security;
 
+import com.salesianostriana.flatbnb.security.exceptionhandling.JwtAccessDeniedHandler;
+import com.salesianostriana.flatbnb.security.exceptionhandling.JwtAuthenticationEntryPoint;
+import com.salesianostriana.flatbnb.security.jwt.access.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +26,9 @@ public class SecurityConfig {
 
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private final JwtAccessDeniedHandler accessDeniedHandler;
 
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
@@ -47,7 +53,7 @@ public class SecurityConfig {
         return p;
     }
 
-    /*@Bean
+    @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable());
@@ -74,6 +80,6 @@ public class SecurityConfig {
 
         return http.build();
 
-    }*/
+    }
 
 }

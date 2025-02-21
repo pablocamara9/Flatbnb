@@ -3,6 +3,7 @@ package com.salesianostriana.flatbnb.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -44,8 +46,8 @@ public class SecurityConfig {
 
         return p;
     }
-/*
-    @Bean
+
+    /*@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable());
@@ -53,10 +55,25 @@ public class SecurityConfig {
         http.sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(excepz -> excepz
-                .authenticationEntryPoint(authenticationEntrypoint)
-                .accessDeniedHandler(new JwtAccessDeniedHandler())
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler)
         );
 
-    }
-*/
+        http.authorizeHttpRequests(authz -> authz
+                .requestMatchers(HttpMethod.POST, "auth/register").permitAll()
+                .requestMatchers("/me/admin").hasRole("ADMIN")
+                .requestMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+        );
+
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+        http.headers(headers -> headers
+                .frameOptions(frameOptions -> frameOptions.disable())
+        );
+
+        return http.build();
+
+    }*/
+
 }

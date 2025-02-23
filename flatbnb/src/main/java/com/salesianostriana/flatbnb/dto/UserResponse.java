@@ -18,7 +18,7 @@ public record UserResponse(
         return new UserResponse(
                 user.getId(),
                 user.getUsername(),
-                null,
+                user.getActivationToken(),
                 null
         );
     }

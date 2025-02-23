@@ -1,4 +1,4 @@
-package com.salesianostriana.flatbnb.dto;
+package com.salesianostriana.flatbnb.dto.user;
 
 public record EditUserDto(
         String nombre,

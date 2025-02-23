@@ -1,4 +1,4 @@
-package com.salesianostriana.flatbnb.dto;
+package com.salesianostriana.flatbnb.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.salesianostriana.flatbnb.model.User;

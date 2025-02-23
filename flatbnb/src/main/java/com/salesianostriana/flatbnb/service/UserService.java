@@ -1,7 +1,7 @@
 package com.salesianostriana.flatbnb.service;
 
-import com.salesianostriana.flatbnb.dto.CreateUserDto;
-import com.salesianostriana.flatbnb.dto.EditUserDto;
+import com.salesianostriana.flatbnb.dto.user.CreateUserDto;
+import com.salesianostriana.flatbnb.dto.user.EditUserDto;
 import com.salesianostriana.flatbnb.error.ActivationExpiredException;
 import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.model.UserRole;

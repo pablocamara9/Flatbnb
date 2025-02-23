@@ -1,6 +1,6 @@
 package com.salesianostriana.flatbnb.security.jwt.refresh;
 
-import com.salesianostriana.flatbnb.dto.UserResponse;
+import com.salesianostriana.flatbnb.dto.user.UserResponse;
 import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.repository.UserRepository;
 import com.salesianostriana.flatbnb.security.jwt.access.JwtService;

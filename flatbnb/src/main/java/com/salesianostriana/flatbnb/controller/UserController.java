@@ -1,9 +1,6 @@
 package com.salesianostriana.flatbnb.controller;
 
-import com.salesianostriana.flatbnb.dto.CreateUserDto;
-import com.salesianostriana.flatbnb.dto.GetAllUsersDto;
-import com.salesianostriana.flatbnb.dto.GetUserDto;
-import com.salesianostriana.flatbnb.dto.UserResponse;
+import com.salesianostriana.flatbnb.dto.*;
 import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -35,10 +32,13 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<GetUserDto> findById(@PathVariable UUID id) {
-        User user = userService.findById(id);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(GetUserDto.from(user));
+    public GetUserDto findById(@PathVariable UUID id) {
+        return GetUserDto.of(userService.findById(id));
+    }
+
+    @PutMapping("{id}")
+    public GetUserDto edit(@PathVariable UUID id, @RequestBody EditUserDto editUserDto) {
+        return GetUserDto.of(userService.edit(id, editUserDto));
     }
 
 }

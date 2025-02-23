@@ -11,7 +11,7 @@ public record GetAllUsersDto(
 ) {
     public static GetAllUsersDto fromDto(List<User> listadoUsuariosSinProcesar) {
         return GetAllUsersDto.builder()
-                .listadoUsuarios(listadoUsuariosSinProcesar.stream().map(GetUserDto::from).toList())
+                .listadoUsuarios(listadoUsuariosSinProcesar.stream().map(GetUserDto::of).toList())
                 .build();
     }
 

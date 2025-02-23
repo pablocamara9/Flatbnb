@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +44,11 @@ public class UserService {
     /*private String generateRandomActicationCode() {
         return UUID.randomUUID().toString();
     }*/
+
+    public User findById(UUID id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro el usuario con id " + id));
+    }
 
 
 }

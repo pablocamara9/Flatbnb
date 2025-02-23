@@ -2,6 +2,7 @@ package com.salesianostriana.flatbnb.controller;
 
 import com.salesianostriana.flatbnb.dto.CreateUserDto;
 import com.salesianostriana.flatbnb.dto.GetAllUsersDto;
+import com.salesianostriana.flatbnb.dto.GetUserDto;
 import com.salesianostriana.flatbnb.dto.UserResponse;
 import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.service.UserService;
@@ -10,9 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/user/")
 public class UserController {
 
     private final UserService userService;
@@ -29,6 +32,13 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(UserResponse.of(user));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<GetUserDto> findById(@PathVariable UUID id) {
+        User user = userService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetUserDto.from(user));
     }
 
 }

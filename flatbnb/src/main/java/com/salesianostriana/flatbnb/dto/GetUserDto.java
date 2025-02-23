@@ -18,7 +18,7 @@ public record GetUserDto(
         boolean enabled,
         Instant createdAt
 ) {
-    public static GetUserDto from(User user) {
+    public static GetUserDto of(User user) {
         return GetUserDto.builder()
                 .id(user.getId())
                 .username(user.getUsername())

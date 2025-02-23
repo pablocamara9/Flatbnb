@@ -1,6 +1,7 @@
 package com.salesianostriana.flatbnb.service;
 
 import com.salesianostriana.flatbnb.dto.CreateUserDto;
+import com.salesianostriana.flatbnb.dto.EditUserDto;
 import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.model.UserRole;
 import com.salesianostriana.flatbnb.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -48,6 +50,22 @@ public class UserService {
     public User findById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No se encontro el usuario con id " + id));
+    }
+
+    public User edit(UUID id, EditUserDto dto) {
+        Optional<User> aBuscar = userRepository.findById(id);
+        if (aBuscar.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el usuario con id " + id);
+        }
+        return aBuscar.map(old -> {
+            old.setNombre(dto.nombre());
+            old.setApellidos(dto.apellidos());
+            old.setEmail(dto.email());
+            old.setTelefono(dto.telefono());
+            old.setPassword(passwordEncoder.encode(dto.password()));
+
+            return userRepository.save(old);
+        }).get();
     }
 
 

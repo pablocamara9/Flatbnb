@@ -68,5 +68,9 @@ public class UserService {
         }).get();
     }
 
+    public void delete(UUID id) {
+        userRepository.deleteById(id);
+    }
+
 
 }

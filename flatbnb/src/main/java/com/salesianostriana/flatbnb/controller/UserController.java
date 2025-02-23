@@ -41,4 +41,10 @@ public class UserController {
         return GetUserDto.of(userService.edit(id, editUserDto));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        userService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }

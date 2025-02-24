@@ -1,4 +1,4 @@
-package com.salesianostriana.flatbnb.dto;
+package com.salesianostriana.flatbnb.dto.piso;
 
 import com.salesianostriana.flatbnb.model.Piso;
 import lombok.Builder;

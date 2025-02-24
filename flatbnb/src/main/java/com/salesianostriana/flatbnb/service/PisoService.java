@@ -1,5 +1,6 @@
 package com.salesianostriana.flatbnb.service;
 
+import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
 import com.salesianostriana.flatbnb.model.Piso;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,6 +21,16 @@ public class PisoService {
             throw new EntityNotFoundException("No se encontraron pisos.");
         }
         return pisos;
+    }
+
+    public Piso createPiso(CreatePisoDto createPisoDto) {
+        return pisoRepository.save(Piso.builder()
+                .direccion(createPisoDto.direccion())
+                .metrosCuadrados(createPisoDto.metrosCuadrados())
+                .numHabitaciones(createPisoDto.numHabitaciones())
+                .observaciones(createPisoDto.observaciones())
+                .build()
+        );
     }
 
 

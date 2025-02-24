@@ -1,6 +1,7 @@
 package com.salesianostriana.flatbnb.controller;
 
 import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
+import com.salesianostriana.flatbnb.dto.piso.EditPisoDto;
 import com.salesianostriana.flatbnb.dto.piso.GetAllPisosDto;
 import com.salesianostriana.flatbnb.dto.piso.GetPisoDto;
 import com.salesianostriana.flatbnb.model.Piso;
@@ -36,6 +37,11 @@ public class PisoController {
     @GetMapping("{id}")
     public GetPisoDto findById(@PathVariable UUID id) {
         return GetPisoDto.of(pisoService.findById(id));
+    }
+
+    @PutMapping("{id}")
+    public GetPisoDto edit(@PathVariable UUID id, @RequestBody EditPisoDto editPisoDto) {
+        return GetPisoDto.of(pisoService.edit(id, editPisoDto));
     }
 
 

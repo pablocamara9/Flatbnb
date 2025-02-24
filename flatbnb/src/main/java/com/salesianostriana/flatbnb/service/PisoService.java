@@ -56,5 +56,9 @@ public class PisoService {
         }).get();
     }
 
+    public void delete(UUID id) {
+        pisoRepository.deleteById(id);
+    }
+
 
 }

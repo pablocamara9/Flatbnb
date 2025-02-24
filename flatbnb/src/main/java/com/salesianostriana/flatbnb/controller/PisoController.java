@@ -44,5 +44,11 @@ public class PisoController {
         return GetPisoDto.of(pisoService.edit(id, editPisoDto));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        pisoService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 
 }

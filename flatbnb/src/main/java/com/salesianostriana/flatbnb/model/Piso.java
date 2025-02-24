@@ -1,8 +1,6 @@
 package com.salesianostriana.flatbnb.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
@@ -25,6 +23,22 @@ public class Piso {
     private double metrosCuadrados;
     private int numHabitaciones;
     private String observaciones;
+
+    @ManyToOne
+    @JoinColumn(name = "propietario_id",
+            foreignKey = @ForeignKey(name = "fk_piso_propietario"))
+    private Propietario propietario;
+
+    // HELPERS Piso - Propietario
+    public void addPropietario(Propietario p) {
+        this.propietario = p;
+        p.getPisos().add(this);
+    }
+
+    public void removePropietario(Propietario p) {
+        p.getPisos().remove(this);
+        this.propietario = null;
+    }
 
     @Override
     public final boolean equals(Object o) {

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +32,11 @@ public class PisoService {
                 .observaciones(createPisoDto.observaciones())
                 .build()
         );
+    }
+
+    public Piso findById(UUID id) {
+        return pisoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro el piso con id " + id));
     }
 
 

@@ -1,13 +1,16 @@
 package com.salesianostriana.flatbnb.controller;
 
-import com.salesianostriana.flatbnb.dto.GetAllPisosDto;
+import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
+import com.salesianostriana.flatbnb.dto.piso.GetAllPisosDto;
+import com.salesianostriana.flatbnb.dto.piso.GetPisoDto;
+import com.salesianostriana.flatbnb.model.Piso;
+import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.service.PisoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,6 +23,14 @@ public class PisoController {
     public ResponseEntity<GetAllPisosDto> findAll() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GetAllPisosDto.fromDto(pisoService.findAll()));
+    }
+
+    @PostMapping
+    public ResponseEntity<GetPisoDto> create(@RequestBody CreatePisoDto dto) {
+        Piso piso = pisoService.createPiso(dto);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GetPisoDto.of(piso));
     }
 
 

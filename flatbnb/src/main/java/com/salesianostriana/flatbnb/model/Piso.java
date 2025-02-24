@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -18,7 +19,7 @@ public class Piso {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
 
     private String direccion;
     private double metrosCuadrados;

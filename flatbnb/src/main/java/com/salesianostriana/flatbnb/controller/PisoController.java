@@ -4,13 +4,13 @@ import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
 import com.salesianostriana.flatbnb.dto.piso.GetAllPisosDto;
 import com.salesianostriana.flatbnb.dto.piso.GetPisoDto;
 import com.salesianostriana.flatbnb.model.Piso;
-import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.service.PisoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,6 +31,11 @@ public class PisoController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(GetPisoDto.of(piso));
+    }
+
+    @GetMapping("{id}")
+    public GetPisoDto findById(@PathVariable UUID id) {
+        return GetPisoDto.of(pisoService.findById(id));
     }
 
 

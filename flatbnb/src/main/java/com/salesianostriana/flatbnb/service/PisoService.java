@@ -3,7 +3,9 @@ package com.salesianostriana.flatbnb.service;
 import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
 import com.salesianostriana.flatbnb.dto.piso.EditPisoDto;
 import com.salesianostriana.flatbnb.model.Piso;
+import com.salesianostriana.flatbnb.model.Propietario;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
+import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import java.util.UUID;
 public class PisoService {
 
     private final PisoRepository pisoRepository;
+    private final PropietarioRepository propietarioRepository;
 
     public List<Piso> findAll() {
         List<Piso> pisos = pisoRepository.findAll();
@@ -27,13 +30,19 @@ public class PisoService {
     }
 
     public Piso createPiso(CreatePisoDto createPisoDto) {
-        return pisoRepository.save(Piso.builder()
+        Propietario prop = propietarioRepository.findById(createPisoDto.idPropietario())
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro el propietario con id " + createPisoDto.idPropietario()));
+
+        Piso p = Piso.builder()
                 .direccion(createPisoDto.direccion())
                 .metrosCuadrados(createPisoDto.metrosCuadrados())
                 .numHabitaciones(createPisoDto.numHabitaciones())
                 .observaciones(createPisoDto.observaciones())
-                .build()
-        );
+                .propietario(prop)
+                .build();
+
+        p.setPropietario(prop);
+        return pisoRepository.save(p);
     }
 
     public Piso findById(UUID id) {

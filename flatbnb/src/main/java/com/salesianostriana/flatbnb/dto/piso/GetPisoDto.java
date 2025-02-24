@@ -1,5 +1,6 @@
 package com.salesianostriana.flatbnb.dto.piso;
 
+import com.salesianostriana.flatbnb.dto.propietario.GetPropietarioDto;
 import com.salesianostriana.flatbnb.model.Piso;
 import lombok.Builder;
 
@@ -11,7 +12,8 @@ public record GetPisoDto(
         String direccion,
         double metrosCuadrados,
         int numHabitaciones,
-        String observaciones
+        String observaciones,
+        GetPropietarioDto propietario
 ) {
     public static GetPisoDto of(Piso piso) {
         return GetPisoDto.builder()
@@ -20,6 +22,8 @@ public record GetPisoDto(
                 .metrosCuadrados(piso.getMetrosCuadrados())
                 .numHabitaciones(piso.getNumHabitaciones())
                 .observaciones(piso.getObservaciones())
+                //.propietario(GetPropietarioDto.of(piso.getPropietario().getId()))
+                .propietario(GetPropietarioDto.of(piso.getPropietario()))
                 .build();
     }
 }

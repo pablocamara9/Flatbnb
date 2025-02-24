@@ -1,12 +1,12 @@
 package com.salesianostriana.flatbnb.dto.piso;
 
-import com.salesianostriana.flatbnb.dto.propietario.GetPropietarioDto;
+import java.util.UUID;
 
 public record EditPisoDto(
         String direccion,
         double metrosCuadrados,
         int numHabitaciones,
         String observaciones,
-        GetPropietarioDto getPropietarioDto
+        UUID idPropietario
 ) {
 }

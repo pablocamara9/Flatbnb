@@ -30,18 +30,20 @@ public class PisoService {
     }
 
     public Piso createPiso(CreatePisoDto createPisoDto) {
-        Propietario prop = propietarioRepository.findById(createPisoDto.idPropietario())
-                .orElseThrow(() -> new EntityNotFoundException("No se encontro el propietario con id " + createPisoDto.idPropietario()));
+        Optional<Propietario> prop = propietarioRepository.findById(createPisoDto.idPropietario());
+        if (prop.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el propietario con id " + createPisoDto.idPropietario());
+        }
 
         Piso p = Piso.builder()
                 .direccion(createPisoDto.direccion())
                 .metrosCuadrados(createPisoDto.metrosCuadrados())
                 .numHabitaciones(createPisoDto.numHabitaciones())
                 .observaciones(createPisoDto.observaciones())
-                .propietario(prop)
+                .propietario(prop.get())
                 .build();
 
-        p.setPropietario(prop);
+        p.setPropietario(prop.get());
         return pisoRepository.save(p);
     }
 
@@ -55,11 +57,18 @@ public class PisoService {
         if(aBuscar.isEmpty()) {
             throw new EntityNotFoundException("No se encontro el piso con id " + id);
         }
+
+        Optional<Propietario> prop = propietarioRepository.findById(dto.idPropietario());
+        if (prop.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el propietario con id " + dto.idPropietario());
+        }
+
         return aBuscar.map(old -> {
             old.setDireccion(dto.direccion());
             old.setMetrosCuadrados(dto.metrosCuadrados());
             old.setNumHabitaciones(dto.numHabitaciones());
             old.setObservaciones(dto.observaciones());
+            old.setPropietario(prop.get());
 
             return pisoRepository.save(old);
         }).get();

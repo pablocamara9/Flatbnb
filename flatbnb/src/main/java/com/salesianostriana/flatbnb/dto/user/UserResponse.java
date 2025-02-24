@@ -1,4 +1,4 @@
-package com.salesianostriana.flatbnb.dto;
+package com.salesianostriana.flatbnb.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.salesianostriana.flatbnb.model.User;
@@ -18,7 +18,7 @@ public record UserResponse(
         return new UserResponse(
                 user.getId(),
                 user.getUsername(),
-                null,
+                user.getActivationToken(),
                 null
         );
     }

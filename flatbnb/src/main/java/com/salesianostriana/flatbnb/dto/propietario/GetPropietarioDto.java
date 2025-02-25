@@ -7,6 +7,7 @@ import java.util.UUID;
 
 @Builder
 public record GetPropietarioDto(
+        UUID id,
         String nombre,
         String apellidos,
         String email,
@@ -15,6 +16,7 @@ public record GetPropietarioDto(
 ) {
     public static GetPropietarioDto of(Propietario propietario) {
         return GetPropietarioDto.builder()
+                .id(propietario.getId())
                 .nombre(propietario.getNombre())
                 .apellidos(propietario.getApellidos())
                 .email(propietario.getEmail())

@@ -66,8 +66,19 @@ public class SecurityConfig {
         );
 
         http.authorizeHttpRequests(authz -> authz
+                //USUARIOS
+                .requestMatchers(HttpMethod.GET, "user/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "user/auth/register", "user/activate/account", "/user/auth/login", "/user/auth/refresh/token").permitAll()
-                .requestMatchers("piso/**").authenticated()
+                .requestMatchers(HttpMethod.PUT, "user/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "user/**").hasRole("ADMIN")
+                //PISOS
+                .requestMatchers(HttpMethod.GET, "piso/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "piso/**").hasRole("PROPIETARIO")
+                .requestMatchers(HttpMethod.PUT, "piso/**").hasRole("PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "piso/**").hasRole("PROPIETARIO")
+                //PROPIETARIOS
+
+                //OTRAS COSAS
                 .requestMatchers("/me/admin").hasRole("ADMIN")
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()

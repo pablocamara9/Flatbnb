@@ -1,15 +1,13 @@
 package com.salesianostriana.flatbnb.controller;
 
 import com.salesianostriana.flatbnb.dto.piso.GetAllPropietariosDto;
+import com.salesianostriana.flatbnb.dto.propietario.EditPropietarioDto;
 import com.salesianostriana.flatbnb.dto.propietario.GetPropietarioDto;
 import com.salesianostriana.flatbnb.service.PropietarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -29,6 +27,11 @@ public class PropietarioController {
     @GetMapping("{id}")
     public GetPropietarioDto findById(@PathVariable UUID id) {
         return GetPropietarioDto.of(propietarioService.findById(id));
+    }
+
+    @PutMapping("{id}")
+    public GetPropietarioDto edit(@PathVariable UUID id, @RequestBody EditPropietarioDto editPropietarioDto) {
+        return GetPropietarioDto.of(propietarioService.edit(id, editPropietarioDto));
     }
 
 }

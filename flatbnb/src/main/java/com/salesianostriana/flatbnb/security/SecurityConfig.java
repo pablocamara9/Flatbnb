@@ -73,13 +73,15 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "user/**").hasRole("ADMIN")
                 //PISOS
                 .requestMatchers(HttpMethod.GET, "piso/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "piso/**").hasRole("PROPIETARIO")
-                .requestMatchers(HttpMethod.PUT, "piso/**").hasRole("PROPIETARIO")
-                .requestMatchers(HttpMethod.DELETE, "piso/**").hasRole("PROPIETARIO")
+                .requestMatchers(HttpMethod.POST, "piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.PUT, "piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "piso/**").hasAnyRole( "ADMIN","PROPIETARIO")
                 //PROPIETARIOS
-
+                .requestMatchers(HttpMethod.GET, "propietario/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "propietario/**").authenticated()
+                .requestMatchers(HttpMethod.PUT, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 //OTRAS COSAS
-                .requestMatchers("/me/admin").hasRole("ADMIN")
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
         );

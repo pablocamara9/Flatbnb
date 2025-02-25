@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,5 +27,10 @@ public class PropietarioService {
     /*public Propietario create(CreatePropietarioDto dto) {
 
     }*/
+
+    public Propietario findById(UUID id) {
+        return propietarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No se encontro el propietario con id " + id));
+    }
 
 }

@@ -57,4 +57,8 @@ public class PropietarioService {
         }).get();
     }
 
+    public void delete(UUID id) {
+        propietarioRepository.deleteById(id);
+    }
+
 }

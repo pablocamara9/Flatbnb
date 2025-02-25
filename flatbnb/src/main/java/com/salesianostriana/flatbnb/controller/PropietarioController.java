@@ -34,4 +34,10 @@ public class PropietarioController {
         return GetPropietarioDto.of(propietarioService.edit(id, editPropietarioDto));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        propietarioService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

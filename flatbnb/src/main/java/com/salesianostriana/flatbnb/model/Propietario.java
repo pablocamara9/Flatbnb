@@ -1,11 +1,13 @@
 package com.salesianostriana.flatbnb.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,7 +22,8 @@ public class Propietario extends User {
 
     private double valoracion;
 
-    @OneToMany(mappedBy = "propietario", fetch = FetchType.LAZY)
-    private Set<Piso> pisos;
+    @Builder.Default
+    @OneToMany(mappedBy = "propietario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Piso> pisos = new HashSet<>();
 
 }

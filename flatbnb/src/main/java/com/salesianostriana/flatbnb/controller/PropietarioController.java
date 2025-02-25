@@ -1,8 +1,10 @@
 package com.salesianostriana.flatbnb.controller;
 
-import com.salesianostriana.flatbnb.dto.piso.GetAllPropietariosDto;
+import com.salesianostriana.flatbnb.dto.propietario.GetAllPropietariosDto;
 import com.salesianostriana.flatbnb.dto.propietario.EditPropietarioDto;
 import com.salesianostriana.flatbnb.dto.propietario.GetPropietarioDto;
+import com.salesianostriana.flatbnb.dto.user.CreateUserDto;
+import com.salesianostriana.flatbnb.model.Propietario;
 import com.salesianostriana.flatbnb.service.PropietarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,14 @@ public class PropietarioController {
     public ResponseEntity<GetAllPropietariosDto> findAll() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GetAllPropietariosDto.fromDto(propietarioService.findAll()));
+    }
+
+    @PostMapping
+    public ResponseEntity<GetPropietarioDto> create(@RequestBody CreateUserDto createUserDto) {
+        Propietario propietario = propietarioService.create(createUserDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(GetPropietarioDto.of(propietario));
     }
 
     @GetMapping("{id}")

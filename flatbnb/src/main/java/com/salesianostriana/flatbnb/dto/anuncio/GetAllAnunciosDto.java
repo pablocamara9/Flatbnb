@@ -1,4 +1,4 @@
-package com.salesianostriana.flatbnb.dto.piso;
+package com.salesianostriana.flatbnb.dto.anuncio;
 
 import com.salesianostriana.flatbnb.model.Anuncio;
 import lombok.Builder;

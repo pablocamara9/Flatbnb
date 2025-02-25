@@ -1,5 +1,6 @@
-package com.salesianostriana.flatbnb.dto.piso;
+package com.salesianostriana.flatbnb.dto.anuncio;
 
+import com.salesianostriana.flatbnb.dto.piso.GetPisoDto;
 import com.salesianostriana.flatbnb.dto.propietario.GetPropietarioDto;
 import com.salesianostriana.flatbnb.model.Anuncio;
 import lombok.Builder;

@@ -81,6 +81,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "propietario/**").authenticated()
                 .requestMatchers(HttpMethod.PUT, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                //ANUNCIOS
+
                 //OTRAS COSAS
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()

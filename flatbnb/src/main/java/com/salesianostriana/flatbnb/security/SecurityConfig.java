@@ -66,9 +66,22 @@ public class SecurityConfig {
         );
 
         http.authorizeHttpRequests(authz -> authz
+                //USUARIOS
+                .requestMatchers(HttpMethod.GET, "user/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "user/auth/register", "user/activate/account", "/user/auth/login", "/user/auth/refresh/token").permitAll()
-                .requestMatchers("piso/**").authenticated()
-                .requestMatchers("/me/admin").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "user/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "user/**").hasRole("ADMIN")
+                //PISOS
+                .requestMatchers(HttpMethod.GET, "piso/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.PUT, "piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "piso/**").hasAnyRole( "ADMIN","PROPIETARIO")
+                //PROPIETARIOS
+                .requestMatchers(HttpMethod.GET, "propietario/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "propietario/**").authenticated()
+                .requestMatchers(HttpMethod.PUT, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                //OTRAS COSAS
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()
         );

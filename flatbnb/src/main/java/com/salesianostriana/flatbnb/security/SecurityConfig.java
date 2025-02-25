@@ -82,7 +82,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 //ANUNCIOS
-
+                .requestMatchers(HttpMethod.GET, "anuncio/**").permitAll()
                 //OTRAS COSAS
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()

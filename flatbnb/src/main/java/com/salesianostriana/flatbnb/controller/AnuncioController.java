@@ -134,4 +134,85 @@ public class AnuncioController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    // Consultas
+    @Operation(summary = "Obtiene un un listado de anuncios ordenando por precio de menor a mayor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/precio")
+    public ResponseEntity<GetAllAnunciosDto> findAllOrderByPrecio() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllOrderByPrecio()));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios ordenando por precio de mayor a menor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/precioDesc")
+    public ResponseEntity<GetAllAnunciosDto> findAllOrderByPrecioDesc() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllOrderByPrecioDesc()));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios entre un rango de precios")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/precioEntre/{min}/{max}")
+    public ResponseEntity<GetAllAnunciosDto> findAllByPrecioBetween(@PathVariable double min, @PathVariable double max) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllByPrecioBetween(min, max)));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios con un precio mayor al proporcionado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/precioMayor/{precio}")
+    public ResponseEntity<GetAllAnunciosDto> findAllByPrecioGreaterThan(@PathVariable double precio) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllByPrecioGreaterThan(precio)));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios con un precio menor al proporcionado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/precioMenor/{precio}")
+    public ResponseEntity<GetAllAnunciosDto> findAllByPrecioLessThan(@PathVariable double precio) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllByPrecioLessThan(precio)));
+    }
+
 }

@@ -99,4 +99,46 @@ public class AnuncioService {
         aBuscar.get().deletePropietario(aBuscar.get().getPropietario());
         anuncioRepository.delete(aBuscar.get());
     }
+
+    // Consultas
+    public List<Anuncio> findAllOrderByPrecio() {
+        List<Anuncio> anuncios = anuncioRepository.findAllOrderByPrecio();
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
+    public List<Anuncio> findAllOrderByPrecioDesc() {
+        List<Anuncio> anuncios = anuncioRepository.findAllOrderByPrecioDesc();
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
+    public List<Anuncio> findAllByPrecioBetween(double min, double max) {
+        List<Anuncio> anuncios = anuncioRepository.findAllByPrecioBetween(min, max);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
+    public List<Anuncio> findAllByPrecioGreaterThan(double precio) {
+        List<Anuncio> anuncios = anuncioRepository.findAllByPrecioGreaterThan(precio);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
+    public List<Anuncio> findAllByPrecioLessThan(double precio) {
+        List<Anuncio> anuncios = anuncioRepository.findAllByPrecioLessThan(precio);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
 }

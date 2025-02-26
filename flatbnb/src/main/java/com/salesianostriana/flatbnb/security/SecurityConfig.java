@@ -87,7 +87,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 .requestMatchers(HttpMethod.DELETE, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 //OTRAS COSAS
-                .requestMatchers("/h2-console/**").permitAll()
+                //.requestMatchers("/h2-console/**").permitAll()
+                .requestMatchers("/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                 .anyRequest().authenticated()
         );
 

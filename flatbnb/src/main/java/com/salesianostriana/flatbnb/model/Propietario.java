@@ -26,4 +26,8 @@ public class Propietario extends User {
     @OneToMany(mappedBy = "propietario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Piso> pisos = new HashSet<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "propietario", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Anuncio> anuncios = new HashSet<>();
+
 }

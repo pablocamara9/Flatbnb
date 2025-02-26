@@ -31,6 +31,7 @@ public class DataSeed {
                 .username("admin")
                 .password("admin")
                 .roles(Set.of(UserRole.ADMIN))
+                .enabled(true)
                 .build();
         userRepository.save(admin);
 

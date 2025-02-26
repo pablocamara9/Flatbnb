@@ -13,34 +13,44 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Piso {
+public class Anuncio {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    private String direccion;
-    private double metrosCuadrados;
-    private int numHabitaciones;
-    private String observaciones;
+    private String descripcion;
+    private double precio;
+    private String urlImagen;
 
-    @ManyToOne
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "piso_id",
+            foreignKey = @ForeignKey(name = "fk_anuncio_piso"))
+    private Piso piso;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "propietario_id",
-            foreignKey = @ForeignKey(name = "fk_piso_propietario"))
+            foreignKey = @ForeignKey(name = "fk_anuncio_propietario"))
     private Propietario propietario;
 
-    @OneToOne(mappedBy = "piso")
-    private Anuncio anuncio;
-
-    // HELPERS Piso - Propietario
-    public void addPropietario(Propietario p) {
-        this.propietario = p;
-        p.getPisos().add(this);
+    public void addPiso(Piso piso) {
+        this.piso = piso;
+        piso.setAnuncio(this);
     }
 
-    public void removePropietario(Propietario p) {
-        p.getPisos().remove(this);
-        this.propietario = null;
+    public void deletePiso(Piso piso) {
+        piso.setAnuncio(null);
+        this.piso = piso;
+    }
+
+    public void addPropietario(Propietario propietario) {
+        this.propietario = propietario;
+        propietario.getAnuncios().add(this);
+    }
+
+    public void deletePropietario(Propietario propietario) {
+        propietario.getAnuncios().remove(this);
+        this.propietario = propietario;
     }
 
     @Override
@@ -50,8 +60,8 @@ public class Piso {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Piso piso = (Piso) o;
-        return getId() != null && Objects.equals(getId(), piso.getId());
+        Anuncio anuncio = (Anuncio) o;
+        return getId() != null && Objects.equals(getId(), anuncio.getId());
     }
 
     @Override

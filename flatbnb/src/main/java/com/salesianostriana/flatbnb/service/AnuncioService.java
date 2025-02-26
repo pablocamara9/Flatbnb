@@ -47,8 +47,8 @@ public class AnuncioService {
                 .descripcion(dto.descripcion())
                 .precio(dto.precio())
                 .urlImagen(dto.urlImagen())
-                .piso(piso.get())
-                .propietario(propietario.get())
+                //.piso(piso.get())
+                //.propietario(propietario.get())
                 .build();
 
         a.setPiso(piso.get());

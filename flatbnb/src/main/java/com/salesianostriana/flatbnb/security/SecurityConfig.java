@@ -83,9 +83,13 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 //ANUNCIOS
                 .requestMatchers(HttpMethod.GET, "anuncio/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                /*.requestMatchers(HttpMethod.POST, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 .requestMatchers(HttpMethod.PUT, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.DELETE, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")*/
+
+                .requestMatchers(HttpMethod.POST, "anuncio/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "anuncio/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "anuncio/**").permitAll()
                 //OTRAS COSAS
                 //.requestMatchers("/h2-console/**").permitAll()
                 .requestMatchers("/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()

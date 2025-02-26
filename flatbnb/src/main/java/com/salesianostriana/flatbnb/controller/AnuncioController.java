@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -82,7 +83,7 @@ public class AnuncioController {
                     content = @Content)
     })
     @PostMapping
-    public ResponseEntity<GetAnuncioDto> create(@RequestBody CreateAnuncioDto dto) {
+    public ResponseEntity<GetAnuncioDto> create(@RequestBody @Valid CreateAnuncioDto dto) {
         Anuncio anuncio = anuncioService.create(dto);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -115,7 +116,7 @@ public class AnuncioController {
                     content = @Content)
     })
     @PutMapping("{id}")
-    public GetAnuncioDto edit(@PathVariable UUID id, @RequestBody EditAnuncioDto editAnuncioDto) {
+    public GetAnuncioDto edit(@PathVariable UUID id, @RequestBody @Valid EditAnuncioDto editAnuncioDto) {
         return GetAnuncioDto.of(anuncioService.edit(id, editAnuncioDto));
     }
 

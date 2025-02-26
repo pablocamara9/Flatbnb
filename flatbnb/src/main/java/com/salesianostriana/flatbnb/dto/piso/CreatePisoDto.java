@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record CreatePisoDto(
-        @NotBlank(message = "La dirección no puede estar vacía")
+        @NotBlank(message = "{createPisoDto.direccion.notblank}")
         String direccion,
         double metrosCuadrados,
         int numHabitaciones,
         String observaciones,
-        @NotNull(message = "El id del propietario no puede estar vacío")
+        @NotNull(message = "{createPisoDto.idPropietario.notnull}")
         UUID idPropietario
 ) {
 }

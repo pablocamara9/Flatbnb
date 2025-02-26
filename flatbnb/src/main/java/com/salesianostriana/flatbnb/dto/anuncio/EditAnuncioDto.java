@@ -7,13 +7,13 @@ import java.util.UUID;
 
 public record EditAnuncioDto(
         String descripcion,
-        @NotNull(message = "El precio no puede estar vacío")
-        @DecimalMin("0.01")
+        @NotNull(message = "{editAnuncioDto.precio.notnull}")
+        @DecimalMin(value = "0.01", message = "{editAnuncioDto.precio.min}")
         double precio,
         String urlImagen,
-        @NotNull(message = "El id del piso no puede estar vacío")
+        @NotNull(message = "{editAnuncioDto.idPiso.notnull}")
         UUID idPiso,
-        @NotNull(message = "El id del propietario no puede estar vacío")
+        @NotNull(message = "{editAnuncioDto.idPropietario.notnull}")
         UUID idPropietario
 ) {
 }

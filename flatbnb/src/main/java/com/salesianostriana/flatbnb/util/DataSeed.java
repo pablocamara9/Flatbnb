@@ -88,7 +88,7 @@ public class DataSeed {
         propietarioRepository.save(p1);
         propietarioRepository.save(p2);
 
-        Anuncio a1 = Anuncio.builder()
+        /*Anuncio a1 = Anuncio.builder()
                 .descripcion("Piso muy luminoso")
                 .precio(99.90)
                 .urlImagen("Foto, mira que bonto mi piso")
@@ -108,6 +108,6 @@ public class DataSeed {
         a2.addPiso(piso2);
 
         anuncioRepository.save(a1);
-        anuncioRepository.save(a2);
+        anuncioRepository.save(a2);*/
     }
 }

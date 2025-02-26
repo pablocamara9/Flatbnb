@@ -121,4 +121,85 @@ public class PropietarioController {
         return ResponseEntity.noContent().build();
     }
 
+    // Consultas
+    @Operation(summary = "Obtiene un un listado de propietarios ordenando por precio de menor a mayor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Propietarios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Propietario.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los propietarios",
+                    content = @Content)
+    })
+    @GetMapping("/valoracion")
+    public ResponseEntity<GetAllPropietariosDto> findAllOrderByValoracion() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllPropietariosDto.fromDto(propietarioService.findAllOrderByValoracion()));
+    }
+
+    @Operation(summary = "Obtiene un un listado de propietarios ordenando por valoración de mayor a menor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Propietarios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Propietario.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los propietarios",
+                    content = @Content)
+    })
+    @GetMapping("/valoracionDesc")
+    public ResponseEntity<GetAllPropietariosDto> findAllOrderByValoracionDesc() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllPropietariosDto.fromDto(propietarioService.findAllOrderByValoracionDesc()));
+    }
+
+    @Operation(summary = "Obtiene un un listado de propietarios entre un rango de valoraciones")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Propietarios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Propietario.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los propietarios",
+                    content = @Content)
+    })
+    @GetMapping("/valoracionBetween/{min}/{max}")
+    public ResponseEntity<GetAllPropietariosDto> findAllByValoracionBetween(@PathVariable double min, @PathVariable double max) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllPropietariosDto.fromDto(propietarioService.findAllByValoracionBetween(min, max)));
+    }
+
+    @Operation(summary = "Obtiene un un listado de propietarios con una valoracion mayor a la proporcionada")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Propietarios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Propietario.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los propietarios",
+                    content = @Content)
+    })
+    @GetMapping("/valoracionMayor/{valoracion}")
+    public ResponseEntity<GetAllPropietariosDto> findAllByValoracionGreaterThan(@PathVariable double valoracion) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllPropietariosDto.fromDto(propietarioService.findAllByValoracionGreaterThan(valoracion)));
+    }
+
+    @Operation(summary = "Obtiene un un listado de propietarios con una valoracion mayor a la proporcionada")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Propietarios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Propietario.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los propietarios",
+                    content = @Content)
+    })
+    @GetMapping("/valoracionMenor/{valoracion}")
+    public ResponseEntity<GetAllPropietariosDto> findAllByValoracionLessThan(@PathVariable double valoracion) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(GetAllPropietariosDto.fromDto(propietarioService.findAllByValoracionLessThan(valoracion)));
+    }
+
 }

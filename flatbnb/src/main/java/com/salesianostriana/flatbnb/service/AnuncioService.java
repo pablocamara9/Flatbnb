@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +53,13 @@ public class AnuncioService {
         a.setPiso(piso.get());
         a.setPropietario(propietario.get());
         return anuncioRepository.save(a);
+    }
+
+    public Anuncio findById(UUID id) {
+        Optional<Anuncio> anuncio = anuncioRepository.findById(id);
+        if(anuncio.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el anuncio con id " + id);
+        }
+        return anuncio.get();
     }
 }

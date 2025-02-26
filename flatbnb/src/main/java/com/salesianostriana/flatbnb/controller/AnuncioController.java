@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/anuncio/")
@@ -29,6 +31,11 @@ public class AnuncioController {
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(GetAnuncioDto.of(anuncio));
+    }
+
+    @GetMapping("{id}")
+    public GetAnuncioDto findById(@PathVariable UUID id) {
+        return GetAnuncioDto.of(anuncioService.findById(id));
     }
 
 }

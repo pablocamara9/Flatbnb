@@ -38,4 +38,10 @@ public class AnuncioController {
         return GetAnuncioDto.of(anuncioService.findById(id));
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> delete(@PathVariable UUID id) {
+        anuncioService.delete(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
 }

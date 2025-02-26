@@ -84,6 +84,8 @@ public class SecurityConfig {
                 //ANUNCIOS
                 .requestMatchers(HttpMethod.GET, "anuncio/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "anuncio/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "anuncio/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "anuncio/**").permitAll()
                 //OTRAS COSAS
                 .requestMatchers("/h2-console/**").permitAll()
                 .anyRequest().authenticated()

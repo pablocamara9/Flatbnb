@@ -78,4 +78,45 @@ public class PropietarioService {
         propietarioRepository.deleteById(id);
     }
 
+    // Consultas
+    public List<Propietario> findAllOrderByValoracion() {
+        List<Propietario> propietarios = propietarioRepository.findAllOrderByValoracion();
+        if(propietarios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron propietarios.");
+        }
+        return propietarios;
+    }
+
+    public List<Propietario> findAllOrderByValoracionDesc() {
+        List<Propietario> propietarios = propietarioRepository.findAllOrderByValoracionDesc();
+        if(propietarios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron propietarios.");
+        }
+        return propietarios;
+    }
+
+    public List<Propietario> findAllByValoracionBetween(double min, double max) {
+        List<Propietario> propietarios = propietarioRepository.findAllByValoracionBetween(min, max);
+        if(propietarios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron propietarios.");
+        }
+        return propietarios;
+    }
+
+    public List<Propietario> findAllByValoracionGreaterThan(double valoracion) {
+        List<Propietario> propietarios = propietarioRepository.findAllByValoracionGreaterThan(valoracion);
+        if(propietarios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron propietarios.");
+        }
+        return propietarios;
+    }
+
+    public List<Propietario> findAllByValoracionLessThan(double valoracion) {
+        List<Propietario> propietarios = propietarioRepository.findAllByValoracionLessThan(valoracion);
+        if(propietarios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron propietarios.");
+        }
+        return propietarios;
+    }
+
 }

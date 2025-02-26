@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,7 +69,7 @@ public class PisoController {
                     content = @Content)
     })
     @PostMapping
-    public ResponseEntity<GetPisoDto> create(@RequestBody CreatePisoDto dto) {
+    public ResponseEntity<GetPisoDto> create(@RequestBody @Valid CreatePisoDto dto) {
         Piso piso = pisoService.createPiso(dto);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -101,7 +102,7 @@ public class PisoController {
                     content = @Content)
     })
     @PutMapping("{id}")
-    public GetPisoDto edit(@PathVariable UUID id, @RequestBody EditPisoDto editPisoDto) {
+    public GetPisoDto edit(@PathVariable UUID id, @RequestBody @Valid EditPisoDto editPisoDto) {
         return GetPisoDto.of(pisoService.edit(id, editPisoDto));
     }
 

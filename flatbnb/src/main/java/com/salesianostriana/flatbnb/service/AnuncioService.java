@@ -1,6 +1,7 @@
 package com.salesianostriana.flatbnb.service;
 
 import com.salesianostriana.flatbnb.dto.anuncio.CreateAnuncioDto;
+import com.salesianostriana.flatbnb.dto.anuncio.EditAnuncioDto;
 import com.salesianostriana.flatbnb.model.Anuncio;
 import com.salesianostriana.flatbnb.model.Piso;
 import com.salesianostriana.flatbnb.model.Propietario;
@@ -61,6 +62,31 @@ public class AnuncioService {
             throw new EntityNotFoundException("No se encontro el anuncio con id " + id);
         }
         return anuncio.get();
+    }
+
+    public Anuncio edit(UUID id, EditAnuncioDto dto) {
+        Optional<Piso> piso = pisoRepository.findById(dto.idPiso());
+        if (piso.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el piso con id " + id);
+        }
+        Optional<Propietario> propietario = propietarioRepository.findById(dto.idPropietario());
+        if (propietario.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el propietario con id " + id);
+        }
+
+        Optional<Anuncio> aBuscar = anuncioRepository.findById(id);
+        if (aBuscar.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el anuncio con id " + id);
+        }
+        return aBuscar.map(old -> {
+            old.setDescripcion(dto.descripcion());
+            old.setPrecio(dto.precio());
+            old.setUrlImagen(dto.urlImagen());
+            old.setPiso(piso.get());
+            old.setPropietario(propietario.get());
+
+            return anuncioRepository.save(old);
+        }).get();
     }
 
     public void delete(UUID id) {

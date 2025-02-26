@@ -1,6 +1,7 @@
 package com.salesianostriana.flatbnb.controller;
 
 import com.salesianostriana.flatbnb.dto.anuncio.CreateAnuncioDto;
+import com.salesianostriana.flatbnb.dto.anuncio.EditAnuncioDto;
 import com.salesianostriana.flatbnb.dto.anuncio.GetAllAnunciosDto;
 import com.salesianostriana.flatbnb.dto.anuncio.GetAnuncioDto;
 import com.salesianostriana.flatbnb.model.Anuncio;
@@ -36,6 +37,11 @@ public class AnuncioController {
     @GetMapping("{id}")
     public GetAnuncioDto findById(@PathVariable UUID id) {
         return GetAnuncioDto.of(anuncioService.findById(id));
+    }
+
+    @PutMapping("{id}")
+    public GetAnuncioDto edit(@PathVariable UUID id, @RequestBody EditAnuncioDto editAnuncioDto) {
+        return GetAnuncioDto.of(anuncioService.edit(id, editAnuncioDto));
     }
 
     @DeleteMapping("{id}")

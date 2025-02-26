@@ -1,9 +1,7 @@
 package com.salesianostriana.flatbnb.util;
 
-import com.salesianostriana.flatbnb.model.Piso;
-import com.salesianostriana.flatbnb.model.Propietario;
-import com.salesianostriana.flatbnb.model.User;
-import com.salesianostriana.flatbnb.model.UserRole;
+import com.salesianostriana.flatbnb.model.*;
+import com.salesianostriana.flatbnb.repository.AnuncioRepository;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import com.salesianostriana.flatbnb.repository.UserRepository;
@@ -23,6 +21,7 @@ public class DataSeed {
     private final PropietarioRepository propietarioRepository;
     private final PasswordEncoder encoder;
     private final PisoRepository pisoRepository;
+    private final AnuncioRepository anuncioRepository;
 
     @PostConstruct
     public void init() {
@@ -88,5 +87,27 @@ public class DataSeed {
         pisoRepository.save(piso2);
         propietarioRepository.save(p1);
         propietarioRepository.save(p2);
+
+        Anuncio a1 = Anuncio.builder()
+                .descripcion("Piso muy luminoso")
+                .precio(99.90)
+                .urlImagen("Foto, mira que bonto mi piso")
+                .build();
+        anuncioRepository.save(a1);
+
+        Anuncio a2 = Anuncio.builder()
+                .descripcion("Piso pequeño pero acogedor")
+                .precio(59.00)
+                .urlImagen("Foto, mira el piso, no está mal eh")
+                .build();
+        anuncioRepository.save(a2);
+
+        a1.setPropietario(p1);
+        a1.addPiso(piso1);
+        a2.setPropietario(p2);
+        a2.addPiso(piso2);
+
+        anuncioRepository.save(a1);
+        anuncioRepository.save(a2);
     }
 }

@@ -23,7 +23,7 @@ public class Anuncio {
     private double precio;
     private String urlImagen;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "piso_id",
             foreignKey = @ForeignKey(name = "fk_anuncio_piso"))
     private Piso piso;

@@ -33,6 +33,26 @@ public class Anuncio {
             foreignKey = @ForeignKey(name = "fk_anuncio_propietario"))
     private Propietario propietario;
 
+    public void addPiso(Piso piso) {
+        this.piso = piso;
+        piso.setAnuncio(this);
+    }
+
+    public void deletePiso(Piso piso) {
+        piso.setAnuncio(null);
+        this.piso = piso;
+    }
+
+    public void addPropietario(Propietario propietario) {
+        this.propietario = propietario;
+        propietario.getAnuncios().add(this);
+    }
+
+    public void deletePropietario(Propietario propietario) {
+        propietario.getAnuncios().remove(this);
+        this.propietario = propietario;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;

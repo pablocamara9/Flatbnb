@@ -62,4 +62,15 @@ public class AnuncioService {
         }
         return anuncio.get();
     }
+
+    public void delete(UUID id) {
+        Optional<Anuncio> aBuscar = anuncioRepository.findById(id);
+        if (aBuscar.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el anuncio con id " + id);
+        }
+
+        aBuscar.get().deletePiso(aBuscar.get().getPiso());
+        aBuscar.get().deletePropietario(aBuscar.get().getPropietario());
+        anuncioRepository.delete(aBuscar.get());
+    }
 }

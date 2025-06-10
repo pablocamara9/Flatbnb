@@ -1,0 +1,1039 @@
+{
+	"info": {
+		"_postman_id": "ff5c833c-792d-4474-9491-bfe86aea44f8",
+		"name": "Flatbnb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41649998"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "FindAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmNDM0MDFkOS0wNzVjLTQ5YWQtYjQ3YS04MmM0OTQ5NjVkYjciLCJpYXQiOjE3NDA0Nzk5MDQsImV4cCI6MTc0MDQ4MDUwNH0.lJjAdtPlK2PB_fr2u66fihSPj1bub9G8V2960DPQb0a2G-o03A7ILe5DlOp86-bO",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"pablo\",\r\n    \"password\": \"1234\",\r\n    \"nombre\": \"Pablo\",\r\n    \"apellidos\": \"Camara Garcia\",\r\n    \"email\": \"camara.gapab23@triana.salesianos.edu\",\r\n    \"telefono\": \"660232323\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"a619562b-29ad-4ea1-b267-1ceac477386b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/activate/account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"activate",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"pablo\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"bc52e8f6-2b20-47d4-a664-2ba5ed9b440c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/auth/refresh/token",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"auth",
+								"refresh",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/9286d555-da3a-415d-b3fa-a2b28ff586b3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"9286d555-da3a-415d-b3fa-a2b28ff586b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"AAAA\",\r\n    \"apellidos\": \"AAAA AAAA\",\r\n    \"email\": \"aaa.aaa@triana.salesianos.edu\",\r\n    \"telefono\": \"123456789\",\r\n    \"password\": \"0000\",\r\n    \"confirmPassword\": \"0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/9286d555-da3a-415d-b3fa-a2b28ff586b3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"9286d555-da3a-415d-b3fa-a2b28ff586b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/9286d555-da3a-415d-b3fa-a2b28ff586b3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"9286d555-da3a-415d-b3fa-a2b28ff586b3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Piso",
+			"item": [
+				{
+					"name": "FindAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI3YjNkODVhMC0wNDIyLTQzMWQtODY5MS04Njg0Y2M2ZDI2Y2UiLCJpYXQiOjE3NDA0ODIxODEsImV4cCI6MTc0MDQ4Mjc4MX0.sVl4Y0NYUVB2zvB3yT66BWCMWUnVS-W4RPxGrxkQm75c5bsnitM1GOkfKmxci5_F",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/piso/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Piso",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmNDM0MDFkOS0wNzVjLTQ5YWQtYjQ3YS04MmM0OTQ5NjVkYjciLCJpYXQiOjE3NDA0Nzk5MzgsImV4cCI6MTc0MDQ4MDUzOH0.EInhsfV_sz1Qg8fQOF7SotSgcJS5vJgLbx29NnGsno30oVEL67amHhwe1OdmEYXL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"direccion\": \"Rue del Percebe, 13\",\r\n    \"metrosCuadrados\": 111.111,\r\n    \"numHabitaciones\": 6,\r\n    \"observaciones\": \"Mu bonito olee oleee\",\r\n    \"idPropietario\": \"a729d27f-20d0-4a81-aaa4-5c3c001e9cfe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/piso/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIwYmQ4ZWVhYS02NGNjLTRkNTktYmRhOC1jMzczYmIwZTdkN2UiLCJpYXQiOjE3NDAzODI5NDAsImV4cCI6MTc0MDM4MzU0MH0.hdOiIECjZ8AmN9NIYJecNTFvGtYmAOI-LBQMmwWd5YIYXbqut655O-ip8Hm6H4em",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/piso/f1b41074-1f56-4de8-9126-907d3160169b",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								"f1b41074-1f56-4de8-9126-907d3160169b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxZTI0ZmUwZi04OTA0LTQ1MTAtOGYzNy00N2E1ZjZhNDBiOTMiLCJpYXQiOjE3NDAzOTk5MzksImV4cCI6MTc0MDQwMDUzOX0.NJIJGrimr5Mh2kzeS_Jisj2OMdXb_XIspQVijK-OT07g-KhJvn-aMQgy2o8tos4h",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"direccion\": \"AAAA EEEE IIII, 99\",\r\n    \"metrosCuadrados\": 123.456,\r\n    \"numHabitaciones\": 3,\r\n    \"observaciones\": \"Pisito vacacional de los buenos\",\r\n    \"idPropietario\": \"a729d27f-20d0-4a81-aaa4-5c3c001e9cfe\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/piso/40662a65-19f3-4559-9ee4-44021fc86bb3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								"40662a65-19f3-4559-9ee4-44021fc86bb3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxZTI0ZmUwZi04OTA0LTQ1MTAtOGYzNy00N2E1ZjZhNDBiOTMiLCJpYXQiOjE3NDAzOTk5MzksImV4cCI6MTc0MDQwMDUzOX0.NJIJGrimr5Mh2kzeS_Jisj2OMdXb_XIspQVijK-OT07g-KhJvn-aMQgy2o8tos4h",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/piso/40662a65-19f3-4559-9ee4-44021fc86bb3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								"40662a65-19f3-4559-9ee4-44021fc86bb3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Propietario",
+			"item": [
+				{
+					"name": "FindAll",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/propietario/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Propietario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIzYjU5NDU2YS1lYjIyLTRiZDktOTMxOC1jZDdkMGZjM2YwZTkiLCJpYXQiOjE3NDAzOTkyNzUsImV4cCI6MTc0MDM5OTg3NX0.mT71lhdm-hdOtVL3gX745AMD_ZAzmuVbg849onmDb3fjptXNC6YxVQTktC5tQZFO",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"propietario\",\r\n    \"password\": \"1234\",\r\n    \"nombre\": \"Propietario\",\r\n    \"apellidos\": \"Dueño y señor\",\r\n    \"email\": \"propietario.depropiedades@triana.salesianos.edu\",\r\n    \"telefono\": \"666555444\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/propietario/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJjZjE1OGMyMy1mNDgwLTQ2NmYtOTRiMS1kM2NlOTg0NDRmZmIiLCJpYXQiOjE3NDA0ODA0OTEsImV4cCI6MTc0MDQ4MTA5MX0.BdFsu00SxmmbgpqCtrWN1SQ6ewzrY-fNIPDBGwnaHaro1BOYMs_p0DQlYSKXFfmc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/propietario/fcebcea8-3ff0-4ede-b3b7-f8203ca7b209",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"fcebcea8-3ff0-4ede-b3b7-f8203ca7b209"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJkOTc2NDQ2NC02YTU0LTRjZDQtYTExNi00NmM1OTM1ZTJjNjIiLCJpYXQiOjE3NDA0ODE2MDMsImV4cCI6MTc0MDQ4MjIwM30.bhK2xu8Px-PfJNfbLvVpn_FPMW9ABsD5bW1UXcmoHjR_3iZA5fDk4mcd8UllmfdK",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"ooooooo\",\r\n    \"apellidos\": \"EEE III\",\r\n    \"email\": \"aaa.eeeiii@gmail.com\",\r\n    \"telefono\": \"999999999\",\r\n    \"password\": \"1234\",\r\n    \"valoracion\": 2.9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/propietario/b5bc492c-b809-4cac-9a94-7bc0442acde8",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"b5bc492c-b809-4cac-9a94-7bc0442acde8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/propietario/00edbcfc-a26d-440f-ac1c-dbad9d13b7fd",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"00edbcfc-a26d-440f-ac1c-dbad9d13b7fd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll OrderByValoracion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/propietario/valoracion",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"valoracion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll OrderByValoracionDesc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/propietario/valoracionDesc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"valoracionDesc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll OrderByValoracionBetween",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/propietario/valoracionBetween/4.1/5.0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"valoracionBetween",
+								"4.1",
+								"5.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll OrderByValoracionGreaterThan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/propietario/valoracionMayor/4.1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"valoracionMayor",
+								"4.1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll OrderByValoracionLessThan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/propietario/valoracionMenor/4.1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"propietario",
+								"valoracionMenor",
+								"4.1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Anuncio",
+			"item": [
+				{
+					"name": "FindAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/anuncio/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Anuncio",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI1NzcwOTFlZi00MjM1LTQzODQtYjljZS1iMjgzY2I5MzgwZTAiLCJpYXQiOjE3NDA1NzMzMTcsImV4cCI6MTc0MDU3MzkxN30.o7esc-uQdXZFp2JUQax8XXDveHdIVroWqJCN2Yd8y8RxvxSwL3Jo6cAkrfIILtLf",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\": \"asdasdasd\",\r\n    \"precio\": 111.11,\r\n    \"urlImagen\": \"aaaaa\",\r\n    \"idPiso\": \"8b69712a-5786-4eca-a8eb-c10150ac97fb\",\r\n    \"idPropietario\": \"21883f09-e0de-4831-8533-b9eddab3d6b3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/anuncio/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmZWVkNjc4ZC1jYjdhLTQ5MmMtOWI4My0zMDk0ZGQ3NGFlNTciLCJpYXQiOjE3NDAzODMzNDcsImV4cCI6MTc0MDM4Mzk0N30.v8nTRBnqDUtL-3dSbZBTXTJYriuKNQkB2crmdnnVUc1FKI4JEpmakazNFM42C3gQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"direccion\": \"AAAA EEEE IIII, 99\",\r\n    \"metrosCuadrados\": 123.456,\r\n    \"numHabitaciones\": 3,\r\n    \"observaciones\": \"Pisito vacacional de los buenos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/piso/3522a2b6-e375-44ec-a62c-dd3c6df97a76",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								"3522a2b6-e375-44ec-a62c-dd3c6df97a76"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/anuncio/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmZWVkNjc4ZC1jYjdhLTQ5MmMtOWI4My0zMDk0ZGQ3NGFlNTciLCJpYXQiOjE3NDAzODMzNDcsImV4cCI6MTc0MDM4Mzk0N30.v8nTRBnqDUtL-3dSbZBTXTJYriuKNQkB2crmdnnVUc1FKI4JEpmakazNFM42C3gQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/piso/40662a65-19f3-4559-9ee4-44021fc86bb3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								"40662a65-19f3-4559-9ee4-44021fc86bb3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll OrderByPrecio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/anuncio/precio",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								"precio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll OrderByPrecioDesc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/anuncio/precioDesc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								"precioDesc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll PrecioBetween",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/anuncio/precioEntre/50.0/70.0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								"precioEntre",
+								"50.0",
+								"70.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll PrecioGreaterThan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/anuncio/precioMayor/70.0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								"precioMayor",
+								"70.0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAll PrecioLessThan",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/anuncio/precioMenor/70.0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								"precioMenor",
+								"70.0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}

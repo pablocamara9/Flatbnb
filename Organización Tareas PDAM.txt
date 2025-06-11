@@ -54,9 +54,9 @@ NOTAS ACTUALES DE LOS MÓDULOS:
 
 3. APARTADOS 1, 2, 3, 4 Y 5 DE LA DOCUMENTACIÓN
 
-	3.1 Básicamente, por ahora, hacer todo lo descrito en el apartado 1 de este documento (corrección de errores y mejoras a la API)
+	✅ 3.1 Básicamente, por ahora, hacer todo lo descrito en el apartado 1 de este documento (corrección de errores y mejoras a la API)
 
-	3.2 Guión de la memoria:
+	✅ 3.2 Guión de la memoria:
 	 - Portada e índice
 	 - Plan de empresa (leer la documentación de Classroom)
 	 - Descripción detallada del sistema

@@ -1,4 +1,4 @@
-package com.salesianostriana.flatbnb.util;
+/*package com.salesianostriana.flatbnb.util;
 
 import com.salesianostriana.flatbnb.model.*;
 import com.salesianostriana.flatbnb.repository.AnuncioRepository;
@@ -111,3 +111,4 @@ public class DataSeed {
         anuncioRepository.save(a2);
     }
 }
+*/

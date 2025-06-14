@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
 
 const routes: Routes = [
-  {path: 'main', component: MainPageComponent },
-  {path: 'login', component: LoginFormComponent},
-  {path: 'register', component: RegisterFormComponent},
-  {path: '', redirectTo: '/main', pathMatch: 'full'},
+  { path: 'main', component: MainPageComponent },
+  { path: 'login', component: LoginFormComponent },
+  { path: 'register', component: RegisterFormComponent },
+  { path: 'anuncio/:id', component: AnnouncementDetailComponent },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
 ];
 
 @NgModule({

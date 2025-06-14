@@ -11,6 +11,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RegisterFormComponent } from './components/register-form/register-form.
     FooterComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    AnnouncementDetailComponent,
   ],
   imports: [
     BrowserModule,

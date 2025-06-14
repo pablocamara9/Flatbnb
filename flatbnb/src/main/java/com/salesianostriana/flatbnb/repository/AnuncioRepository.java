@@ -1,10 +1,11 @@
 package com.salesianostriana.flatbnb.repository;
 
 import com.salesianostriana.flatbnb.model.Anuncio;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface AnuncioRepository
@@ -15,34 +16,40 @@ public interface AnuncioRepository
         FROM Anuncio a
         ORDER BY a.precio
         """)
-    List<Anuncio> findAllOrderByPrecio();
+    Page<Anuncio> findAllOrderByPrecio(Pageable pageable);
 
     @Query("""
         SELECT a
         FROM Anuncio a
         ORDER BY a.precio DESC
         """)
-    List<Anuncio> findAllOrderByPrecioDesc();
+    Page<Anuncio> findAllOrderByPrecioDesc(Pageable pageable);
 
     @Query("""
         SELECT a
         FROM Anuncio a
         WHERE a.precio BETWEEN :min AND :max
         """)
-    List<Anuncio> findAllByPrecioBetween(double min, double max);
+    Page<Anuncio> findAllByPrecioBetween(double min, double max, Pageable pageable);
 
     @Query("""
         SELECT a
         FROM Anuncio a
         WHERE a.precio > :precio
         """)
-    List<Anuncio> findAllByPrecioGreaterThan(double precio);
+    Page<Anuncio> findAllByPrecioGreaterThan(double precio, Pageable pageable);
 
     @Query("""
         SELECT a
         FROM Anuncio a
         WHERE a.precio < :precio
         """)
-    List<Anuncio> findAllByPrecioLessThan(double precio);
+    Page<Anuncio> findAllByPrecioLessThan(double precio, Pageable pageable);
+
+    @Query("""
+        SELECT a
+        FROM Anuncio a
+    """)
+    Page<Anuncio> findAllPaged(Pageable pageable);
 
 }

@@ -2,7 +2,6 @@ package com.salesianostriana.flatbnb.controller;
 
 import com.salesianostriana.flatbnb.dto.anuncio.CreateAnuncioDto;
 import com.salesianostriana.flatbnb.dto.anuncio.EditAnuncioDto;
-import com.salesianostriana.flatbnb.dto.anuncio.GetAllAnunciosDto;
 import com.salesianostriana.flatbnb.dto.anuncio.GetAnuncioDto;
 import com.salesianostriana.flatbnb.model.Anuncio;
 import com.salesianostriana.flatbnb.service.AnuncioService;
@@ -16,6 +15,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,10 +69,21 @@ public class AnuncioController {
             )
     })
     @GetMapping
-    public ResponseEntity<GetAllAnunciosDto> findAll() {
+    public ResponseEntity<Page<GetAnuncioDto>> findAll(
+            @PageableDefault(page = 0, size = 5) Pageable pageable
+    ) {
+        Page<Anuncio> pagedResult = anuncioService.findAllPaged(pageable);
+
+        if (pagedResult.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pagedResult.map(GetAnuncioDto::of));
+    }
+    /*public ResponseEntity<GetAllAnunciosDto> findAll() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(GetAllAnunciosDto.fromDto(anuncioService.findAll()));
-    }
+    }*/
 
     @Operation(summary = "Crea un nuevo anuncio")
     @ApiResponses(value = {
@@ -147,9 +160,16 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precio")
-    public ResponseEntity<GetAllAnunciosDto> findAllOrderByPrecio() {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllOrderByPrecio(
+            @PageableDefault(page = 0, size = 5) Pageable pageable
+    ) {
+        Page<Anuncio> pagedResult = anuncioService.findAllOrderByPrecio(pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.status(HttpStatus.OK)
-                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllOrderByPrecio()));
+                .body(pagedResult.map(GetAnuncioDto::of));
     }
 
     @Operation(summary = "Obtiene un un listado de anuncios ordenando por precio de mayor a menor")
@@ -163,9 +183,16 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioDesc")
-    public ResponseEntity<GetAllAnunciosDto> findAllOrderByPrecioDesc() {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllOrderByPrecioDesc(
+            @PageableDefault(page = 0, size = 5) Pageable pageable
+    ) {
+        Page<Anuncio> pagedResult = anuncioService.findAllOrderByPrecioDesc(pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.status(HttpStatus.OK)
-                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllOrderByPrecioDesc()));
+                .body(pagedResult.map(GetAnuncioDto::of));
     }
 
     @Operation(summary = "Obtiene un un listado de anuncios entre un rango de precios")
@@ -179,9 +206,14 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioEntre/{min}/{max}")
-    public ResponseEntity<GetAllAnunciosDto> findAllByPrecioBetween(@PathVariable double min, @PathVariable double max) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioBetween(@PathVariable double min, @PathVariable double max, Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAllByPrecioBetween(min, max, pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.status(HttpStatus.OK)
-                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllByPrecioBetween(min, max)));
+                .body(pagedResult.map(GetAnuncioDto::of));
     }
 
     @Operation(summary = "Obtiene un un listado de anuncios con un precio mayor al proporcionado")
@@ -195,9 +227,14 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioMayor/{precio}")
-    public ResponseEntity<GetAllAnunciosDto> findAllByPrecioGreaterThan(@PathVariable double precio) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioGreaterThan(@PathVariable double precio, Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAllByPrecioGreaterThan(precio, pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.status(HttpStatus.OK)
-                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllByPrecioGreaterThan(precio)));
+                .body(pagedResult.map(GetAnuncioDto::of));
     }
 
     @Operation(summary = "Obtiene un un listado de anuncios con un precio menor al proporcionado")
@@ -211,9 +248,14 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioMenor/{precio}")
-    public ResponseEntity<GetAllAnunciosDto> findAllByPrecioLessThan(@PathVariable double precio) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioLessThan(@PathVariable double precio, Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAllByPrecioLessThan(precio, pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.status(HttpStatus.OK)
-                .body(GetAllAnunciosDto.fromDto(anuncioService.findAllByPrecioLessThan(precio)));
+                .body(pagedResult.map(GetAnuncioDto::of));
     }
 
 }

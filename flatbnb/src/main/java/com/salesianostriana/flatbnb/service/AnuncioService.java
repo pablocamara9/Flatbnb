@@ -10,6 +10,8 @@ import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -101,44 +103,52 @@ public class AnuncioService {
     }
 
     // Consultas
-    public List<Anuncio> findAllOrderByPrecio() {
-        List<Anuncio> anuncios = anuncioRepository.findAllOrderByPrecio();
+    public Page<Anuncio> findAllOrderByPrecio(Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAllOrderByPrecio(pageable);
         if(anuncios.isEmpty()) {
             throw new EntityNotFoundException("No se encontraron anuncios.");
         }
         return anuncios;
     }
 
-    public List<Anuncio> findAllOrderByPrecioDesc() {
-        List<Anuncio> anuncios = anuncioRepository.findAllOrderByPrecioDesc();
+    public Page<Anuncio> findAllOrderByPrecioDesc(Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAllOrderByPrecioDesc(pageable);
         if(anuncios.isEmpty()) {
             throw new EntityNotFoundException("No se encontraron anuncios.");
         }
         return anuncios;
     }
 
-    public List<Anuncio> findAllByPrecioBetween(double min, double max) {
-        List<Anuncio> anuncios = anuncioRepository.findAllByPrecioBetween(min, max);
+    public Page<Anuncio> findAllByPrecioBetween(double min, double max, Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAllByPrecioBetween(min, max, pageable);
         if(anuncios.isEmpty()) {
             throw new EntityNotFoundException("No se encontraron anuncios.");
         }
         return anuncios;
     }
 
-    public List<Anuncio> findAllByPrecioGreaterThan(double precio) {
-        List<Anuncio> anuncios = anuncioRepository.findAllByPrecioGreaterThan(precio);
+    public Page<Anuncio> findAllByPrecioGreaterThan(double precio, Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAllByPrecioGreaterThan(precio, pageable);
         if(anuncios.isEmpty()) {
             throw new EntityNotFoundException("No se encontraron anuncios.");
         }
         return anuncios;
     }
 
-    public List<Anuncio> findAllByPrecioLessThan(double precio) {
-        List<Anuncio> anuncios = anuncioRepository.findAllByPrecioLessThan(precio);
+    public Page<Anuncio> findAllByPrecioLessThan(double precio, Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAllByPrecioLessThan(precio, pageable);
         if(anuncios.isEmpty()) {
             throw new EntityNotFoundException("No se encontraron anuncios.");
         }
         return anuncios;
+    }
+
+    public Page<Anuncio> findAllPaged(Pageable pageable) {
+        Page<Anuncio> anunciosPaged = anuncioRepository.findAllPaged(pageable);
+        if(anunciosPaged.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anunciosPaged;
     }
 
 }

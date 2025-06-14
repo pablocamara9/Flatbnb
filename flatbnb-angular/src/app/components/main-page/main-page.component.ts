@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Anuncio, Anuncios } from '../../models/anuncio.model';
 
 @Component({
@@ -11,7 +12,7 @@ import { Anuncio, Anuncios } from '../../models/anuncio.model';
 export class MainPageComponent implements OnInit {
   anuncios: Anuncio[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.http.get<any>('http://localhost:8080/anuncio/')
@@ -31,6 +32,10 @@ export class MainPageComponent implements OnInit {
           this.anuncios = [];
         }
       });
+  }
+
+  verDetalle(id: string) {
+    this.router.navigate(['/anuncio', id]);
   }
 
 }

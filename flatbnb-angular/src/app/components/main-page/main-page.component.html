@@ -24,7 +24,9 @@
         <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center">
             <ng-container *ngIf="anuncios.length > 0; else sinAnuncios">
                 <div class="col" *ngFor="let anuncio of anuncios">
-                    <div class="card h-100 border-0 shadow-none rounded-4">
+                    <div class="card h-100 border-0 shadow-none rounded-4"
+                         style="cursor:pointer"
+                         (click)="verDetalle(anuncio.id)">
                         <img [src]="anuncio.urlImagen" class="card-img-top rounded-4 property-img" alt="Imagen anuncio">
                         <div class="card-body p-0 pt-2">
                             <h6 class="card-title mb-1">{{ anuncio.descripcion }}</h6>

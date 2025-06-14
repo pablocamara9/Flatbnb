@@ -1,0 +1,88 @@
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.navbar-flatbnb {
+    background: #fff;
+    border-bottom: 1px solid #f2f2f2;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar-brand span {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-left: 0.25rem;
+    color: #222;
+}
+
+.nav-link {
+    color: #222 !important;
+    font-weight: 400;
+    margin-right: 1.5rem;
+    font-size: 1rem;
+}
+
+.search-box {
+    background: #f7f3f3;
+    border-radius: 12px;
+    padding: 0.25rem 1rem;
+    display: flex;
+    align-items: center;
+    min-width: 180px;
+    margin-right: 1rem;
+}
+
+.search-box input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 1rem;
+    color: #7c5a5a;
+    width: 100px;
+}
+
+.search-box .bi-search {
+    color: #a97c7c;
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.icon-btn {
+    background: #f7f3f3;
+    border: none;
+    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.icon-btn .bi {
+    font-size: 1.2rem;
+    color: #7c5a5a;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: none;
+}
+
+@media (max-width: 991px) {
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .nav-link {
+        margin-right: 1rem;
+    }
+}

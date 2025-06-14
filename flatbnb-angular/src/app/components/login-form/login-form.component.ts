@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login-form',
@@ -24,7 +25,12 @@ export class LoginFormComponent {
 
   procesaFormulario() {
     if (!this.camposRellenos()) {
-      alert('Por favor, rellena todos los campos.');
+          Swal.fire({
+            icon: 'info',
+            title: 'Error de inicio de sesión',
+            text: 'Por favor, rellena todos los campos.',
+            timer: 3000,
+          })
       return false; // Evita el envío del formulario
     }
     this.login();
@@ -39,17 +45,26 @@ export class LoginFormComponent {
     this.http.post<User>('http://localhost:8080/user/auth/login', body)    
       .subscribe({
         next: (response) => {
-          // Maneja el login exitoso aquí (guardar token, redirigir, etc)
           console.log('Login exitoso', response);
           localStorage.setItem('user', JSON.stringify(response));
           localStorage.setItem('accessToken', response.token);
           localStorage.setItem('refreshToken', response.refreshToken);
           
+          Swal.fire({
+            icon: 'success',
+            title: 'Inicio de sesión exitoso',
+            text: `Bienvenido de nuevo, ${response.username}!`,
+            timer: 3000,
+          })
           this.router.navigate(['/main']);
         },
         error: (error) => {
-          // Maneja el error de login aquí
-          alert('Usuario o contraseña incorrectos');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error de inicio de sesión',
+            text: 'Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo.',
+            timer: 3000,
+          })
         }
       });
   }

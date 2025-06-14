@@ -1,0 +1,47 @@
+body,
+.container-fluid {
+    background: #fff;
+}
+
+form label {
+    font-family: 'Google Sans', Arial, sans-serif;
+    color: #222;
+}
+
+form .form-control {
+    background: #fff;
+    border: 1.5px solid #ececec;
+    font-size: 1rem;
+    font-family: 'Google Sans', Arial, sans-serif;
+    color: #222;
+    box-shadow: none;
+}
+
+form .form-control:focus {
+    border-color: #d32f2f;
+    box-shadow: none;
+}
+
+.btn-danger {
+    background: #d32f2f;
+    border: none;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+    background: #b71c1c;
+}
+
+.btn[style*="background: #f6f2f0"] {
+    border: none;
+}
+
+.btn[style*="background: #f6f2f0"]:hover,
+.btn[style*="background: #f6f2f0"]:focus {
+    background: #ece6e2;
+    color: #7c6f65;
+}
+
+.fw-medium {
+    font-weight: 500;
+}

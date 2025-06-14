@@ -1,3 +1,5 @@
+SET client_encoding = 'UTF8';
+
 -- Inserción de usuarios
 INSERT INTO user_entity (id, username, password, nombre, apellidos, email, telefono, enabled, activation_token, created_at)
 VALUES

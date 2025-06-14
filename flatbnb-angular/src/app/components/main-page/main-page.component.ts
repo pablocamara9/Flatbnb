@@ -19,7 +19,6 @@ export class MainPageComponent implements OnInit {
         next: (data) => {
           console.log(data);
           
-          // Si la respuesta es paginada (Spring Page), accede a .content
           if (data && data.content) {
             this.anuncios = data.content;
             console.log(this.anuncios);
@@ -33,7 +32,5 @@ export class MainPageComponent implements OnInit {
         }
       });
   }
-
-  imgPrueba: string = 'https://lh3.googleusercontent.com/proxy/O-YVZQI9UTw60VjBdbNIQ55o0W6wI0qps52xxBMm4zp5h1pCZOFapEyRHH4hgrvmQjRscO-zCKgYwtYRpA0P6vFE2f-PryOlxZeEV7K-u1mZYhOFT3U4udsUnKj2a2Y';
 
 }

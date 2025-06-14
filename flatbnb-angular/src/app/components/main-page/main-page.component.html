@@ -29,7 +29,9 @@
                          (click)="verDetalle(anuncio.id)">
                         <img [src]="anuncio.urlImagen" class="card-img-top rounded-4 property-img" alt="Imagen anuncio">
                         <div class="card-body p-0 pt-2">
-                            <h6 class="card-title mb-1">{{ anuncio.descripcion }}</h6>
+                            <h6 class="card-title mb-1">
+                              {{ anuncio.descripcion.split('.')[0] | slice:0:40 }}{{ anuncio.descripcion.length > 40 ? '...' : '' }}
+                            </h6>
                             <small>{{ anuncio.precio | currency:'EUR':'symbol':'1.0-0' }} / noche</small>
                         </div>
                     </div>

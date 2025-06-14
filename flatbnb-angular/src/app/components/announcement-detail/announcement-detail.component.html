@@ -13,9 +13,7 @@
     {{ anuncio.descripcion }}
   </h2>
   <div class="mb-3 text-muted" style="font-size: 1.05rem;">
-    {{ anuncio.piso?.numHabitaciones || '?' }} habitaciones ·
-    {{ anuncio.piso?.numCamas || '?' }} camas ·
-    {{ anuncio.piso?.numBanos || '?' }} baños
+    {{ anuncio.piso?.numHabitaciones || '?' }} habitaciones
   </div>
 
   <!-- Imagen principal centrada -->
@@ -30,6 +28,60 @@
     <h5 class="fw-bold mb-2" style="font-family: 'Google Sans', Arial, sans-serif;">Acerca de este lugar</h5>
     <div class="text-muted" style="font-size: 1.07rem;">
       {{ anuncio.descripcion }}
+    </div>
+  </div>
+
+  <!-- Detalle del piso -->
+  <div class="mb-4">
+    <h5 class="fw-bold mb-3" style="font-family: 'Google Sans', Arial, sans-serif;">Detalles del piso</h5>
+    <div style="padding: 0;">
+      <div class="mb-2" style="font-size: 1.07rem;">
+        <i class="bi bi-geo-alt-fill me-2 text-danger"></i>
+        <span class="fw-semibold">Dirección:</span>
+        <span class="text-muted"> {{ anuncio.piso?.direccion }}</span>
+      </div>
+      <div class="mb-2" style="font-size: 1.07rem;">
+        <i class="bi bi-aspect-ratio me-2 text-primary"></i>
+        <span class="fw-semibold">Metros cuadrados:</span>
+        <span class="text-muted"> {{ anuncio.piso?.metrosCuadrados }} m²</span>
+      </div>
+      <div class="mb-2" style="font-size: 1.07rem;">
+        <i class="bi bi-door-open me-2 text-success"></i>
+        <span class="fw-semibold">Habitaciones:</span>
+        <span class="text-muted"> {{ anuncio.piso?.numHabitaciones }}</span>
+      </div>
+      <div style="font-size: 1.07rem;">
+        <i class="bi bi-card-text me-2 text-secondary"></i>
+        <span class="fw-semibold">Observaciones:</span>
+        <span class="text-muted"> {{ anuncio.piso?.observaciones }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalle del propietario -->
+  <div class="mb-4">
+    <h5 class="fw-bold mb-3" style="font-family: 'Google Sans', Arial, sans-serif;">Propietario</h5>
+    <div style="padding: 0;">
+      <div class="mb-2" style="font-size: 1.07rem;">
+        <i class="bi bi-person-fill me-2 text-primary"></i>
+        <span class="fw-semibold">Nombre:</span>
+        <span class="text-muted"> {{ anuncio.piso?.propietario?.nombre || anuncio.propietario?.nombre }}</span>
+      </div>
+      <div class="mb-2" style="font-size: 1.07rem;">
+        <i class="bi bi-person-badge-fill me-2 text-primary"></i>
+        <span class="fw-semibold">Apellidos:</span>
+        <span class="text-muted"> {{ anuncio.piso?.propietario?.apellidos || anuncio.propietario?.apellidos }}</span>
+      </div>
+      <div class="mb-2" style="font-size: 1.07rem;">
+        <i class="bi bi-envelope-fill me-2 text-success"></i>
+        <span class="fw-semibold">Email:</span>
+        <span class="text-muted"> {{ anuncio.piso?.propietario?.email || anuncio.propietario?.email }}</span>
+      </div>
+      <div style="font-size: 1.07rem;">
+        <i class="bi bi-telephone-fill me-2 text-secondary"></i>
+        <span class="fw-semibold">Teléfono:</span>
+        <span class="text-muted"> {{ anuncio.piso?.propietario?.telefono || anuncio.propietario?.telefono }}</span>
+      </div>
     </div>
   </div>
 

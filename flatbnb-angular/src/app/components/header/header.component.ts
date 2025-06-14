@@ -8,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
-  logoUrl: string = '/assets/logo.png';
+  logoPath: string = 'assets/logo.png';
 
 }

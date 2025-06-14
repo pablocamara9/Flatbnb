@@ -1,15 +1,17 @@
-body, .container, .container-fluid {
-  background: #fff;
+body,
+.container,
+.container-fluid {
+    background: #fff;
 }
 
 .search-bar input:focus {
-  outline: none;
-  box-shadow: none;
+    outline: none;
+    box-shadow: none;
 }
 
 .property-img {
-  height: 140px;
-  object-fit: cover;
+    height: 140px;
+    object-fit: cover;
 }
 
 .card {
@@ -20,7 +22,6 @@ body, .container, .container-fluid {
 
 .card img {
     width: 100%;
-    height: auto;
 }
 
 .card-body {
@@ -28,30 +29,33 @@ body, .container, .container-fluid {
 }
 
 .card-title {
-  font-size: 1rem;
-  font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 1rem;
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-weight: bold;
 }
 
 .card-body small {
-  font-size: 0.95rem;
-  color: #7c6f65;
-  font-family: 'Google Sans', Arial, sans-serif;
+    font-size: 0.95rem;
+    color: #7c6f65;
+    font-family: 'Google Sans', Arial, sans-serif;
 }
 
 .btn-light {
-  background: #f6f2f0;
-  color: #7c6f65;
-  font-weight: 500;
-  font-family: 'Google Sans', Arial, sans-serif;
-  box-shadow: none;
+    background: #f6f2f0;
+    color: #7c6f65;
+    font-weight: 500;
+    font-family: 'Google Sans', Arial, sans-serif;
+    box-shadow: none;
 }
 
-.btn-light:active, .btn-light:focus, .btn-light:hover {
-  background: #ece6e2;
-  color: #7c6f65;
-  box-shadow: none;
+.btn-light:active,
+.btn-light:focus,
+.btn-light:hover {
+    background: #ece6e2;
+    color: #7c6f65;
+    box-shadow: none;
 }
 
 .footer {
-  border-top: none;
+    border-top: none;
 }

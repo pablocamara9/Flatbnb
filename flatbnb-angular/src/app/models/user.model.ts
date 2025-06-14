@@ -4,3 +4,7 @@ export interface User {
     token: string
     refreshToken: string
 }
+
+export interface UserRegister {
+    token: string
+}

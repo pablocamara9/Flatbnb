@@ -5,19 +5,21 @@
         </a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="userRole === '' || userRole === 'USER'">
                     <a class="nav-link" href="#">Explorar</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="userRole === '' || userRole === 'USER'">
                     <a class="nav-link" href="#">Listas de deseos</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="userRole === '' || userRole === 'USER'">
                     <a class="nav-link" href="#">Viajes</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="userRole === '' || userRole === 'USER'">
                     <a class="nav-link" href="#">Mensajes</a>
                 </li>
-                <!-- Opciones según rol -->
+                <li class="nav-item" *ngIf="userRole === 'USER'">
+                    <a class="nav-link" [routerLink]="['/reservas', userId]">Mis reservas</a>
+                </li>
                 <li class="nav-item" *ngIf="userRole === 'ADMIN'">
                     <a class="nav-link" [routerLink]="['/admin', userId]">Panel de administración</a>
                 </li>
@@ -26,9 +28,6 @@
                 </li>
                 <li class="nav-item" *ngIf="userRole === 'PROPIETARIO'">
                     <a class="nav-link" [routerLink]="['/propietario-pisos/', userId]">Mis pisos</a>
-                </li>
-                <li class="nav-item" *ngIf="userRole === 'USER'">
-                    <a class="nav-link" [routerLink]="['/reservas', userId]">Mis reservas</a>
                 </li>
             </ul>
             <form class="d-flex align-items-center" role="search">

@@ -2,12 +2,15 @@ package com.salesianostriana.flatbnb.service;
 
 import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
 import com.salesianostriana.flatbnb.dto.piso.EditPisoDto;
+import com.salesianostriana.flatbnb.model.Anuncio;
 import com.salesianostriana.flatbnb.model.Piso;
 import com.salesianostriana.flatbnb.model.Propietario;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -76,6 +79,14 @@ public class PisoService {
 
     public void delete(UUID id) {
         pisoRepository.deleteById(id);
+    }
+
+    public Page<Piso> findAllByPropietarioId(UUID propietarioId, Pageable pageable) {
+        Page<Piso> pisos = pisoRepository.findPisosByPropietarioId(propietarioId, pageable);
+        if(pisos.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron pisos.");
+        }
+        return pisos;
     }
 
 

@@ -2,19 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Anuncio } from '../../../models/anuncio.model';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-propietario',
   standalone: false,
-  templateUrl: './propietario.component.html',
-  styleUrl: './propietario.component.css'
+  templateUrl: './propietario-anuncios.component.html',
+  styleUrl: './propietario-anuncios.component.css'
 })
 export class PropietarioComponent implements OnInit {
+
   anuncios: Anuncio[] = [];
   totalPages: number = 0;
   currentPage: number = 0;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.loadAnuncios(0);
@@ -95,5 +97,13 @@ export class PropietarioComponent implements OnInit {
           });
       }
     });
+  }
+
+  nuevoAnuncio() {
+    this.router.navigate(['/agregar-anuncio']);
+  }
+
+  redirectEditForm(id: string) {
+    this.router.navigate(['/editar-anuncio', id]);
   }
 }

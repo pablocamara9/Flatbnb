@@ -12,8 +12,9 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { FormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
-import { PropietarioComponent } from './components/propietario/propietario-main-page/propietario.component';
+import { PropietarioComponent } from './components/propietario/propietario-anuncios/propietario-anuncios.component';
 import { PropietarioFormComponent } from './components/propietario/propietario-form/propietario-form.component';
+import { PropietarioPisosComponent } from './components/propietario/propietario-pisos/propietario-pisos.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { PropietarioFormComponent } from './components/propietario/propietario-f
     AnnouncementDetailComponent,
     PropietarioComponent,
     PropietarioFormComponent,
+    PropietarioPisosComponent,
   ],
   imports: [
     BrowserModule,

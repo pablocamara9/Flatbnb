@@ -1,40 +1,41 @@
 <app-header></app-header>
 
 <div class="container my-5">
-  <h2 class="fw-bold mb-4" style="font-family: 'Google Sans', Arial, sans-serif;">
-    Mis anuncios
-  </h2>
-  <div *ngIf="anuncios && anuncios.length > 0; else sinAnuncios">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold m-0" style="font-family: 'Google Sans', Arial, sans-serif;">
+      Mis pisos
+    </h2>
+    <button class="btn btn-primary" (click)="nuevoAnuncio()">
+      Nuevo piso
+    </button>
+  </div>
+  <div *ngIf="pisos && pisos.length > 0; else sinPisos">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-      <div class="col" *ngFor="let anuncio of anuncios">
+      <div class="col" *ngFor="let piso of pisos">
+        <img [src]="urlImagen" class="card-img-top rounded-top-4" alt="Imagen anuncio" style="object-fit:cover; height:220px;">
         <div class="card h-100 shadow-sm rounded-4">
-          <img [src]="anuncio.urlImagen" class="card-img-top rounded-top-4" alt="Imagen anuncio" style="object-fit:cover; height:220px;">
           <div class="card-body">
-            <h5 class="card-title fw-semibold">{{ anuncio.descripcion }}</h5>
-            <ng-container *ngIf="anuncio.piso">
+            <ng-container *ngIf="piso">
               <p class="card-text mb-1">
                 <i class="bi bi-geo-alt-fill text-danger me-1"></i>
-                {{ anuncio.piso.direccion }}
+                {{ piso.direccion }}
               </p>
               <p class="card-text mb-1">
-                <i class="bi bi-door-open text-success me-1"></i>
-                {{ anuncio.piso.numHabitaciones }} habitaciones
+                <i class="bi bi-aspect-ratio text-primary me-1"></i>
+                {{ piso.metrosCuadrados }} m²
                 <span class="ms-3">
-                  <i class="bi bi-aspect-ratio text-primary me-1"></i>
-                  {{ anuncio.piso.metrosCuadrados }} m²
+                  <i class="bi bi-door-open text-success me-1"></i>
+                  {{ piso.numHabitaciones }} habitaciones
                 </span>
               </p>
               <p class="card-text text-muted" style="font-size: 0.98rem;">
-                {{ anuncio.piso.observaciones }}
+                {{ piso.observaciones }}
               </p>
             </ng-container>
-            <div class="fw-bold text-danger mt-2">
-              {{ anuncio.precio | currency:'EUR':'symbol':'1.0-0' }} / noche
-            </div>
           </div>
-          <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
-            <button class="btn btn-outline-primary btn-sm rounded-pill">Editar</button>
-            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarAnuncio(anuncio.id)">Eliminar</button>
+          <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2 pt-1 pb-1" style="margin-bottom:0;">
+            <button class="btn btn-outline-primary btn-sm rounded-pill" (click)="redirectEditForm(piso.id)">Editar</button>
+            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarAnuncio(piso.id)">Eliminar</button>
           </div>
         </div>
       </div>
@@ -56,9 +57,9 @@
       </ul>
     </nav>
   </div>
-  <ng-template #sinAnuncios>
+  <ng-template #sinPisos>
     <div class="text-center text-muted py-5">
-      No tienes anuncios publicados.
+      No tienes pisos publicados.
     </div>
   </ng-template>
 </div>

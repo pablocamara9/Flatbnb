@@ -1,0 +1,71 @@
+<app-header></app-header>
+
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold m-0" style="font-family: 'Google Sans', Arial, sans-serif;">
+      Mis anuncios
+    </h2>
+    <button class="btn btn-primary" (click)="nuevoAnuncio()">
+      Nuevo anuncio
+    </button>
+  </div>
+  <div *ngIf="anuncios && anuncios.length > 0; else sinAnuncios">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <div class="col" *ngFor="let anuncio of anuncios">
+        <div class="card h-100 shadow-sm rounded-4">
+          <img [src]="anuncio.urlImagen" class="card-img-top rounded-top-4" alt="Imagen anuncio" style="object-fit:cover; height:220px;">
+          <div class="card-body">
+            <h5 class="card-title fw-semibold">{{ anuncio.descripcion }}</h5>
+            <ng-container *ngIf="anuncio.piso">
+              <p class="card-text mb-1">
+                <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                {{ anuncio.piso.direccion }}
+              </p>
+              <p class="card-text mb-1">
+                <i class="bi bi-door-open text-success me-1"></i>
+                {{ anuncio.piso.numHabitaciones }} habitaciones
+                <span class="ms-3">
+                  <i class="bi bi-aspect-ratio text-primary me-1"></i>
+                  {{ anuncio.piso.metrosCuadrados }} m²
+                </span>
+              </p>
+              <p class="card-text text-muted" style="font-size: 0.98rem;">
+                {{ anuncio.piso.observaciones }}
+              </p>
+            </ng-container>
+            <div class="fw-bold text-danger mt-2">
+              {{ anuncio.precio | currency:'EUR':'symbol':'1.0-0' }} / noche
+            </div>
+          </div>
+          <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2">
+            <button class="btn btn-outline-primary btn-sm rounded-pill" (click)="redirectEditForm(anuncio.id)">Editar</button>
+            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarAnuncio(anuncio.id)">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Paginación -->
+    <nav class="mt-4 d-flex justify-content-center" *ngIf="totalPages > 1">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <button class="page-link" (click)="cambiarPagina(currentPage - 1)" [disabled]="currentPage === 0">&laquo;</button>
+        </li>
+        <li class="page-item"
+            *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="i === currentPage">
+          <button class="page-link" (click)="cambiarPagina(i)">{{ i + 1 }}</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+          <button class="page-link" (click)="cambiarPagina(currentPage + 1)" [disabled]="currentPage === totalPages - 1">&raquo;</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <ng-template #sinAnuncios>
+    <div class="text-center text-muted py-5">
+      No tienes anuncios publicados.
+    </div>
+  </ng-template>
+</div>
+
+<app-footer></app-footer>

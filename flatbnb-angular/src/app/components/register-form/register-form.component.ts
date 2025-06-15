@@ -18,10 +18,11 @@ export class RegisterFormComponent {
   telefono: string = '';
   username: string = '';
   password: string = '';
+  rol: string = '';
 
   logoPath: string = 'assets/logo.png';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   camposRellenos(): boolean {
     if (
@@ -52,14 +53,17 @@ export class RegisterFormComponent {
   }
 
   register() {
+    let userRole = this.rol === '2' ? 'PROPIETARIO' : 'USER';
     const body = {
-      name: this.nombre,
-      surname: this.apellidos,
-      email: this.email,
-      phone: this.telefono,
       username: this.username,
-      password: this.password
+      password: this.password,
+      nombre: this.nombre,
+      apellidos: this.apellidos,
+      email: this.email,
+      telefono: this.telefono,
+      role: userRole
     }
+
 
     this.http.post<UserRegister>('http://localhost:8080/user/auth/register', body)
       .subscribe({

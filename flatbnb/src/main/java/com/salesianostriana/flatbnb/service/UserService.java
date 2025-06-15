@@ -49,7 +49,7 @@ public class UserService {
                 .apellidos(createUserDto.apellidos())
                 .email(createUserDto.email())
                 .telefono(createUserDto.telefono())
-                .roles(Set.of(UserRole.USER))
+                .roles(Set.of(createUserDto.role()))
                 .activationToken(generateRandomActivationCode())
                 .build();
 

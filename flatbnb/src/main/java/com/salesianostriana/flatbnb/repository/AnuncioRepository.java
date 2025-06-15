@@ -59,6 +59,4 @@ public interface AnuncioRepository
         WHERE a.propietario.id = :propietarioID
     """)
     Page<Anuncio> findAnunciosByPropietarioId(UUID propietarioID, Pageable pageable);
-
-    //Page<Anuncio> findAnunciosByPropietarioId(UUID propietarioID, Pageable pageable);
 }

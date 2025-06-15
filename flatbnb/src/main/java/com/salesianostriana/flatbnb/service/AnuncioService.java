@@ -9,9 +9,11 @@ import com.salesianostriana.flatbnb.repository.AnuncioRepository;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -91,6 +93,7 @@ public class AnuncioService {
         }).get();
     }
 
+    @Transactional
     public void delete(UUID id) {
         Optional<Anuncio> aBuscar = anuncioRepository.findById(id);
         if (aBuscar.isEmpty()) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Anuncio } from '../../models/anuncio.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-propietario',
@@ -13,7 +14,7 @@ export class PropietarioComponent implements OnInit {
   totalPages: number = 0;
   currentPage: number = 0;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.loadAnuncios(0);
@@ -21,15 +22,17 @@ export class PropietarioComponent implements OnInit {
 
   loadAnuncios(page: number) {
     const userStr = localStorage.getItem('user');
+    const token = localStorage.getItem('accessToken');
     let propietarioId = null;
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
         propietarioId = userObj.id;
-      } catch {}
+      } catch { }
     }
-    if (propietarioId) {
-      this.http.get<any>(`http://localhost:8080/anuncio/propietario/${propietarioId}?page=${page}`)
+    if (propietarioId && token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      this.http.get<any>(`http://localhost:8080/anuncio/propietario/${propietarioId}?page=${page}`, { headers })
         .subscribe({
           next: (data) => {
             // Si tu backend devuelve { content: [...], totalPages: n, number: n, ... }
@@ -55,5 +58,42 @@ export class PropietarioComponent implements OnInit {
     if (page >= 0 && page < this.totalPages) {
       this.loadAnuncios(page);
     }
+  }
+
+  eliminarAnuncio(anuncioId: string) {
+    const token = localStorage.getItem('accessToken');
+    const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : undefined;
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "No podrás deshacer esta acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, bórralo!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.http.delete(`http://localhost:8080/anuncio/${anuncioId}`, { headers })
+          .subscribe({
+            next: () => {
+              // Elimina el anuncio del array local tras borrarlo en el backend
+              this.anuncios = this.anuncios.filter(a => a.id !== anuncioId);
+              Swal.fire({
+                title: "Eliminado",
+                text: "El anuncio se eliminó exitosamente.",
+                icon: "success"
+              });
+            },
+            error: () => {
+              Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "No se pudo eliminar el anuncio. Inténtalo de nuevo.",
+                timer: 3000,
+              });
+            }
+          });
+      }
+    });
   }
 }

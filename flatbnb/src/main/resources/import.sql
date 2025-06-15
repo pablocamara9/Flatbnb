@@ -7,18 +7,18 @@ VALUES
 (gen_random_uuid(), 'admin', '{bcrypt}$2a$12$kEeH.BiaTOopCQA0kf7Oyuy.I0U4W5G2U0EXt0RFqNnCfhmrIwUay', 'Admin', 'Admin', 'admin1@example.com', '600000001', true, null, now()),
 
 -- Clientes (USER)
-(gen_random_uuid(), 'cliente1', '{bcrypt}$2a$12$HudIWopmJk80ZoZ4XbPdF.IMy5wD/ooHl79eivxGt/NYylK.wsbSa', 'Carlos', 'Ramírez', 'cliente1@example.com', '600000002', true, null, now()),
-(gen_random_uuid(), 'cliente2', '{bcrypt}$2a$12$pmDZpOAbFAnYqVuOlDZRmu97BCsoZLSeZEFrhpDJ5jfSzMod41lwm', 'Lucía', 'Gómez', 'cliente2@example.com', '600000003', true, null, now()),
-(gen_random_uuid(), 'cliente3', '{bcrypt}$2a$12$GQsPapaIyHBH5zPKSN2aMugHLFuzDa3anZYbBQIJ.9TYUt13kO4KW', 'Miguel', 'López', 'cliente3@example.com', '600000004', true, null, now()),
-(gen_random_uuid(), 'cliente4', '{bcrypt}$2a$12$x9nj7yjDyGwFzaZVn6yrKONSAN551krHrkMn9Tx.RyzY0Z7ejJHb.', 'Sofía', 'Martínez', 'cliente4@example.com', '600000005', true, null, now()),
-(gen_random_uuid(), 'cliente5', '{bcrypt}$2a$12$aMBaTlBgbwXYJToDn8VkF.IogfarO7kA4qLrnia.WukfpFrjwKOYq', 'Andrés', 'Fernández', 'cliente5@example.com', '600000006', true, null, now()),
+(gen_random_uuid(), 'cliente1', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Carlos', 'Ramírez', 'cliente1@example.com', '600000002', true, null, now()),
+(gen_random_uuid(), 'cliente2', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Lucía', 'Gómez', 'cliente2@example.com', '600000003', true, null, now()),
+(gen_random_uuid(), 'cliente3', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Miguel', 'López', 'cliente3@example.com', '600000004', true, null, now()),
+(gen_random_uuid(), 'cliente4', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Sofía', 'Martínez', 'cliente4@example.com', '600000005', true, null, now()),
+(gen_random_uuid(), 'cliente5', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Andrés', 'Fernández', 'cliente5@example.com', '600000006', true, null, now()),
 
 -- Propietarios
-(gen_random_uuid(), 'propietario1', '{bcrypt}$2a$12$fA7Ej3EBKllXrsvF8YpqdeydYUxz6vWJFpX9vs5ArqoHJ4XZg8bBG', 'Ana', 'Torres', 'propietario1@example.com', '600000007', true, null, now()),
-(gen_random_uuid(), 'propietario2', '{bcrypt}$2a$12$a/.dFfTTAGOZBjJ7hYb/Dec0/FD3.O3kM7i3tJ1afl/WChecLgkmq', 'Javier', 'Santos', 'propietario2@example.com', '600000008', true, null, now()),
-(gen_random_uuid(), 'propietario3', '{bcrypt}$2a$12$FxzA/fcOqxCK.HP5Ggrav.4ofKkYrV94xZEDQXwbbj9xRCmoa8wd6', 'Marina', 'Delgado', 'propietario3@example.com', '600000009', true, null, now()),
-(gen_random_uuid(), 'propietario4', '{bcrypt}$2a$12$OiagGFPL24hX.Jaw.7tPwe5IXPXEoNU/daHak5ATWVzzwxhbLo8uC', 'Luis', 'Vega', 'propietario4@example.com', '600000010', true, null, now()),
-(gen_random_uuid(), 'propietario5', '{bcrypt}$2a$12$oaUh3VlrpnzzxKiRHucqw.gAo5/PHs5bK.MdrOe0gSJxTNHyKMFk.', 'Paula', 'Moreno', 'propietario5@example.com', '600000011', true, null, now());
+(gen_random_uuid(), 'propietario1', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Ana', 'Torres', 'propietario1@example.com', '600000007', true, null, now()),
+(gen_random_uuid(), 'propietario2', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Javier', 'Santos', 'propietario2@example.com', '600000008', true, null, now()),
+(gen_random_uuid(), 'propietario3', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Marina', 'Delgado', 'propietario3@example.com', '600000009', true, null, now()),
+(gen_random_uuid(), 'propietario4', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Luis', 'Vega', 'propietario4@example.com', '600000010', true, null, now()),
+(gen_random_uuid(), 'propietario5', '{bcrypt}$2a$12$12qpoLFNojuLZxkrnuaRm./l4syMsN4pkR9YNeBdMxOGXz5kyJBYW', 'Paula', 'Moreno', 'propietario5@example.com', '600000011', true, null, now());
 
 -- Inserción de roles
 -- Admin

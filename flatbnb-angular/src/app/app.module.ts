@@ -12,6 +12,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { FormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
+import { PropietarioComponent } from './components/propietario/propietario.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AnnouncementDetailComponent } from './components/announcement-detail/an
     LoginFormComponent,
     RegisterFormComponent,
     AnnouncementDetailComponent,
+    PropietarioComponent,
   ],
   imports: [
     BrowserModule,

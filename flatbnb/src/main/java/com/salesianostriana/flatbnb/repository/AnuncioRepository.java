@@ -1,6 +1,7 @@
 package com.salesianostriana.flatbnb.repository;
 
 import com.salesianostriana.flatbnb.model.Anuncio;
+import com.salesianostriana.flatbnb.model.Propietario;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -52,4 +53,12 @@ public interface AnuncioRepository
     """)
     Page<Anuncio> findAllPaged(Pageable pageable);
 
+    @Query("""
+        SELECT a
+        FROM Anuncio a
+        WHERE a.propietario.id = :propietarioID
+    """)
+    Page<Anuncio> findAnunciosByPropietarioId(UUID propietarioID, Pageable pageable);
+
+    //Page<Anuncio> findAnunciosByPropietarioId(UUID propietarioID, Pageable pageable);
 }

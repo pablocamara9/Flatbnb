@@ -151,4 +151,12 @@ public class AnuncioService {
         return anunciosPaged;
     }
 
+    public Page<Anuncio> findAllByPropietarioId(UUID propietarioId, Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAnunciosByPropietarioId(propietarioId, pageable);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
 }

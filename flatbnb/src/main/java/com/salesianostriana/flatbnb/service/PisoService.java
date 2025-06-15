@@ -35,6 +35,7 @@ public class PisoService {
         return pisos;
     }
 
+    @Transactional
     public Piso createPiso(CreatePisoDto createPisoDto) {
         Optional<Propietario> prop = propietarioRepository.findById(createPisoDto.idPropietario());
         if (prop.isEmpty()) {
@@ -49,7 +50,10 @@ public class PisoService {
                 .propietario(prop.get())
                 .build();
 
+        prop.get().getPisos().add(p);
         p.setPropietario(prop.get());
+
+        //propietarioRepository.saveAndFlush(prop.get());
         return pisoRepository.save(p);
     }
 
@@ -91,10 +95,13 @@ public class PisoService {
         Anuncio a = aBuscar.get().getAnuncio();
 
         aBuscar.get().removePropietario(aBuscar.get().getPropietario());
-        aBuscar.get().getAnuncio().setPiso(null);
-        aBuscar.get().setAnuncio(null);
 
-        anuncioRepository.saveAndFlush(a);
+        if(aBuscar.get().getAnuncio() != null) {
+            aBuscar.get().getAnuncio().setPiso(null);
+            aBuscar.get().setAnuncio(null);
+            anuncioRepository.saveAndFlush(a);
+        }
+
         propietarioRepository.saveAndFlush(p);
         pisoRepository.delete(aBuscar.get());
     }

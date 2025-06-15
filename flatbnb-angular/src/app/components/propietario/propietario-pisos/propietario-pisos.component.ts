@@ -100,10 +100,10 @@ export class PropietarioPisosComponent implements OnInit {
   }
 
   nuevoPiso() {
-    this.router.navigate(['/agregar-anuncio']);
+    this.router.navigate(['/agregar-piso']);
   }
 
   redirectEditForm(id: string) {
-    this.router.navigate(['/editar-anuncio', id]);
+    this.router.navigate(['/editar-piso', id]);
   }
 }

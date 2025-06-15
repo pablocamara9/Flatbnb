@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<div class="container mt-4 d-flex flex-column align-items-center">
+  <h2>{{ isEdit ? 'Editar Piso' : 'Agregar Nuevo Piso' }}</h2>
+  <form (ngSubmit)="agregarPiso()" #Form="ngForm" class="w-100" style="max-width: 700px;">
+    <div class="mb-3 w-100">
+      <label for="direccion" class="form-label">Dirección</label>
+      <input type="text" id="direccion" class="form-control" name="direccion" required [(ngModel)]="direccion">
+    </div>
+    <div class="mb-3 w-100">
+      <label for="metrosCuadrados" class="form-label">Metros cuadrados</label>
+      <input type="number" id="metrosCuadrados" class="form-control" name="metrosCuadrados" required min="0" [(ngModel)]="metrosCuadrados">
+    </div>
+    <div class="mb-3 w-100">
+      <label for="numHabitaciones" class="form-label">Número de habitaciones</label>
+      <input type="number" id="numHabitaciones" class="form-control" name="numHabitaciones" required min="1" [(ngModel)]="numHabitaciones">
+    </div>
+    <div class="mb-3 w-100">
+      <label for="observaciones" class="form-label">Observaciones</label>
+      <textarea id="observaciones" class="form-control" name="observaciones" rows="3" [(ngModel)]="observaciones"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ isEdit ? 'Guardar cambios' : 'Agregar piso' }}</button>
+  </form>
+</div>
+
+<app-footer></app-footer>

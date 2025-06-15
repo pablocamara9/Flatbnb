@@ -15,6 +15,7 @@ import { AnnouncementDetailComponent } from './components/announcement-detail/an
 import { PropietarioComponent } from './components/propietario/propietario-anuncios/propietario-anuncios.component';
 import { PropietarioFormComponent } from './components/propietario/propietario-form/propietario-form.component';
 import { PropietarioPisosComponent } from './components/propietario/propietario-pisos/propietario-pisos.component';
+import { PropietarioPisoFormComponent } from './components/propietario/propietario-piso-form/propietario-piso-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PropietarioPisosComponent } from './components/propietario/propietario-
     PropietarioComponent,
     PropietarioFormComponent,
     PropietarioPisosComponent,
+    PropietarioPisoFormComponent,
   ],
   imports: [
     BrowserModule,

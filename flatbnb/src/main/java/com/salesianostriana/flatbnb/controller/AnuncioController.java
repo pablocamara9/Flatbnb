@@ -259,7 +259,7 @@ public class AnuncioController {
     }
 
     @GetMapping("/propietario/{id}")
-    public ResponseEntity<Page<GetAnuncioDto>> findAllByPropietarioId(@PathVariable UUID id, @PageableDefault(page = 0, size = 5) Pageable pageable) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPropietarioId(@PathVariable UUID id, @PageableDefault(page = 0, size = 6) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPropietarioId(id, pageable);
 
         if(pagedResult.isEmpty()) {

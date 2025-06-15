@@ -33,7 +33,7 @@ export class PropietarioPisoFormComponent implements OnInit {
       if (!token) return;
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
       this.http.get<any>(`http://localhost:8080/piso/${this.pisoId}`, { headers }).subscribe({
-        next: (data) => {
+        next: (data) => {          
           this.direccion = data.direccion;
           this.metrosCuadrados = data.metrosCuadrados;
           this.numHabitaciones = data.numHabitaciones;
@@ -53,33 +53,51 @@ export class PropietarioPisoFormComponent implements OnInit {
       return;
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    // Obtener el id del propietario desde el objeto 'user' en localStorage
+    let idPropietario = null;
+    const userStr = localStorage.getItem('user');
+    if (userStr) {
+      try {
+        const userObj = JSON.parse(userStr);
+        idPropietario = userObj.id;
+      } catch {}
+    }
     const body = {
       direccion: this.direccion,
       metrosCuadrados: this.metrosCuadrados,
       numHabitaciones: this.numHabitaciones,
-      observaciones: this.observaciones
+      observaciones: this.observaciones,
+      idPropietario: idPropietario
     };
 
     if (this.isEdit && this.pisoId) {
       this.http.put(`http://localhost:8080/piso/${this.pisoId}`, body, { headers }).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Piso actualizado correctamente.', 'success').then(() => {
-            this.router.navigate(['/mis-pisos']);
+            window.location.reload();
           });
+          this.router.navigate(['/propietario-pisos/', idPropietario]);
         },
         error: () => {
-          Swal.fire('Error', 'No se pudo actualizar el piso.', 'error');
+          Swal.fire('Error', 'No se pudo actualizar el piso.', 'error').then(() => {
+            window.location.reload();
+          });
+          this.router.navigate(['/propietario-pisos/', idPropietario]);
         }
       });
     } else {
       this.http.post('http://localhost:8080/piso/', body, { headers }).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Piso agregado correctamente.', 'success').then(() => {
-            this.router.navigate(['/mis-pisos']);
+            window.location.reload();
           });
+          this.router.navigate(['/propietario-pisos/', idPropietario]);
         },
         error: () => {
-          Swal.fire('Error', 'No se pudo agregar el piso.', 'error');
+          Swal.fire('Error', 'No se pudo agregar el piso.', 'error').then(() => {
+            window.location.reload();
+          });
+          this.router.navigate(['/propietario-pisos/', idPropietario]);
         }
       });
     }

@@ -38,6 +38,8 @@ export class PropietarioPisosComponent implements OnInit {
       this.http.get<any>(`http://localhost:8080/piso/propietario/${propietarioId}?page=${page}`, { headers })
         .subscribe({
           next: (data) => {
+            console.log('Anuncios del propietario:', data);
+            
             this.pisos = data.content || [];
             this.totalPages = data.totalPages || 1;
             this.currentPage = data.number || 0;

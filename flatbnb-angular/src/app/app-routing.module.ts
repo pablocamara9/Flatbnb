@@ -4,7 +4,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
-import { PropietarioComponent } from './components/propietario/propietario.component';
+import { PropietarioComponent } from './components/propietario/propietario-main-page/propietario.component';
 
 const routes: Routes = [
   { path: 'main', component: MainPageComponent },

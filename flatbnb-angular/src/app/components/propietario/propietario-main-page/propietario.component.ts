@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Anuncio } from '../../models/anuncio.model';
+import { Anuncio } from '../../../models/anuncio.model';
 import Swal from 'sweetalert2';
 
 @Component({

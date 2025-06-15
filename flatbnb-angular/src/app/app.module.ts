@@ -12,7 +12,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { FormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { AnnouncementDetailComponent } from './components/announcement-detail/announcement-detail.component';
-import { PropietarioComponent } from './components/propietario/propietario.component';
+import { PropietarioComponent } from './components/propietario/propietario-main-page/propietario.component';
+import { PropietarioFormComponent } from './components/propietario/propietario-form/propietario-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PropietarioComponent } from './components/propietario/propietario.compo
     RegisterFormComponent,
     AnnouncementDetailComponent,
     PropietarioComponent,
+    PropietarioFormComponent,
   ],
   imports: [
     BrowserModule,

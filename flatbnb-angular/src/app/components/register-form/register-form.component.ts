@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserRegister } from '../../models/user.model';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-register-form',
@@ -22,7 +23,7 @@ export class RegisterFormComponent {
 
   logoPath: string = 'assets/logo.png';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 
   camposRellenos(): boolean {
     if (
@@ -53,67 +54,16 @@ export class RegisterFormComponent {
   }
 
   register() {
-    let userRole = this.rol === '2' ? 'PROPIETARIO' : 'USER';
-    const body = {
-      username: this.username,
-      password: this.password,
-      nombre: this.nombre,
-      apellidos: this.apellidos,
-      email: this.email,
-      telefono: this.telefono,
-      role: userRole
-    }
+    this.authService.register(
+      this.username,
+      this.password,
+      this.nombre,
+      this.apellidos,
+      this.email,
+      this.telefono,
+      this.rol
+    );
 
-
-    this.http.post<UserRegister>('http://localhost:8080/user/auth/register', body)
-      .subscribe({
-        next: (response) => {
-          console.log('Registro exitoso', response);
-
-          if (response.token) {
-            this.activateAccount(response.token);
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error de registro',
-              text: 'Por favor, inténtalo de nuevo.',
-              timer: 3000,
-            })
-          }
-        },
-        error: (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error de registro',
-            text: 'Por favor, inténtalo de nuevo.',
-            timer: 3000,
-          })
-        }
-      });
-
-  }
-
-  activateAccount(token: string) {
-    const body = { token: token };
-    this.http.post('http://localhost:8080/user/activate/account', body)
-      .subscribe({
-        next: (response) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Registro exitoso',
-            text: 'Por favor, inicia sesión.',
-            timer: 3000,
-          })
-          this.router.navigate(['/main']);
-        },
-        error: (error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error de registro',
-            text: 'Por favor, verifica tu correo o contacta con soporte.',
-            timer: 3000,
-          })
-        }
-      });
+    this.router.navigate(['/main']);
   }
 }

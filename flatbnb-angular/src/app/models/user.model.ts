@@ -3,6 +3,7 @@ export interface User {
     username: string
     token: string
     refreshToken: string
+    role: string
 }
 
 export interface UserRegister {

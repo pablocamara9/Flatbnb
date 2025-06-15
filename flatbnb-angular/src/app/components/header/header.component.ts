@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth-service.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,15 @@ import Swal from 'sweetalert2';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit{
   logoPath: string = 'assets/logo.png';
+  userRole: string | null = null;
+  userId: string | null = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
+  ngOnInit(): void {
+    this.userRole = this.authService.getRoles();
+  }
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('accessToken');
@@ -29,6 +35,8 @@ export class HeaderComponent {
       timer: 3000,
     })
 
+    this.userRole = null;
+    this.userId = null;
     this.router.navigate(['/main']);
   }
 }

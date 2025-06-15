@@ -3,60 +3,23 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 //import { jwtDecode } from 'jwt-decode';
 import { User } from '../models/user.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   constructor(private http: HttpClient) { }
 
-  userLogin(body: { username: string; password: string }): Observable<User> {
-    return this.http.post<User>('/auth/login', body);
-  }
-  /*getUsuario(username: string) {
-    return this.http.get<miUsuario>(`/me`);
-  }
-  logout() {
-    return this.http.post('/auth/logout', {}).subscribe({
-      next: () => {
-        localStorage.clear();
-
-      },
-      error: () => {
-        localStorage.clear();
-      }
-    });
-  }*/
-
-  register(data: any, userType: string) {
-    let url = userType === 'writer' ? '/writer/auth/register' : '/user/auth/register';
-
-    if (data instanceof FormData) {
-      return this.http.post(url, data);
-    } else {
-      return this.http.post(url, data, { headers: { 'Content-Type': 'application/json' } });
-    }
-  }
-
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('user');
-  }
-
-  getAuthorizationHeader(): string {
-    return 'Bearer ' + localStorage.getItem('accessToken');
-  }
-
-  verifyAccount(body: { token: string }) {
-    return this.http.post('/activate/account/', body);
-
-  }
-
-  /*getRoles(): string[] {
+  getRoles(): string {
     const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
     if (userStr) {
       try {
         const user = JSON.parse(userStr);
         if (user.token) {
           const decoded: any = jwtDecode(user.token);
-          if (decoded.roles && Array.isArray(decoded.roles)) {
+          if (decoded.roles && Array.isArray(decoded.roles) && decoded.roles.length > 0) {
+            return decoded.roles[0];
+          }
+          if (typeof decoded.roles === 'string') {
             return decoded.roles;
           }
         }
@@ -64,16 +27,7 @@ export class AuthService {
         console.error('Error decodificando el token:', e);
       }
     }
-    return [];
-  }*/
-
-
-
-  /*isWriterOrAdmin(): boolean {
-    const roles = this.getRoles();
-    const result = roles.includes('WRITER') || roles.includes('ADMIN');
-    return result;
-  }*/
-
+    return '';
+  }
 
 }

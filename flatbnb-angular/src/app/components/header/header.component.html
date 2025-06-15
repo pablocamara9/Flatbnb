@@ -17,6 +17,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Mensajes</a>
                 </li>
+                <!-- Opciones según rol -->
+                <li class="nav-item" *ngIf="userRole === 'ADMIN'">
+                    <a class="nav-link" [routerLink]="['/admin', userId]">Panel de administración</a>
+                </li>
+                <li class="nav-item" *ngIf="userRole === 'PROPIETARIO'">
+                    <a class="nav-link" routerLink="/mis-anuncios">Mis anuncios</a>
+                </li>
+                <li class="nav-item" *ngIf="userRole === 'USER'">
+                    <a class="nav-link" routerLink="/reservas">Mis reservas</a>
+                </li>
             </ul>
             <form class="d-flex align-items-center" role="search">
                 <ng-container *ngIf="!isLoggedIn(); else logged">

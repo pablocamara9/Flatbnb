@@ -38,7 +38,6 @@ export class PropietarioPisosComponent implements OnInit {
       this.http.get<any>(`http://localhost:8080/piso/propietario/${propietarioId}?page=${page}`, { headers })
         .subscribe({
           next: (data) => {
-            // Si tu backend devuelve { content: [...], totalPages: n, number: n, ... }
             this.pisos = data.content || [];
             this.totalPages = data.totalPages || 1;
             this.currentPage = data.number || 0;
@@ -63,7 +62,7 @@ export class PropietarioPisosComponent implements OnInit {
     }
   }
 
-  eliminarAnuncio(anuncioId: string) {
+  eliminarPiso(anuncioId: string) {
     const token = localStorage.getItem('accessToken');
     const headers = token ? new HttpHeaders().set('Authorization', `Bearer ${token}`) : undefined;
     Swal.fire({
@@ -76,7 +75,7 @@ export class PropietarioPisosComponent implements OnInit {
       confirmButtonText: "Sí, bórralo!"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.http.delete(`http://localhost:8080/anuncio/${anuncioId}`, { headers })
+        this.http.delete(`http://localhost:8080/piso/${anuncioId}`, { headers })
           .subscribe({
             next: () => {
               // Elimina el anuncio del array local tras borrarlo en el backend
@@ -100,7 +99,7 @@ export class PropietarioPisosComponent implements OnInit {
     });
   }
 
-  nuevoAnuncio() {
+  nuevoPiso() {
     this.router.navigate(['/agregar-anuncio']);
   }
 

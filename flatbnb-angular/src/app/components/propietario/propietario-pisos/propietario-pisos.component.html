@@ -5,28 +5,29 @@
     <h2 class="fw-bold m-0" style="font-family: 'Google Sans', Arial, sans-serif;">
       Mis pisos
     </h2>
-    <button class="btn btn-primary" (click)="nuevoAnuncio()">
+    <button class="btn btn-primary" (click)="nuevoPiso()">
       Nuevo piso
     </button>
   </div>
   <div *ngIf="pisos && pisos.length > 0; else sinPisos">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       <div class="col" *ngFor="let piso of pisos">
-        <img [src]="urlImagen" class="card-img-top rounded-top-4" alt="Imagen anuncio" style="object-fit:cover; height:220px;">
         <div class="card h-100 shadow-sm rounded-4">
+          <img [src]="urlImagen" class="card-img-top rounded-top-4" alt="Imagen anuncio" style="object-fit:cover; height:220px;">
           <div class="card-body">
             <ng-container *ngIf="piso">
               <p class="card-text mb-1">
                 <i class="bi bi-geo-alt-fill text-danger me-1"></i>
-                {{ piso.direccion }}
+                <span class="fw-bold">{{ piso.direccion }}</span>
               </p>
+              <hr>
               <p class="card-text mb-1">
                 <i class="bi bi-aspect-ratio text-primary me-1"></i>
                 {{ piso.metrosCuadrados }} m²
-                <span class="ms-3">
-                  <i class="bi bi-door-open text-success me-1"></i>
-                  {{ piso.numHabitaciones }} habitaciones
-                </span>
+              </p>
+              <p class="card-text mb-1">
+                <i class="bi bi-door-open text-success me-1"></i>
+                {{ piso.numHabitaciones }} habitaciones
               </p>
               <p class="card-text text-muted" style="font-size: 0.98rem;">
                 {{ piso.observaciones }}
@@ -35,7 +36,7 @@
           </div>
           <div class="card-footer bg-transparent border-0 d-flex justify-content-end gap-2 pt-1 pb-1" style="margin-bottom:0;">
             <button class="btn btn-outline-primary btn-sm rounded-pill" (click)="redirectEditForm(piso.id)">Editar</button>
-            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarAnuncio(piso.id)">Eliminar</button>
+            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarPiso(piso.id)">Eliminar</button>
           </div>
         </div>
       </div>

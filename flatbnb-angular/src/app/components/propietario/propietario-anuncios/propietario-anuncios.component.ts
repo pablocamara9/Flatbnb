@@ -37,7 +37,6 @@ export class PropietarioComponent implements OnInit {
       this.http.get<any>(`http://localhost:8080/anuncio/propietario/${propietarioId}?page=${page}`, { headers })
         .subscribe({
           next: (data) => {
-            // Si tu backend devuelve { content: [...], totalPages: n, number: n, ... }
             this.anuncios = data.content || [];
             this.totalPages = data.totalPages || 1;
             this.currentPage = data.number || 0;

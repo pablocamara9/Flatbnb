@@ -5,9 +5,11 @@ import com.salesianostriana.flatbnb.dto.piso.EditPisoDto;
 import com.salesianostriana.flatbnb.model.Anuncio;
 import com.salesianostriana.flatbnb.model.Piso;
 import com.salesianostriana.flatbnb.model.Propietario;
+import com.salesianostriana.flatbnb.repository.AnuncioRepository;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +25,7 @@ public class PisoService {
 
     private final PisoRepository pisoRepository;
     private final PropietarioRepository propietarioRepository;
+    private final AnuncioRepository anuncioRepository;
 
     public List<Piso> findAll() {
         List<Piso> pisos = pisoRepository.findAll();
@@ -77,8 +80,23 @@ public class PisoService {
         }).get();
     }
 
+    @Transactional
     public void delete(UUID id) {
-        pisoRepository.deleteById(id);
+        Optional<Piso> aBuscar = pisoRepository.findById(id);
+        if (aBuscar.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el piso con id " + id);
+        }
+
+        Propietario p = aBuscar.get().getPropietario();
+        Anuncio a = aBuscar.get().getAnuncio();
+
+        aBuscar.get().removePropietario(aBuscar.get().getPropietario());
+        aBuscar.get().getAnuncio().setPiso(null);
+        aBuscar.get().setAnuncio(null);
+
+        anuncioRepository.saveAndFlush(a);
+        propietarioRepository.saveAndFlush(p);
+        pisoRepository.delete(aBuscar.get());
     }
 
     public Page<Piso> findAllByPropietarioId(UUID propietarioId, Pageable pageable) {

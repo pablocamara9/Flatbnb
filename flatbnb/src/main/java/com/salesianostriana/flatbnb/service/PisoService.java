@@ -96,11 +96,20 @@ public class PisoService {
 
         aBuscar.get().removePropietario(aBuscar.get().getPropietario());
 
+        // Si el piso está en un anuncio, borro el piso y borro el anuncio entero
         if(aBuscar.get().getAnuncio() != null) {
-            aBuscar.get().getAnuncio().setPiso(null);
+            /*aBuscar.get().getAnuncio().setPiso(null);
+            aBuscar.get().setAnuncio(null);*/
+            aBuscar.get().getAnuncio().deletePiso(aBuscar.get());
             aBuscar.get().setAnuncio(null);
-            anuncioRepository.saveAndFlush(a);
+
+            a.deletePropietario(p);
+            p.getAnuncios().remove(a);
+            anuncioRepository.delete(a);
         }
+
+        /*aBuscar.get().removePropietario(p);
+        p.getPisos().remove(aBuscar.get());*/
 
         propietarioRepository.saveAndFlush(p);
         pisoRepository.delete(aBuscar.get());

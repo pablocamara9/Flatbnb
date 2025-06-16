@@ -102,6 +102,9 @@ public class AnuncioService {
 
         aBuscar.get().deletePiso(aBuscar.get().getPiso());
         aBuscar.get().deletePropietario(aBuscar.get().getPropietario());
+
+        pisoRepository.saveAndFlush(aBuscar.get().getPiso());
+        propietarioRepository.saveAndFlush(aBuscar.get().getPropietario());
         anuncioRepository.delete(aBuscar.get());
     }
 

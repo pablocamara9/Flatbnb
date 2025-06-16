@@ -23,7 +23,7 @@ export class AdminMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarUsuarios();
-    this.cargarAnuncios();
+    this.cargarAnuncios(0, 10000000);
     this.cargarPisos();
   }
 
@@ -51,8 +51,8 @@ export class AdminMainComponent implements OnInit {
       });
   }
 
-  cargarAnuncios() {
-    this.http.get<any>('http://localhost:8080/anuncio/')
+  cargarAnuncios(pagina: number, size: number) {
+    this.http.get<any>(`http://localhost:8080/anuncio/?page=${pagina}&size=${size}`)
       .subscribe({
         next: (data) => {
           if (Array.isArray(data)) {
@@ -107,7 +107,9 @@ export class AdminMainComponent implements OnInit {
             this.service.eliminarUsuario(id).subscribe({
               next: () => {
                 Swal.fire('Eliminado!', 'El usuario ha sido eliminado.', 'success').then(() => {
-                  this.cargarUsuarios();
+                  window.location.reload();
+                  //this.cargarUsuarios();
+                  
                 });
               },
               error: () => {

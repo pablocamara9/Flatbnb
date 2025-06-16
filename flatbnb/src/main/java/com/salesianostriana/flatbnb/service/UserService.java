@@ -6,6 +6,7 @@ import com.salesianostriana.flatbnb.error.ActivationExpiredException;
 import com.salesianostriana.flatbnb.model.User;
 import com.salesianostriana.flatbnb.model.UserRole;
 import com.salesianostriana.flatbnb.repository.UserRepository;
+import com.salesianostriana.flatbnb.security.jwt.refresh.RefreshTokenRepository;
 import com.salesianostriana.flatbnb.util.SendGridMailSender;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final SendGridMailSender mailSender;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Value("${activation.duration}")
     private int activationDuration;
@@ -100,6 +102,12 @@ public class UserService {
     }
 
     public void delete(UUID id) {
+        Optional<User> aBuscar = userRepository.findById(id);
+        if (aBuscar.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el usuario con id " + id);
+        }
+
+        refreshTokenRepository.deleteByUser(aBuscar.get());
         userRepository.deleteById(id);
     }
 

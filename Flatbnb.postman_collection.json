@@ -17,7 +17,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmNDM0MDFkOS0wNzVjLTQ5YWQtYjQ3YS04MmM0OTQ5NjVkYjciLCJpYXQiOjE3NDA0Nzk5MDQsImV4cCI6MTc0MDQ4MDUwNH0.lJjAdtPlK2PB_fr2u66fihSPj1bub9G8V2960DPQb0a2G-o03A7ILe5DlOp86-bO",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxNGE4OTk4MS1jNTkzLTRiYzctODcxYS1lODlhOWFmZWJhZjYiLCJpYXQiOjE3NDk0NTg5MTAsImV4cCI6MTc0OTQ1OTUxMH0.KkaM-VPUyeYwmLzrzbt92pkineyV_VIhFuQeSk3DlZpD9T0cbuj9ccHagmTZUUvM",
 									"type": "string"
 								}
 							]
@@ -44,7 +44,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"pablo\",\r\n    \"password\": \"1234\",\r\n    \"nombre\": \"Pablo\",\r\n    \"apellidos\": \"Camara Garcia\",\r\n    \"email\": \"camara.gapab23@triana.salesianos.edu\",\r\n    \"telefono\": \"660232323\"\r\n}",
+							"raw": "{\r\n    \"username\": \"pablo3\",\r\n    \"password\": \"1234\",\r\n    \"nombre\": \"Pablo\",\r\n    \"apellidos\": \"Camara Garcia\",\r\n    \"email\": \"camara.gapab23@triana.salesianos.edu\",\r\n    \"telefono\": \"660232323\",\r\n    \"role\": \"PROPIETARIO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,7 +72,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"token\": \"a619562b-29ad-4ea1-b267-1ceac477386b\"\r\n}",
+							"raw": "{\r\n    \"token\": \"3019e616-447e-4a8c-8868-ff044334df9b\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -112,7 +112,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"pablo\",\r\n    \"password\": \"1234\"\r\n}",
+							"raw": "{\r\n    \"username\": \"propietario1\",\r\n    \"password\": \"1234\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -140,7 +140,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"refreshToken\": \"bc52e8f6-2b20-47d4-a664-2ba5ed9b440c\"\r\n}",
+							"raw": "{\r\n    \"refreshToken\": \"454ffd5a-a27b-4ef7-b9bc-5a75dd1b4c86\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -208,6 +208,34 @@
 					"response": []
 				},
 				{
+					"name": "Edit Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/03776c90-1be1-4fa2-9508-1a84f29965d7/editRole",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"03776c90-1be1-4fa2-9508-1a84f29965d7",
+								"editRole"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Delete",
 					"request": {
 						"method": "DELETE",
@@ -220,6 +248,34 @@
 							"path": [
 								"user",
 								"9286d555-da3a-415d-b3fa-a2b28ff586b3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Role",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"role\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/03776c90-1be1-4fa2-9508-1a84f29965d7/editRole",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"03776c90-1be1-4fa2-9508-1a84f29965d7",
+								"editRole"
 							]
 						}
 					},
@@ -238,7 +294,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI3YjNkODVhMC0wNDIyLTQzMWQtODY5MS04Njg0Y2M2ZDI2Y2UiLCJpYXQiOjE3NDA0ODIxODEsImV4cCI6MTc0MDQ4Mjc4MX0.sVl4Y0NYUVB2zvB3yT66BWCMWUnVS-W4RPxGrxkQm75c5bsnitM1GOkfKmxci5_F",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxNGE4OTk4MS1jNTkzLTRiYzctODcxYS1lODlhOWFmZWJhZjYiLCJpYXQiOjE3NDk0NTg5MTAsImV4cCI6MTc0OTQ1OTUxMH0.KkaM-VPUyeYwmLzrzbt92pkineyV_VIhFuQeSk3DlZpD9T0cbuj9ccHagmTZUUvM",
 									"type": "string"
 								}
 							]
@@ -266,7 +322,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmNDM0MDFkOS0wNzVjLTQ5YWQtYjQ3YS04MmM0OTQ5NjVkYjciLCJpYXQiOjE3NDA0Nzk5MzgsImV4cCI6MTc0MDQ4MDUzOH0.EInhsfV_sz1Qg8fQOF7SotSgcJS5vJgLbx29NnGsno30oVEL67amHhwe1OdmEYXL",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI4YzY4YTczZi0yMDVmLTQ3NDQtOGYwNS1iYzJmNWI0MzY3ZDciLCJyb2xlcyI6WyJQUk9QSUVUQVJJTyJdLCJpYXQiOjE3NTAwMjk1ODcsImV4cCI6MTc1MDAzMDE4N30.g63WNbdD6JFX0tTBykHuvg6g9iS9CQcvsWIn4psY6w3WvHrvni_jPElE9J2Y3orD",
 									"type": "string"
 								}
 							]
@@ -275,7 +331,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"direccion\": \"Rue del Percebe, 13\",\r\n    \"metrosCuadrados\": 111.111,\r\n    \"numHabitaciones\": 6,\r\n    \"observaciones\": \"Mu bonito olee oleee\",\r\n    \"idPropietario\": \"a729d27f-20d0-4a81-aaa4-5c3c001e9cfe\"\r\n}",
+							"raw": "{\r\n    \"direccion\": \"Rue del Percebe, 13\",\r\n    \"metrosCuadrados\": 80,\r\n    \"numHabitaciones\": 6,\r\n    \"observaciones\": \"Mu bonito olee oleee\",\r\n    \"idPropietario\": \"8c68a73f-205f-4744-8f05-bc2f5b4367d7\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -331,7 +387,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxZTI0ZmUwZi04OTA0LTQ1MTAtOGYzNy00N2E1ZjZhNDBiOTMiLCJpYXQiOjE3NDAzOTk5MzksImV4cCI6MTc0MDQwMDUzOX0.NJIJGrimr5Mh2kzeS_Jisj2OMdXb_XIspQVijK-OT07g-KhJvn-aMQgy2o8tos4h",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiZDc5NjdhYS1iZmM5LTQ1ODctYWM4Yi03ZDcxZThhNWI4MGUiLCJyb2xlcyI6WyJQUk9QSUVUQVJJTyJdLCJpYXQiOjE3NTAwMjg4OTQsImV4cCI6MTc1MDAyOTQ5NH0.DegdAZQo3UUFLxRZvYTJUSPAJwW16FjRGJW-eekmi3QJ0m68eA3R28a8WyxaDup7",
 									"type": "string"
 								}
 							]
@@ -340,7 +396,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"direccion\": \"AAAA EEEE IIII, 99\",\r\n    \"metrosCuadrados\": 123.456,\r\n    \"numHabitaciones\": 3,\r\n    \"observaciones\": \"Pisito vacacional de los buenos\",\r\n    \"idPropietario\": \"a729d27f-20d0-4a81-aaa4-5c3c001e9cfe\"\r\n}",
+							"raw": "{\r\n    \"direccion\": \"AAAA EEEE IIII, 99\",\r\n    \"metrosCuadrados\": 123.456,\r\n    \"numHabitaciones\": 3,\r\n    \"observaciones\": \"Pisito vacacional de los buenos\",\r\n    \"idPropietario\": \"bd7967aa-bfc9-4587-ac8b-7d71e8a5b80e\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,13 +404,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/piso/40662a65-19f3-4559-9ee4-44021fc86bb3",
+							"raw": "{{base_url}}/piso/0f318811-2df4-4e92-8353-8d01ead2b5bd",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"piso",
-								"40662a65-19f3-4559-9ee4-44021fc86bb3"
+								"0f318811-2df4-4e92-8353-8d01ead2b5bd"
 							]
 						}
 					},
@@ -368,7 +424,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxZTI0ZmUwZi04OTA0LTQ1MTAtOGYzNy00N2E1ZjZhNDBiOTMiLCJpYXQiOjE3NDAzOTk5MzksImV4cCI6MTc0MDQwMDUzOX0.NJIJGrimr5Mh2kzeS_Jisj2OMdXb_XIspQVijK-OT07g-KhJvn-aMQgy2o8tos4h",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiOGEwNzM3MS1hMjQ1LTQ4OWQtOWE5Mi00ODUxMjAwZDJlZDUiLCJyb2xlcyI6WyJQUk9QSUVUQVJJTyJdLCJpYXQiOjE3NTAwMjUxODYsImV4cCI6MTc1MDAyNTc4Nn0.ZYrKKn_R0HsV5_lCaFjFosullVX5Ct5fltJWbGU3cafWTNWfqj92FXMiG3qXP3HH",
 									"type": "string"
 								}
 							]
@@ -376,13 +432,95 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/piso/40662a65-19f3-4559-9ee4-44021fc86bb3",
+							"raw": "{{base_url}}/piso/7f1764b5-96dd-487b-bc71-031208958110",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"piso",
-								"40662a65-19f3-4559-9ee4-44021fc86bb3"
+								"7f1764b5-96dd-487b-bc71-031208958110"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindPisosByPropietario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1327919e-506b-4c91-bacd-ea19c5d5a997",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/piso/propietario/bee330ec-ee54-4c9e-bac9-ea4e7b5cc5ec",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								"propietario",
+								"bee330ec-ee54-4c9e-bac9-ea4e7b5cc5ec"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindPisosByPropietario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "1327919e-506b-4c91-bacd-ea19c5d5a997",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/piso/propietario/bee330ec-ee54-4c9e-bac9-ea4e7b5cc5ec",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"piso",
+								"propietario",
+								"bee330ec-ee54-4c9e-bac9-ea4e7b5cc5ec"
 							]
 						}
 					},
@@ -494,7 +632,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJkOTc2NDQ2NC02YTU0LTRjZDQtYTExNi00NmM1OTM1ZTJjNjIiLCJpYXQiOjE3NDA0ODE2MDMsImV4cCI6MTc0MDQ4MjIwM30.bhK2xu8Px-PfJNfbLvVpn_FPMW9ABsD5bW1UXcmoHjR_3iZA5fDk4mcd8UllmfdK",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI1MTYwMWY1Yy04NjU0LTRjNDAtOTI3NS0xNzRlNDc0YTk5ZmQiLCJpYXQiOjE3NDk0Njk4OTEsImV4cCI6MTc0OTQ3MDQ5MX0.JNi6IDgcdCkjdUvbWJhiEy_Nq3fqdpqhaoeFznG6glVSatxAyLyTLKEXErr2V-L0",
 									"type": "string"
 								}
 							]
@@ -511,13 +649,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/propietario/b5bc492c-b809-4cac-9a94-7bc0442acde8",
+							"raw": "{{base_url}}/propietario/51601f5c-8654-4c40-9275-174e474a99fd",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"propietario",
-								"b5bc492c-b809-4cac-9a94-7bc0442acde8"
+								"51601f5c-8654-4c40-9275-174e474a99fd"
 							]
 						}
 					},
@@ -531,7 +669,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI0ODZmMzZmMS04YzI3LTQwMzQtYTQ1Yi0xNjc2ODU4MTg5ZTAiLCJpYXQiOjE3NDA0ODMzNzIsImV4cCI6MTc0MDQ4Mzk3Mn0.HCS-iOQmTjWXW6lYGm2HC916LM6UQbljRIovbaKUZW6Syxy2eUQtpf2ryJNfVENL",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmNDQ1YjRiMi1hMmRiLTRlZGEtOWMzYy1hODgzMTdkYzcxN2IiLCJyb2xlcyI6WyJQUk9QSUVUQVJJTyJdLCJpYXQiOjE3NTAwMjQ1MDgsImV4cCI6MTc1MDAyNTEwOH0.tKhiBmEu6zNJraKvich9Kc22KOot-23XcSW_z7je0kKaTejHOePeU7E3jCNIiVl5",
 									"type": "string"
 								}
 							]
@@ -539,13 +677,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/propietario/00edbcfc-a26d-440f-ac1c-dbad9d13b7fd",
+							"raw": "{{base_url}}/propietario/e143c6c5-0651-42c1-b3b6-7648bc7ab0f6",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"propietario",
-								"00edbcfc-a26d-440f-ac1c-dbad9d13b7fd"
+								"e143c6c5-0651-42c1-b3b6-7648bc7ab0f6"
 							]
 						}
 					},
@@ -738,17 +876,49 @@
 			"item": [
 				{
 					"name": "FindAll",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI2ZjAyMzZhZi0wNTA4LTRhZjktOTdlNi1iNzNiOTA4MWIyNzQiLCJpYXQiOjE3NDA1MjczMjUsImV4cCI6MTc0MDUyNzkyNX0.fSk7-59_7YxxHMYCv3GVt1vX_urtyhQ_NInNYDRsC-ekPF8WXMXRGUiW7u0YGHQp",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{base_url}}/anuncio/",
+							"raw": "{{base_url}}/anuncio/?page=0&size=10",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"anuncio",
 								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -762,7 +932,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI1NzcwOTFlZi00MjM1LTQzODQtYjljZS1iMjgzY2I5MzgwZTAiLCJpYXQiOjE3NDA1NzMzMTcsImV4cCI6MTc0MDU3MzkxN30.o7esc-uQdXZFp2JUQax8XXDveHdIVroWqJCN2Yd8y8RxvxSwL3Jo6cAkrfIILtLf",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiNzg0NjIwOC1mYTMyLTQ0MzAtOTQ4Zi03MzM5YzY1N2FhMzIiLCJpYXQiOjE3NDk0Njc5NzcsImV4cCI6MTc0OTQ2ODU3N30.YpMjJ8ah01x9BPgHVcFCsrqxaX_66CiCWQH4S-vmbJYKiuHR3hnG9kyGecbpXOFh",
 									"type": "string"
 								}
 							]
@@ -771,7 +941,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"descripcion\": \"asdasdasd\",\r\n    \"precio\": 111.11,\r\n    \"urlImagen\": \"aaaaa\",\r\n    \"idPiso\": \"8b69712a-5786-4eca-a8eb-c10150ac97fb\",\r\n    \"idPropietario\": \"21883f09-e0de-4831-8533-b9eddab3d6b3\"\r\n}",
+							"raw": "{\r\n    \"descripcion\": \"asdasdasd\",\r\n    \"precio\": 0.01,\r\n    \"urlImagen\": \"qwertyuiop\",\r\n    \"idPiso\": \"9dec75de-3ac4-44d9-a535-24d2bc5e5f95\",\r\n    \"idPropietario\": \"f9d9bd21-7fa3-48f1-927a-345026f28a08\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -799,7 +969,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmZWVkNjc4ZC1jYjdhLTQ5MmMtOWI4My0zMDk0ZGQ3NGFlNTciLCJpYXQiOjE3NDAzODMzNDcsImV4cCI6MTc0MDM4Mzk0N30.v8nTRBnqDUtL-3dSbZBTXTJYriuKNQkB2crmdnnVUc1FKI4JEpmakazNFM42C3gQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJiNzg0NjIwOC1mYTMyLTQ0MzAtOTQ4Zi03MzM5YzY1N2FhMzIiLCJpYXQiOjE3NDk0Njc5NzcsImV4cCI6MTc0OTQ2ODU3N30.YpMjJ8ah01x9BPgHVcFCsrqxaX_66CiCWQH4S-vmbJYKiuHR3hnG9kyGecbpXOFh",
 									"type": "string"
 								}
 							]
@@ -808,7 +978,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"direccion\": \"AAAA EEEE IIII, 99\",\r\n    \"metrosCuadrados\": 123.456,\r\n    \"numHabitaciones\": 3,\r\n    \"observaciones\": \"Pisito vacacional de los buenos\"\r\n}",
+							"raw": "{\r\n    \"descripcion\": \"AAAA EEEE IIII\",\r\n    \"precio\": 80,\r\n    \"urlImagen\": \"123456789\",\r\n    \"idPiso\": \"246dea9b-3a79-40a7-ae4c-9490f63eeb57\",\r\n    \"idPropietario\": \"b7846208-fa32-4430-948f-7339c657aa32\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -816,13 +986,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/piso/3522a2b6-e375-44ec-a62c-dd3c6df97a76",
+							"raw": "{{base_url}}/anuncio/7055c117-f4dd-4e55-bed7-e5cf5dd7a2d1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"piso",
-								"3522a2b6-e375-44ec-a62c-dd3c6df97a76"
+								"anuncio",
+								"7055c117-f4dd-4e55-bed7-e5cf5dd7a2d1"
 							]
 						}
 					},
@@ -834,13 +1004,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/anuncio/",
+							"raw": "{{base_url}}/anuncio/17c2d847-78de-4c91-8df2-7ce942442bcb",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"anuncio",
-								""
+								"17c2d847-78de-4c91-8df2-7ce942442bcb"
 							]
 						}
 					},
@@ -854,7 +1024,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJmZWVkNjc4ZC1jYjdhLTQ5MmMtOWI4My0zMDk0ZGQ3NGFlNTciLCJpYXQiOjE3NDAzODMzNDcsImV4cCI6MTc0MDM4Mzk0N30.v8nTRBnqDUtL-3dSbZBTXTJYriuKNQkB2crmdnnVUc1FKI4JEpmakazNFM42C3gQ",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI5MTRiZWZkNC01Yzg2LTRjZTItYTkyOC0xNTg1ODM4YTNlZjIiLCJyb2xlcyI6WyJQUk9QSUVUQVJJTyJdLCJpYXQiOjE3NTAwMjM0NDksImV4cCI6MTc1MDAyNDA0OX0.zJIVMGx-TnCj45I2n2CsiAJv_ExOtlhxy7VoqPhfSfwQdNJHED66AfRSyFqlQcO3",
 									"type": "string"
 								}
 							]
@@ -862,13 +1032,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/piso/40662a65-19f3-4559-9ee4-44021fc86bb3",
+							"raw": "{{base_url}}/anuncio/2440242c-41ce-4490-81a7-117d58925f99",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"piso",
-								"40662a65-19f3-4559-9ee4-44021fc86bb3"
+								"anuncio",
+								"2440242c-41ce-4490-81a7-117d58925f99"
 							]
 						}
 					},
@@ -880,13 +1050,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/anuncio/precio",
+							"raw": "{{base_url}}/anuncio/precio?page=0&size=10",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"anuncio",
 								"precio"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -898,13 +1078,23 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/anuncio/precioDesc",
+							"raw": "{{base_url}}/anuncio/precioDesc?page=0&size=10",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"anuncio",
 								"precioDesc"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -928,15 +1118,25 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/anuncio/precioEntre/50.0/70.0",
+							"raw": "{{base_url}}/anuncio/precioEntre/600.0/700.0?page=0&size=10",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"anuncio",
 								"precioEntre",
-								"50.0",
-								"70.0"
+								"600.0",
+								"700.0"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -960,14 +1160,24 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/anuncio/precioMayor/70.0",
+							"raw": "{{base_url}}/anuncio/precioMayor/760.0?page=0&size=1",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"anuncio",
 								"precioMayor",
-								"70.0"
+								"760.0"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "1"
+								}
 							]
 						}
 					},
@@ -991,14 +1201,106 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/anuncio/precioMenor/70.0",
+							"raw": "{{base_url}}/anuncio/precioMenor/600.0?page=0&size=10",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"anuncio",
 								"precioMenor",
-								"70.0"
+								"600.0"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAnunciosByPropietario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI5MTRiZWZkNC01Yzg2LTRjZTItYTkyOC0xNTg1ODM4YTNlZjIiLCJyb2xlcyI6WyJQUk9QSUVUQVJJTyJdLCJpYXQiOjE3NTAwMjM0NDksImV4cCI6MTc1MDAyNDA0OX0.zJIVMGx-TnCj45I2n2CsiAJv_ExOtlhxy7VoqPhfSfwQdNJHED66AfRSyFqlQcO3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/anuncio/propietario/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								"propietario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindAnunciosByPropietario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzM4NCJ9.eyJzdWIiOiI5MTRiZWZkNC01Yzg2LTRjZTItYTkyOC0xNTg1ODM4YTNlZjIiLCJyb2xlcyI6WyJQUk9QSUVUQVJJTyJdLCJpYXQiOjE3NTAwMjM0NDksImV4cCI6MTc1MDAyNDA0OX0.zJIVMGx-TnCj45I2n2CsiAJv_ExOtlhxy7VoqPhfSfwQdNJHED66AfRSyFqlQcO3",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/anuncio/propietario/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"anuncio",
+								"propietario",
+								""
 							]
 						}
 					},

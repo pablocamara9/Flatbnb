@@ -2,12 +2,17 @@ package com.salesianostriana.flatbnb.service;
 
 import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
 import com.salesianostriana.flatbnb.dto.piso.EditPisoDto;
+import com.salesianostriana.flatbnb.model.Anuncio;
 import com.salesianostriana.flatbnb.model.Piso;
 import com.salesianostriana.flatbnb.model.Propietario;
+import com.salesianostriana.flatbnb.repository.AnuncioRepository;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +25,7 @@ public class PisoService {
 
     private final PisoRepository pisoRepository;
     private final PropietarioRepository propietarioRepository;
+    private final AnuncioRepository anuncioRepository;
 
     public List<Piso> findAll() {
         List<Piso> pisos = pisoRepository.findAll();
@@ -29,6 +35,7 @@ public class PisoService {
         return pisos;
     }
 
+    @Transactional
     public Piso createPiso(CreatePisoDto createPisoDto) {
         Optional<Propietario> prop = propietarioRepository.findById(createPisoDto.idPropietario());
         if (prop.isEmpty()) {
@@ -43,7 +50,10 @@ public class PisoService {
                 .propietario(prop.get())
                 .build();
 
+        prop.get().getPisos().add(p);
         p.setPropietario(prop.get());
+
+        //propietarioRepository.saveAndFlush(prop.get());
         return pisoRepository.save(p);
     }
 
@@ -74,8 +84,43 @@ public class PisoService {
         }).get();
     }
 
+    @Transactional
     public void delete(UUID id) {
-        pisoRepository.deleteById(id);
+        Optional<Piso> aBuscar = pisoRepository.findById(id);
+        if (aBuscar.isEmpty()) {
+            throw new EntityNotFoundException("No se encontro el piso con id " + id);
+        }
+
+        Propietario p = aBuscar.get().getPropietario();
+        Anuncio a = aBuscar.get().getAnuncio();
+
+        aBuscar.get().removePropietario(aBuscar.get().getPropietario());
+
+        // Si el piso está en un anuncio, borro el piso y borro el anuncio entero
+        if(aBuscar.get().getAnuncio() != null) {
+            /*aBuscar.get().getAnuncio().setPiso(null);
+            aBuscar.get().setAnuncio(null);*/
+            aBuscar.get().getAnuncio().deletePiso(aBuscar.get());
+            aBuscar.get().setAnuncio(null);
+
+            a.deletePropietario(p);
+            p.getAnuncios().remove(a);
+            anuncioRepository.delete(a);
+        }
+
+        /*aBuscar.get().removePropietario(p);
+        p.getPisos().remove(aBuscar.get());*/
+
+        propietarioRepository.saveAndFlush(p);
+        pisoRepository.delete(aBuscar.get());
+    }
+
+    public Page<Piso> findAllByPropietarioId(UUID propietarioId, Pageable pageable) {
+        Page<Piso> pisos = pisoRepository.findPisosByPropietarioId(propietarioId, pageable);
+        if(pisos.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron pisos.");
+        }
+        return pisos;
     }
 
 

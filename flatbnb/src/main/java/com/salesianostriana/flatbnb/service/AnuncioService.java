@@ -9,9 +9,11 @@ import com.salesianostriana.flatbnb.repository.AnuncioRepository;
 import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.repository.PropietarioRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -91,6 +93,7 @@ public class AnuncioService {
         }).get();
     }
 
+    @Transactional
     public void delete(UUID id) {
         Optional<Anuncio> aBuscar = anuncioRepository.findById(id);
         if (aBuscar.isEmpty()) {
@@ -99,6 +102,9 @@ public class AnuncioService {
 
         aBuscar.get().deletePiso(aBuscar.get().getPiso());
         aBuscar.get().deletePropietario(aBuscar.get().getPropietario());
+
+        pisoRepository.saveAndFlush(aBuscar.get().getPiso());
+        propietarioRepository.saveAndFlush(aBuscar.get().getPropietario());
         anuncioRepository.delete(aBuscar.get());
     }
 
@@ -149,6 +155,14 @@ public class AnuncioService {
             throw new EntityNotFoundException("No se encontraron anuncios.");
         }
         return anunciosPaged;
+    }
+
+    public Page<Anuncio> findAllByPropietarioId(UUID propietarioId, Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAnunciosByPropietarioId(propietarioId, pageable);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
     }
 
 }

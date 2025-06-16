@@ -91,8 +91,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 //ANUNCIOS
                 .requestMatchers(HttpMethod.GET, "anuncio/**").permitAll()
-                /*.requestMatchers(HttpMethod.POST, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.PUT, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")*/
+                .requestMatchers(HttpMethod.POST, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.PUT, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 .requestMatchers(HttpMethod.DELETE, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
 
                 //OTRAS COSAS

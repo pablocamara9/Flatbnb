@@ -32,7 +32,7 @@ export class PropietarioPisoFormComponent implements OnInit {
       const token = localStorage.getItem('accessToken');
       if (!token) return;
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      this.http.get<any>(`http://localhost:8080/piso/${this.pisoId}`, { headers }).subscribe({
+      this.http.get<Piso>(`http://localhost:8080/piso/${this.pisoId}`, { headers }).subscribe({
         next: (data) => {          
           this.direccion = data.direccion;
           this.metrosCuadrados = data.metrosCuadrados;

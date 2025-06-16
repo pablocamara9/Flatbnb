@@ -27,7 +27,7 @@
                     <div class="card h-100 border-0 shadow-none rounded-4"
                          style="cursor:pointer"
                          (click)="verDetalle(anuncio.id)">
-                        <img [src]="anuncio.urlImagen" class="card-img-top rounded-4 property-img" alt="Imagen anuncio">
+                        <img [src]="anuncio.urlImagen || 'assets/placeholder.jpg'" class="card-img-top rounded-4 property-img" alt="Imagen anuncio">
                         <div class="card-body p-0 pt-2">
                             <h6 class="card-title mb-1">
                               {{ anuncio.descripcion.split('.')[0] | slice:0:40 }}{{ anuncio.descripcion.length > 40 ? '...' : '' }}
@@ -42,6 +42,24 @@
                     No hay anuncios disponibles.
                 </div>
             </ng-template>
+        </div>
+        <!-- Controles de paginación -->
+        <div class="d-flex justify-content-center mt-4" *ngIf="totalPaginas > 1">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" [class.disabled]="paginaActual === 0">
+                        <button class="page-link" (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 0">&laquo;</button>
+                    </li>
+                    <li class="page-item"
+                        *ngFor="let page of [].constructor(totalPaginas); let i = index"
+                        [class.active]="i === paginaActual">
+                        <button class="page-link" (click)="cambiarPagina(i)">{{ i + 1 }}</button>
+                    </li>
+                    <li class="page-item" [class.disabled]="paginaActual === totalPaginas - 1">
+                        <button class="page-link" (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas - 1">&raquo;</button>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 

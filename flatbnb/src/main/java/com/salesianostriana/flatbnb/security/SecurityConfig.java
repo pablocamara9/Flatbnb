@@ -18,6 +18,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -57,7 +64,8 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable());
-        http.cors(Customizer.withDefaults());
+        //http.cors(Customizer.withDefaults());
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
         http.sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.exceptionHandling(excepz -> excepz
@@ -84,15 +92,12 @@ public class SecurityConfig {
                 //ANUNCIOS
                 .requestMatchers(HttpMethod.GET, "anuncio/**").permitAll()
                 /*.requestMatchers(HttpMethod.POST, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.PUT, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.DELETE, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")*/
+                .requestMatchers(HttpMethod.PUT, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")*/
+                .requestMatchers(HttpMethod.DELETE, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
 
-                .requestMatchers(HttpMethod.POST, "anuncio/**").permitAll()
-                .requestMatchers(HttpMethod.PUT, "anuncio/**").permitAll()
-                .requestMatchers(HttpMethod.DELETE, "anuncio/**").permitAll()
                 //OTRAS COSAS
                 //.requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                .requestMatchers("/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/error").permitAll()
                 .anyRequest().authenticated()
         );
 
@@ -104,6 +109,36 @@ public class SecurityConfig {
 
         return http.build();
 
+    }
+
+    /*@Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedOrigin("http://localhost:4200");
+        corsConfiguration.addAllowedMethod("");
+        corsConfiguration.addAllowedHeader("");
+        corsConfiguration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+
+        return new CorsFilter(source);
+    }*/
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOriginPatterns(
+                List.of("http://localhost:4200/", "http://host.docker.internal:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(
+                List.of("Authorization", "Content-Type", "content-type", "Accept", "X-Requested-With"));
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
 }

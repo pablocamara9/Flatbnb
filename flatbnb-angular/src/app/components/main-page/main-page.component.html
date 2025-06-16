@@ -1,0 +1,48 @@
+<app-header></app-header>
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-between p-0 bg-white">
+    <!-- Barra de búsqueda -->
+    <div class="d-flex justify-content-center mt-4">
+        <div class="search-bar bg-light rounded-pill px-3 py-2 d-flex align-items-center" style="width: 700px;">
+            <i class="bi bi-search me-2 text-secondary"></i>
+            <input type="text" class="form-control border-0 bg-transparent shadow-none" placeholder="¿Dónde ir?"
+                style="font-size: 1.1rem;">
+            <button class="btn btn-link ms-auto p-0"><i class="bi bi-x-lg text-secondary"></i></button>
+        </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
+        <button class="btn btn-light rounded-pill px-3">Cualquier lugar</button>
+        <button class="btn btn-light rounded-pill px-3">Cualquier semana</button>
+        <button class="btn btn-light rounded-pill px-3">Añadir huéspedes</button>
+        <button class="btn btn-light rounded-pill px-3">Precio</button>
+        <button class="btn btn-light rounded-pill px-3">Reserva inmediata</button>
+    </div>
+
+    <!-- Tarjetas de propiedades -->
+    <div class="container mt-4 flex-grow-1">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center">
+            <ng-container *ngIf="anuncios.length > 0; else sinAnuncios">
+                <div class="col" *ngFor="let anuncio of anuncios">
+                    <div class="card h-100 border-0 shadow-none rounded-4"
+                         style="cursor:pointer"
+                         (click)="verDetalle(anuncio.id)">
+                        <img [src]="anuncio.urlImagen" class="card-img-top rounded-4 property-img" alt="Imagen anuncio">
+                        <div class="card-body p-0 pt-2">
+                            <h6 class="card-title mb-1">
+                              {{ anuncio.descripcion.split('.')[0] | slice:0:40 }}{{ anuncio.descripcion.length > 40 ? '...' : '' }}
+                            </h6>
+                            <small>{{ anuncio.precio | currency:'EUR':'symbol':'1.0-0' }} / noche</small>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-template #sinAnuncios>
+                <div class="col-12 text-center text-muted py-5">
+                    No hay anuncios disponibles.
+                </div>
+            </ng-template>
+        </div>
+    </div>
+
+<app-footer></app-footer>

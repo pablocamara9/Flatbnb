@@ -206,7 +206,7 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioEntre/{min}/{max}")
-    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioBetween(@PathVariable double min, @PathVariable double max, Pageable pageable) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioBetween(@PathVariable double min, @PathVariable double max, @PageableDefault(page = 0, size = 5) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPrecioBetween(min, max, pageable);
 
         if(pagedResult.isEmpty()) {
@@ -227,7 +227,7 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioMayor/{precio}")
-    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioGreaterThan(@PathVariable double precio, Pageable pageable) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioGreaterThan(@PathVariable double precio, @PageableDefault(page = 0, size = 5) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPrecioGreaterThan(precio, pageable);
 
         if(pagedResult.isEmpty()) {
@@ -248,8 +248,19 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioMenor/{precio}")
-    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioLessThan(@PathVariable double precio, Pageable pageable) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioLessThan(@PathVariable double precio, @PageableDefault(page = 0, size = 5) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPrecioLessThan(precio, pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pagedResult.map(GetAnuncioDto::of));
+    }
+
+    @GetMapping("/propietario/{id}")
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPropietarioId(@PathVariable UUID id, @PageableDefault(page = 0, size = 6) Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAllByPropietarioId(id, pageable);
 
         if(pagedResult.isEmpty()) {
             return ResponseEntity.noContent().build();

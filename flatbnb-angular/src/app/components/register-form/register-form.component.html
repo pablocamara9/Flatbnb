@@ -1,0 +1,62 @@
+<app-header></app-header>
+
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-white">
+    <div class="w-100" style="max-width: 420px;">
+        <div class="d-flex justify-content-center mb-3">
+            <img [src]="logoPath" alt="Logo Flatbnb">
+        </div>
+        <h2 class="text-center mb-4 fw-bold" style="font-family: 'Google Sans', Arial, sans-serif;">
+            Crea tu cuenta
+        </h2>
+        <form (ngSubmit)="procesaRegistro()">
+            <div class="mb-3">
+                <label for="nombre" class="form-label fw-medium">Nombre</label>
+                <input type="text" class="form-control rounded-3 py-2" id="nombre" placeholder="Nombre"
+                    [(ngModel)]="nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+                <label for="apellidos" class="form-label fw-medium">Apellidos</label>
+                <input type="text" class="form-control rounded-3 py-2" id="apellidos" placeholder="Apellidos"
+                    [(ngModel)]="apellidos" name="apellidos" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label fw-medium">Correo electrónico</label>
+                <input type="email" class="form-control rounded-3 py-2" id="email" placeholder="Correo electrónico"
+                    [(ngModel)]="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label fw-medium">Teléfono</label>
+                <input type="tel" class="form-control rounded-3 py-2" id="telefono" placeholder="Teléfono"
+                    [(ngModel)]="telefono" name="telefono" required>
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label fw-medium">Nombre de usuario</label>
+                <input type="text" class="form-control rounded-3 py-2" id="username" placeholder="Nombre de usuario"
+                    [(ngModel)]="username" name="username" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label fw-medium">Contraseña</label>
+                <input type="password" class="form-control rounded-3 py-2" id="password" placeholder="Contraseña"
+                    [(ngModel)]="password" name="password" required>
+            </div>
+            <div class="mb-4">
+                <label for="rol" class="form-label fw-medium">Tipo de usuario</label>
+                <select id="rol" class="form-select rounded-3 py-2" [(ngModel)]="rol" name="rol" required>
+                    <option value="" disabled selected>Selecciona un rol</option>
+                    <option value="1">Cliente</option>
+                    <option value="2">Propietario</option>
+                </select>
+            </div>
+            <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-danger rounded-pill py-2 fw-semibold"
+                    style="font-size: 1.1rem;">Registrarse</button>
+            </div>
+            <div class="d-grid">
+                <button type="button" class="btn rounded-pill py-2 fw-semibold"
+                    style="background: #f6f2f0; color: #7c6f65; font-size: 1.1rem;">Iniciar sesión</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<app-footer></app-footer>

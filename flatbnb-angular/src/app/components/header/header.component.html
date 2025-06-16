@@ -21,7 +21,7 @@
                     <a class="nav-link" [routerLink]="['/reservas', userId]">Mis reservas</a>
                 </li>
                 <li class="nav-item" *ngIf="userRole === 'ADMIN'">
-                    <a class="nav-link" [routerLink]="['/admin', userId]">Panel de administración</a>
+                    <a class="nav-link" [routerLink]="['/admin']">Panel de administración</a>
                 </li>
                 <li class="nav-item" *ngIf="userRole === 'PROPIETARIO'">
                     <a class="nav-link" [routerLink]="['/propietario/', userId]">Mis anuncios</a>

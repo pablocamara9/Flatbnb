@@ -1,0 +1,86 @@
+<app-header></app-header>
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-3">Gestión de usuarios</h3>
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-sm table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                  <td>{{ usuario.id }}</td>
+                  <td>{{ usuario.nombre || usuario.username }}</td>
+                  <td>{{ usuario.email }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="usuarios.length === 0" class="text-center text-muted">No hay usuarios.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-3">Gestión de anuncios</h3>
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-sm table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let anuncio of anuncios">
+                  <td>{{ anuncio.id }}</td>
+                  <td>{{ anuncio.descripcion }}</td>
+                  <td>{{ anuncio.precio }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="anuncios.length === 0" class="text-center text-muted">No hay anuncios.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-3">Gestión de pisos</h3>
+          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-sm table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Dirección</th>
+                  <th>Habitaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let piso of pisos">
+                  <td>{{ piso.id }}</td>
+                  <td>{{ piso.direccion }}</td>
+                  <td>{{ piso.numHabitaciones }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div *ngIf="pisos.length === 0" class="text-center text-muted">No hay pisos.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

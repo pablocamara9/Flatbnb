@@ -8,6 +8,7 @@ import { PropietarioComponent } from './components/propietario/propietario-anunc
 import { PropietarioFormComponent } from './components/propietario/propietario-form/propietario-form.component';
 import { PropietarioPisosComponent } from './components/propietario/propietario-pisos/propietario-pisos.component';
 import { PropietarioPisoFormComponent } from './components/propietario/propietario-piso-form/propietario-piso-form.component';
+import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
 
 const routes: Routes = [
   { path: 'main', component: MainPageComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'propietario-pisos/:id', component: PropietarioPisosComponent},
   { path: 'agregar-piso', component: PropietarioPisoFormComponent},
   { path: 'editar-piso/:id', component: PropietarioPisoFormComponent},
+  { path: 'admin', component: AdminMainComponent},
   { path: '', redirectTo: '/main', pathMatch: 'full' },
 ];
 

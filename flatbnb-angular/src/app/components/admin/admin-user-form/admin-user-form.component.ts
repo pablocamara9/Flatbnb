@@ -55,12 +55,14 @@ guardarUsuario() {
   if (!this.userId) return;
   const token = localStorage.getItem('accessToken');
   let headers = undefined;
+  // Quitar corchetes si existen en this.role
+  const cleanRole = this.role.replace(/^\[|\]$/g, '');
   const body = {
     nombre: this.nombre,
     apellidos: this.apellidos,
     email: this.email,
     telefono: this.telefono,
-    role: this.role
+    role: cleanRole
   }
   if (token) {
     headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

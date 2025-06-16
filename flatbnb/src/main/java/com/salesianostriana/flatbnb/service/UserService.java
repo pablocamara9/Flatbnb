@@ -92,7 +92,8 @@ public class UserService {
             old.setApellidos(dto.apellidos());
             old.setEmail(dto.email());
             old.setTelefono(dto.telefono());
-            old.setPassword(passwordEncoder.encode(dto.password()));
+            //old.setPassword(passwordEncoder.encode(dto.password()));
+            old.setRoles(Set.of(dto.role()));
 
             return userRepository.save(old);
         }).get();

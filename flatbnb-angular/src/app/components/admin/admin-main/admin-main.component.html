@@ -1,86 +1,119 @@
 <app-header></app-header>
 
-<div class="container my-5">
-  <div class="row">
-    <div class="col-md-4 mb-4">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h3 class="card-title text-center mb-3">Gestión de usuarios</h3>
-          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-            <table class="table table-sm table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let usuario of usuarios">
-                  <td>{{ usuario.id }}</td>
-                  <td>{{ usuario.nombre || usuario.username }}</td>
-                  <td>{{ usuario.email }}</td>
-                </tr>
-              </tbody>
+<div class="container-fluid my-5 px-4">
+    <section class="mb-4 w-100">
+        <h3 class="fw-bold mb-2">Gestión de usuarios</h3>
+        <div class="table-responsive w-100" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-sm table-striped w-100 align-middle" style="font-size: 0.93rem;">
+                <thead>
+                    <tr>
+                        <th class="py-1 px-2">ID</th>
+                        <th class="py-1 px-2">Username</th>
+                        <th class="py-1 px-2">Nombre</th>
+                        <th class="py-1 px-2">Apellidos</th>
+                        <th class="py-1 px-2">Email</th>
+                        <th class="py-1 px-2">Teléfono</th>
+                        <th class="py-1 px-2">Rol</th>
+                        <th class="py-1 px-2">Habilitado</th>
+                        <th class="py-1 px-2">Creado</th>
+                        <th class="py-1 px-2">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios">
+                        <td class="py-1 px-2">{{ usuario.id }}</td>
+                        <td class="py-1 px-2">{{ usuario.username }}</td>
+                        <td class="py-1 px-2">{{ usuario.nombre }}</td>
+                        <td class="py-1 px-2">{{ usuario.apellidos }}</td>
+                        <td class="py-1 px-2">{{ usuario.email }}</td>
+                        <td class="py-1 px-2">{{ usuario.telefono || 'No disponible' }}</td>
+                        <td class="py-1 px-2">
+                          <span *ngIf="usuario.role === '[ADMIN]'" style="color: #ffc107; font-weight: bold;">[ADMIN]</span>
+                          <span *ngIf="usuario.role === '[USER]'" style="color: #007bff; font-weight: bold;">[USER]</span>
+                          <span *ngIf="usuario.role === '[PROPIETARIO]'" style="color: #dc3545; font-weight: bold;">[PROPIETARIO]</span>
+                        </td>
+                        <td class="py-1 px-2">{{ usuario.enabled ? 'Sí' : 'No' }}</td>
+                        <td class="py-1 px-2">{{ usuario.createdAt | date:'shortDate' }}</td>
+                        <td class="py-1 px-2">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2"
+                              [disabled]="usuario.role === '[ADMIN]'" (click)="editarUsuario(usuario.id)">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill"
+                              [disabled]="usuario.role === '[ADMIN]'" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <div *ngIf="usuarios.length === 0" class="text-center text-muted">No hay usuarios.</div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h3 class="card-title text-center mb-3">Gestión de anuncios</h3>
-          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-            <table class="table table-sm table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Descripción</th>
-                  <th>Precio</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let anuncio of anuncios">
-                  <td>{{ anuncio.id }}</td>
-                  <td>{{ anuncio.descripcion }}</td>
-                  <td>{{ anuncio.precio }}</td>
-                </tr>
-              </tbody>
+    </section>
+
+    <section class="mb-4 w-100">
+        <h3 class="fw-bold mb-2">Gestión de anuncios</h3>
+        <div class="table-responsive w-85" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-sm table-striped w-100 align-middle" style="font-size: 0.93rem;">
+                <thead>
+                    <tr>
+                        <th class="py-1 px-2">ID</th>
+                        <th class="py-1 px-2">Descripción</th>
+                        <th class="py-1 px-2">Precio</th>
+                        <th class="py-1 px-2">Imagen</th>
+                        <th class="py-1 px-2">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let anuncio of anuncios">
+                        <td class="py-1 px-2">{{ anuncio.id }}</td>
+                        <td class="py-1 px-2">{{ anuncio.descripcion | slice:0:25 }}<span
+                                *ngIf="anuncio.descripcion?.length > 25">…</span></td>
+                        <td class="py-1 px-2">{{ anuncio.precio }}</td>
+                        <td class="py-1 px-2">
+                            <img *ngIf="anuncio.urlImagen" [src]="anuncio.urlImagen || '/assets/placeholder.jpg'"
+                                alt="Imagen" class="img-thumbnail" style="max-width: 60px; max-height: 60px;">
+                        </td>
+                        <td class="py-1 px-2">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <div *ngIf="anuncios.length === 0" class="text-center text-muted">No hay anuncios.</div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="card h-100 shadow-sm">
-        <div class="card-body">
-          <h3 class="card-title text-center mb-3">Gestión de pisos</h3>
-          <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
-            <table class="table table-sm table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Dirección</th>
-                  <th>Habitaciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let piso of pisos">
-                  <td>{{ piso.id }}</td>
-                  <td>{{ piso.direccion }}</td>
-                  <td>{{ piso.numHabitaciones }}</td>
-                </tr>
-              </tbody>
+    </section>
+
+    <section class="w-100">
+        <h3 class="fw-bold mb-2">Gestión de pisos</h3>
+        <div class="table-responsive w-100" style="max-height: 400px; overflow-y: auto;">
+            <table class="table table-sm table-striped w-100 align-middle" style="font-size: 0.93rem;">
+                <thead>
+                    <tr>
+                        <th class="py-1 px-2">ID</th>
+                        <th class="py-1 px-2">Dirección</th>
+                        <th class="py-1 px-2">Metros²</th>
+                        <th class="py-1 px-2">Habitaciones</th>
+                        <th class="py-1 px-2">Observaciones</th>
+                        <th class="py-1 px-2">Operaciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let piso of pisos">
+                        <td class="py-1 px-2">{{ piso.id }}</td>
+                        <td class="py-1 px-2">{{ piso.direccion | slice:0:20 }}<span
+                                *ngIf="piso.direccion?.length > 20">…</span></td>
+                        <td class="py-1 px-2">{{ piso.metrosCuadrados }} m²</td>
+                        <td class="py-1 px-2">{{ piso.numHabitaciones }}</td>
+                        <td class="py-1 px-2">{{ piso.observaciones || 'No disponible' | slice:0:25 }}<span
+                                *ngIf="piso.observaciones?.length > 25">…</span></td>
+                        <td class="py-1 px-2">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
             </table>
             <div *ngIf="pisos.length === 0" class="text-center text-muted">No hay pisos.</div>
-          </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </section>
 </div>
 
 <app-footer></app-footer>

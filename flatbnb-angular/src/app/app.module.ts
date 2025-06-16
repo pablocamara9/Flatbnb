@@ -17,6 +17,7 @@ import { PropietarioFormComponent } from './components/propietario/propietario-f
 import { PropietarioPisosComponent } from './components/propietario/propietario-pisos/propietario-pisos.component';
 import { PropietarioPisoFormComponent } from './components/propietario/propietario-piso-form/propietario-piso-form.component';
 import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
+import { AdminUserFormComponent } from './components/admin/admin-user-form/admin-user-form.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AdminMainComponent } from './components/admin/admin-main/admin-main.com
     PropietarioPisosComponent,
     PropietarioPisoFormComponent,
     AdminMainComponent,
+    AdminUserFormComponent,
   ],
   imports: [
     BrowserModule,

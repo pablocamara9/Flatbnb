@@ -69,7 +69,8 @@ export class PropietarioFormComponent implements OnInit {
         idPropietario = userObj.id;
       } catch { }
     }
-    let idPiso = this.pisoId || null;
+    // Asegura que idPiso es un número y no string vacío
+    let idPiso = this.pisoId && this.pisoId !== '' ? Number(this.pisoId) : null;
     if (!idPiso) {
       Swal.fire('Error', 'Debe seleccionar un piso para el anuncio.', 'error');
       return;

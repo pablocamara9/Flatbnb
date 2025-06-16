@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ListadoUsuario, Root } from '../../../models/user.model';
-import { Pisos } from '../../../models/piso.model';
+import { AdminService } from '../../../services/admin.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-main',
@@ -17,7 +19,7 @@ export class AdminMainComponent implements OnInit {
 
   pisos: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private service: AdminService, private router: Router) { }
 
   ngOnInit(): void {
     this.cargarUsuarios();
@@ -85,5 +87,34 @@ export class AdminMainComponent implements OnInit {
         },
         error: () => { this.pisos = []; }
       });
+  }
+
+  editarUsuario(id: string) {
+    this.router.navigate(['/admin/editar-usuario', id]);
+  }
+
+  eliminarUsuario(id: string) {
+    Swal.fire({
+          title: "¿Estás seguro?",
+          text: "No podrás deshacer esta acción!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sí, bórralo!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.service.eliminarUsuario(id).subscribe({
+              next: () => {
+                Swal.fire('Eliminado!', 'El usuario ha sido eliminado.', 'success').then(() => {
+                  this.cargarUsuarios();
+                });
+              },
+              error: () => {
+                Swal.fire('Error', 'No se pudo eliminar el usuario.', 'error');
+              }
+            });
+          }
+        });
   }
 }

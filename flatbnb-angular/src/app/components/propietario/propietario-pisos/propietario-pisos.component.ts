@@ -38,7 +38,7 @@ export class PropietarioPisosComponent implements OnInit {
       this.http.get<any>(`http://localhost:8080/piso/propietario/${propietarioId}?page=${page}`, { headers })
         .subscribe({
           next: (data) => {
-            console.log('Anuncios del propietario:', data);
+            console.log('Pisos del propietario:', data);
             
             this.pisos = data.content || [];
             this.totalPages = data.totalPages || 1;
@@ -48,7 +48,7 @@ export class PropietarioPisosComponent implements OnInit {
             this.pisos = [];
             this.totalPages = 0;
             this.currentPage = 0;
-            console.error('Error al cargar anuncios del propietario', err);
+            console.error('Error al cargar pisos del propietario', err);
           }
         });
     } else {
@@ -84,7 +84,7 @@ export class PropietarioPisosComponent implements OnInit {
               this.pisos = this.pisos.filter(a => a.id !== anuncioId);
               Swal.fire({
                 title: "Eliminado",
-                text: "El anuncio se eliminó exitosamente.",
+                text: "El piso se eliminó exitosamente.",
                 icon: "success"
               });
             },
@@ -92,7 +92,7 @@ export class PropietarioPisosComponent implements OnInit {
               Swal.fire({
                 icon: "error",
                 title: "Error",
-                text: "No se pudo eliminar el anuncio. Inténtalo de nuevo.",
+                text: "No se pudo eliminar el piso. Inténtalo de nuevo.",
                 timer: 3000,
               });
             }

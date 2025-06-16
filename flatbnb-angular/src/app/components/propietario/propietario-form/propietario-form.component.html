@@ -12,8 +12,18 @@
       <input type="number" id="precio" class="form-control" name="precio" required min="0" [(ngModel)]="precio">
     </div>
     <div class="mb-3 w-100">
-      <label for="imagenUrl" class="form-label">URL de la Imagen</label>
-      <input type="url" id="imagenUrl" class="form-control" name="imagenUrl" required [(ngModel)]="imagenUrl">
+      <label for="urlImagen" class="form-label">URL de la Imagen</label>
+      <input type="url" id="urlImagen" class="form-control" name="urlImagen" required [(ngModel)]="urlImagen">
+    </div>
+    
+    <div class="mb-3 w-100">
+      <label for="piso" class="form-label">Piso</label>
+      <select id="piso" class="form-select" name="piso" required [(ngModel)]="pisoId">
+        <option value="" disabled selected>Seleccione un piso</option>
+        <option *ngFor="let piso of pisos" [value]="piso.id">
+          {{ piso.direccion }} ({{ piso.metrosCuadrados }} m², {{ piso.numHabitaciones }} hab.)
+        </option>
+      </select>
     </div>
     <button type="submit" class="btn btn-primary">{{ isEdit ? 'Guardar Cambios' : 'Agregar Anuncio' }}</button>
   </form>

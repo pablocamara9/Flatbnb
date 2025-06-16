@@ -5,7 +5,6 @@ export interface Pisos {
 }
 
 export interface Piso {
-piso: any;
     id: string;
     direccion: string;
     metrosCuadrados: number;

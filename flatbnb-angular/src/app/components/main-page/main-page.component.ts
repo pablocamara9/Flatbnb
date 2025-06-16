@@ -14,7 +14,7 @@ export class MainPageComponent implements OnInit {
   paginaActual: number = 0;
   totalPaginas: number = 1;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.cargarAnuncios(0);
@@ -51,5 +51,102 @@ export class MainPageComponent implements OnInit {
   verDetalle(id: string) {
     this.router.navigate(['/anuncio', id]);
   }
+
+  ordenaMasCaros() {
+    this.http.get<any>(`http://localhost:8080/anuncio/precioDesc?orden=precio&direccion=desc&page=${this.paginaActual}`)
+      .subscribe({
+        next: (data) => {
+          if (data && data.content) {
+            this.anuncios = data.content;
+          } else {
+            this.anuncios = [];
+          }
+        },
+        error: () => {
+          this.anuncios = [];
+        }
+      });
+  }
+
+  ordenaMasBaratos() {
+    this.http.get<any>(`http://localhost:8080/anuncio/precio?orden=precio&direccion=asc&page=${this.paginaActual}`)
+      .subscribe({
+        next: (data) => {
+          if (data && data.content) {
+            this.anuncios = data.content;
+          } else {
+            this.anuncios = [];
+          }
+        },
+        error: () => {
+          this.anuncios = [];
+        }
+      });
+  }
+
+  ordenaMasEspaciosos() {
+    this.http.get<any>(`http://localhost:8080/anuncio/espacio?page=${this.paginaActual}`)
+      .subscribe({
+        next: (data) => {
+          if (data && data.content) {
+            this.anuncios = data.content;
+          } else {
+            this.anuncios = [];
+          }
+        },
+        error: () => {
+          this.anuncios = [];
+        }
+      });
+  }
+
+  ordenaMenosEspaciosos() {
+    this.http.get<any>(`http://localhost:8080/anuncio/espacioMenor?page=${this.paginaActual}`)
+      .subscribe({
+        next: (data) => {
+          if (data && data.content) {
+            this.anuncios = data.content;
+          } else {
+            this.anuncios = [];
+          }
+        },
+        error: () => {
+          this.anuncios = [];
+        }
+      });
+  }
+
+  ordenaMasHabitaciones() {
+    this.http.get<any>(`http://localhost:8080/anuncio/habitaciones?page=${this.paginaActual}`)
+      .subscribe({
+        next: (data) => {
+          if (data && data.content) {
+            this.anuncios = data.content;
+          } else {
+            this.anuncios = [];
+          }
+        },
+        error: () => {
+          this.anuncios = [];
+        }
+      });
+  }
+
+  ordenaMenosHabitaciones() {
+        this.http.get<any>(`http://localhost:8080/anuncio/habitacionesMenor?page=${this.paginaActual}`)
+      .subscribe({
+        next: (data) => {
+          if (data && data.content) {
+            this.anuncios = data.content;
+          } else {
+            this.anuncios = [];
+          }
+        },
+        error: () => {
+          this.anuncios = [];
+        }
+      });
+  }
+
 
 }

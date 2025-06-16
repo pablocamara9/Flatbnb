@@ -12,27 +12,32 @@
 
     <!-- Filtros -->
     <div class="d-flex justify-content-center gap-2 mt-3 flex-wrap">
-        <button class="btn btn-light rounded-pill px-3">Cualquier lugar</button>
-        <button class="btn btn-light rounded-pill px-3">Cualquier semana</button>
-        <button class="btn btn-light rounded-pill px-3">Añadir huéspedes</button>
-        <button class="btn btn-light rounded-pill px-3">Precio</button>
-        <button class="btn btn-light rounded-pill px-3">Reserva inmediata</button>
+        <button class="btn btn-light rounded-pill px-3" (click)="ordenaMasCaros()">Más caros</button>
+        <button class="btn btn-light rounded-pill px-3" (click)="ordenaMasBaratos()">Más baratos</button>
+        <button class="btn btn-light rounded-pill px-3" (click)="ordenaMasEspaciosos()">Más espaciosos</button>
+        <button class="btn btn-light rounded-pill px-3" (click)="ordenaMenosEspaciosos()">Menos espaciosos</button>
+        <button class="btn btn-light rounded-pill px-3" (click)="ordenaMasHabitaciones()">Más habitaciones</button>
+        <button class="btn btn-light rounded-pill px-3" (click)="ordenaMenosHabitaciones()">Menos habitaciones</button>
     </div>
 
     <!-- Tarjetas de propiedades -->
     <div class="container mt-4 flex-grow-1">
-        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4 justify-content-center">
+        <h2 class="mb-4 text-center fw-bold">Top reservas</h2>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
             <ng-container *ngIf="anuncios.length > 0; else sinAnuncios">
                 <div class="col" *ngFor="let anuncio of anuncios">
                     <div class="card h-100 border-0 shadow-none rounded-4"
-                         style="cursor:pointer"
+                         style="cursor:pointer; min-height: 420px; max-width: 420px;"
                          (click)="verDetalle(anuncio.id)">
-                        <img [src]="anuncio.urlImagen || 'assets/placeholder.jpg'" class="card-img-top rounded-4 property-img" alt="Imagen anuncio">
+                        <img [src]="anuncio.urlImagen || 'assets/placeholder.jpg'"
+                             class="card-img-top rounded-4 property-img"
+                             alt="Imagen anuncio"
+                             style="height: 260px; object-fit: cover;">
                         <div class="card-body p-0 pt-2">
-                            <h6 class="card-title mb-1">
+                            <h6 class="card-title mb-1" style="font-size: 1.1rem;">
                               {{ anuncio.descripcion.split('.')[0] | slice:0:40 }}{{ anuncio.descripcion.length > 40 ? '...' : '' }}
                             </h6>
-                            <small>{{ anuncio.precio | currency:'EUR':'symbol':'1.0-0' }} / noche</small>
+                            <small style="font-size: 1rem;">{{ anuncio.precio | currency:'EUR':'symbol':'1.0-0' }} / noche</small>
                         </div>
                     </div>
                 </div>

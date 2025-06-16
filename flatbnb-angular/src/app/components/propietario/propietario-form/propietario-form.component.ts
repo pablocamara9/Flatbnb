@@ -7,20 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './propietario-form.component.css'
 })
 export class PropietarioFormComponent {
-  anuncio = {
-    descripcion: '',
-    precio: null,
-    imagenUrl: ''
-  };
+  
+  isEdit: boolean = false;
+  descripcion: string = '';
+  precio: number | null = null;
+  imagenUrl: string = '';
 
-  onSubmit() {
-    // Aquí puedes manejar el envío del formulario, por ejemplo, enviarlo a un servicio
-    console.log('Anuncio enviado:', this.anuncio);
-    // Opcional: resetear el formulario
-    this.anuncio = {
-      descripcion: '',
-      precio: null,
-      imagenUrl: ''
-    };
+
+  agregarAnuncio() {
+
   }
 }

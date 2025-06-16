@@ -13,7 +13,7 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
       <div class="col" *ngFor="let anuncio of anuncios">
         <div class="card h-100 shadow-sm rounded-4">
-          <img [src]="anuncio.urlImagen" class="card-img-top rounded-top-4" alt="Imagen anuncio" style="object-fit:cover; height:220px;">
+          <img [src]="anuncio.urlImagen || 'assets/placeholder.jpg'" class="card-img-top rounded-top-4" alt="Imagen anuncio" style="object-fit:cover; height:220px;">
           <div class="card-body">
             <h5 class="card-title fw-semibold">{{ anuncio.descripcion }}</h5>
             <hr>

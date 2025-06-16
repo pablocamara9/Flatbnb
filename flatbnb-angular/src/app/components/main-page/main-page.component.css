@@ -1,0 +1,61 @@
+body,
+.container,
+.container-fluid {
+    background: #fff;
+}
+
+.search-bar input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.property-img {
+    height: 140px;
+    object-fit: cover;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-family: 'Google Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+.card-body small {
+    font-size: 0.95rem;
+    color: #7c6f65;
+    font-family: 'Google Sans', Arial, sans-serif;
+}
+
+.btn-light {
+    background: #f6f2f0;
+    color: #7c6f65;
+    font-weight: 500;
+    font-family: 'Google Sans', Arial, sans-serif;
+    box-shadow: none;
+}
+
+.btn-light:active,
+.btn-light:focus,
+.btn-light:hover {
+    background: #ece6e2;
+    color: #7c6f65;
+    box-shadow: none;
+}
+
+.footer {
+    border-top: none;
+}

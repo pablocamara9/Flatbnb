@@ -1,10 +1,13 @@
 package com.salesianostriana.flatbnb.controller;
 
+import com.salesianostriana.flatbnb.dto.anuncio.GetAnuncioDto;
 import com.salesianostriana.flatbnb.dto.piso.CreatePisoDto;
 import com.salesianostriana.flatbnb.dto.piso.EditPisoDto;
 import com.salesianostriana.flatbnb.dto.piso.GetAllPisosDto;
 import com.salesianostriana.flatbnb.dto.piso.GetPisoDto;
+import com.salesianostriana.flatbnb.model.Anuncio;
 import com.salesianostriana.flatbnb.model.Piso;
+import com.salesianostriana.flatbnb.repository.PisoRepository;
 import com.salesianostriana.flatbnb.service.PisoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -14,8 +17,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +36,7 @@ import java.util.UUID;
 public class PisoController {
 
     private final PisoService pisoService;
+    private final PisoRepository pisoRepository;
 
     @Operation(summary = "Obtiene todos los pisos y los devuelve en forma de listado")
     @ApiResponses(value = {
@@ -119,6 +127,17 @@ public class PisoController {
     public ResponseEntity<?> delete(@PathVariable UUID id) {
         pisoService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
+
+    @GetMapping("/propietario/{id}")
+    public ResponseEntity<Page<GetPisoDto>> findAllByPropietarioId(@PathVariable UUID id, @PageableDefault(page = 0, size = 6) Pageable pageable) {
+        Page<Piso> pagedResult = pisoService.findAllByPropietarioId(id, pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pagedResult.map(GetPisoDto::of));
     }
 
 

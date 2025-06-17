@@ -86,7 +86,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "piso/**").hasAnyRole( "ADMIN","PROPIETARIO")
                 //PROPIETARIOS
                 .requestMatchers(HttpMethod.GET, "propietario/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "propietario/**").authenticated()
+                .requestMatchers(HttpMethod.POST, "propietario/**").permitAll()
                 .requestMatchers(HttpMethod.PUT, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 //ANUNCIOS

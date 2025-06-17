@@ -78,7 +78,8 @@ export class AuthService {
     apellidos: string,
     email: string,
     telefono: string,
-    role: string
+    role: string,
+    endpoint: string // nuevo parámetro
   ) {
     let userRole = role === '2' ? 'PROPIETARIO' : 'USER';
     const body = {
@@ -91,14 +92,20 @@ export class AuthService {
       role: userRole
     }
 
-
-    this.http.post<UserRegister>('http://localhost:8080/user/auth/register', body)
+    this.http.post<UserRegister>(endpoint, body)
       .subscribe({
         next: (response) => {
           console.log('Registro exitoso', response);
 
           if (response.token) {
             this.activateAccount(response.token);
+          } else if (endpoint.includes('/propietario/')) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro exitoso',
+              text: 'Propietario registrado correctamente.',
+              timer: 3000,
+            });
           } else {
             Swal.fire({
               icon: 'error',

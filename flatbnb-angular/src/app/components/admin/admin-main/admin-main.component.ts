@@ -179,7 +179,7 @@ export class AdminMainComponent implements OnInit {
     }
 
     agregarUsuario() {
-
+      this.router.navigate(['register']);
     }
 
     agregarAnuncio() {

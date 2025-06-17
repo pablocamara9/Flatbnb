@@ -127,7 +127,7 @@ export class PropietarioPisoFormComponent implements OnInit {
             if(this.authService.isAdmin()) {
               this.router.navigate(['/admin']);
             } else {
-              this.router.navigate(['/propietario/', idPropietario]);
+              this.router.navigate(['/propietario-pisos/', idPropietario]);
             }
           });
         },
@@ -136,7 +136,7 @@ export class PropietarioPisoFormComponent implements OnInit {
             if(this.authService.isAdmin()) {
               this.router.navigate(['/admin']);
             } else {
-              this.router.navigate(['/propietario/', idPropietario]);
+              this.router.navigate(['/propietario-pisos/', idPropietario]);
             }
           });
         }

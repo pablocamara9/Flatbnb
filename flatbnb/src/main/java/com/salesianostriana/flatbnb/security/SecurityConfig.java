@@ -75,7 +75,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authz -> authz
                 //USUARIOS
-                .requestMatchers(HttpMethod.GET, "user/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "user/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "user/{id}").permitAll()
                 .requestMatchers(HttpMethod.POST, "user/auth/register", "user/activate/account", "/user/auth/login", "/user/auth/refresh/token").permitAll()
                 .requestMatchers(HttpMethod.PUT, "user/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "user/**").hasRole("ADMIN")

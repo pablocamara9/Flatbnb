@@ -30,11 +30,6 @@
                         <td class="py-1 px-2">{{ usuario.apellidos }}</td>
                         <td class="py-1 px-2">{{ usuario.email }}</td>
                         <td class="py-1 px-2">{{ usuario.telefono || 'No disponible' }}</td>
-                        <!--<td class="py-1 px-2">
-                          <span *ngIf="usuario.role === '[ADMIN]'" style="color: #ffc107; font-weight: bold;">[ADMIN]</span>
-                          <span *ngIf="usuario.role === '[USER]'" style="color: #007bff; font-weight: bold;">[USER]</span>
-                          <span *ngIf="usuario.role === '[PROPIETARIO]'" style="color: #dc3545; font-weight: bold;">[PROPIETARIO]</span>
-                        </td>-->
                         <td>
                             <span *ngIf="usuario.role === '[ADMIN]'" class="badge bg-warning text-dark">ADMIN</span>
                             <span *ngIf="usuario.role === '[USER]'" class="badge bg-primary">USER</span>

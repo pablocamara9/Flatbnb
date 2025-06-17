@@ -16,6 +16,16 @@
       <input type="url" id="urlImagen" class="form-control" name="urlImagen" required [(ngModel)]="urlImagen">
     </div>
     
+    <!-- Nuevo select de propietarios solo para admin -->
+    <div *ngIf="admin" class="mb-3 w-100">
+      <label for="propietarioSelect" class="form-label">Propietario</label>
+      <select id="propietarioSelect" class="form-select" name="propietarioId" [(ngModel)]="propietarioId" required (change)="cargarPisos()">
+        <option value="" disabled selected>Seleccione un propietario</option>
+        <option *ngFor="let propietario of propietarios" [value]="propietario.id">
+          {{ propietario.nombre }} {{ propietario.apellidos }} ({{ propietario.email }})
+        </option>
+      </select>
+    </div>
     <div class="mb-3 w-100">
       <label for="piso" class="form-label">Piso</label>
       <select id="piso" class="form-select" name="piso" required [(ngModel)]="pisoId">

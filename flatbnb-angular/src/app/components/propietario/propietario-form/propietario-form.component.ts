@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Anuncio } from '../../../models/anuncio.model';
 import { Piso } from '../../../models/piso.model';
 import { AuthService } from '../../../services/auth-service.service';
+import { Propietario } from '../../../models/propietario.model';
 
 @Component({
   selector: 'app-propietario-form',
@@ -20,6 +21,8 @@ export class PropietarioFormComponent implements OnInit {
   urlImagen: string = '';
   anuncioId: string | null = null;
   propietarioId: string | null = null;
+  propietarios: Propietario[] = [];
+  admin: boolean = false;
 
   pisoId: string = '';
   pisos: Piso[] = [];
@@ -32,6 +35,8 @@ export class PropietarioFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.admin = this.authService.isAdmin();
+    this.obtenerPropietarios();
     this.anuncioId = this.route.snapshot.paramMap.get('id');
     if (this.anuncioId) {
       this.isEdit = true;
@@ -51,12 +56,28 @@ export class PropietarioFormComponent implements OnInit {
           Swal.fire('Error', 'No se pudo cargar el anuncio.', 'error');
         }
       });
-
-      // Elimina esta línea:
       // this.cargarPisos();
     } else {
       this.cargarPisos();
     }
+  }
+
+  obtenerPropietarios() {
+    const token = localStorage.getItem('accessToken');
+    let headers = undefined;
+    if (token) {
+      headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+    this.http.get<any>('http://localhost:8080/propietario/', { headers }).subscribe({
+      next: (data) => {
+        if (data && Array.isArray(data.listadoPropietarios)) {
+          this.propietarios = data.listadoPropietarios;
+        } else {
+          this.propietarios = [];
+        }
+      },
+      error: () => { this.propietarios = []; }
+    });
   }
 
   agregarAnuncio() {
@@ -109,12 +130,20 @@ export class PropietarioFormComponent implements OnInit {
       this.http.post('http://localhost:8080/anuncio/', body, { headers }).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Anuncio agregado correctamente.', 'success').then(() => {
-            this.router.navigate(['/propietario/', idPropietario]);
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario/', idPropietario]);
+            }
           });
         },
         error: () => {
           Swal.fire('Error', 'No se pudo agregar el anuncio.', 'error').then(() => {
-            this.router.navigate(['/propietario/', idPropietario]);
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario/', idPropietario]);
+            }
           });
         }
       });
@@ -145,22 +174,23 @@ export class PropietarioFormComponent implements OnInit {
   }*/
 
   cargarPisos() {
-    const userStr = localStorage.getItem('user');
     const token = localStorage.getItem('accessToken');
-    let propietarioId = null;
-    if (userStr) {
-      try {
-        const userObj = JSON.parse(userStr);
-        propietarioId = this.propietarioId || userObj.id;
-        
-      } catch { }
+    let propietarioId = this.propietarioId;
+    // Si no hay propietario seleccionado y no es admin, usar el del usuario logado
+    if (!propietarioId && !this.admin) {
+      const userStr = localStorage.getItem('user');
+      if (userStr) {
+        try {
+          const userObj = JSON.parse(userStr);
+          propietarioId = userObj.id;
+        } catch { }
+      }
     }
     if (propietarioId && token) {
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
       this.http.get<any>(`http://localhost:8080/piso/propietario/${propietarioId}?page=0`, { headers })
         .subscribe({
           next: (data) => {
-            console.log('Pisos del propietario:', data);
             this.pisos = data.content || [];
           },
           error: (err) => {

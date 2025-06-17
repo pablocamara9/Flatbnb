@@ -124,15 +124,21 @@ export class PropietarioPisoFormComponent implements OnInit {
       this.http.post('http://localhost:8080/piso/', body, { headers }).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Piso agregado correctamente.', 'success').then(() => {
-            window.location.reload();
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario/', idPropietario]);
+            }
           });
-          this.router.navigate(['/propietario-pisos/', idPropietario]);
         },
         error: () => {
           Swal.fire('Error', 'No se pudo agregar el piso.', 'error').then(() => {
-            window.location.reload();
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario/', idPropietario]);
+            }
           });
-          this.router.navigate(['/propietario-pisos/', idPropietario]);
         }
       });
     }

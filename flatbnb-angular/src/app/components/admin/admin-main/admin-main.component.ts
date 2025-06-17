@@ -183,7 +183,7 @@ export class AdminMainComponent implements OnInit {
     }
 
     agregarAnuncio() {
-      
+      this.router.navigate(['agregar-anuncio']);
     }
 
     agregarPiso() {

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Piso } from '../../../models/piso.model';
 import { AuthService } from '../../../services/auth-service.service';
+import { Propietario, Propietarios } from '../../../models/propietario.model';
 
 @Component({
   selector: 'app-propietario-piso-form',
@@ -20,6 +21,8 @@ export class PropietarioPisoFormComponent implements OnInit {
   pisoId: string | null = null;
   isEdit: boolean = false;
   propietarioId: string | null = null;
+  isAdmin: boolean = false;
+  propietarios: Propietario[] = [];
 
   constructor(
     private http: HttpClient,
@@ -29,6 +32,10 @@ export class PropietarioPisoFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+    if (this.isAdmin) {
+      this.cargarPropietarios();
+    }
     this.pisoId = this.route.snapshot.paramMap.get('id');
     if (this.pisoId) {
       this.isEdit = true;
@@ -50,6 +57,24 @@ export class PropietarioPisoFormComponent implements OnInit {
     }
   }
 
+  cargarPropietarios() {
+    const token = localStorage.getItem('accessToken');
+    let headers = undefined;
+    if (token) {
+      headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+    this.http.get<any>('http://localhost:8080/propietario/', { headers }).subscribe({
+      next: (data) => {
+        if (data && Array.isArray(data.listadoPropietarios)) {
+          this.propietarios = data.listadoPropietarios;
+        } else {
+          this.propietarios = [];
+        }
+      },
+      error: () => { this.propietarios = []; }
+    });
+  }
+
   agregarPiso() {
     const token = localStorage.getItem('accessToken');
     if (!token) {
@@ -63,7 +88,7 @@ export class PropietarioPisoFormComponent implements OnInit {
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
-        idPropietario = this.propietarioId;
+        idPropietario = this.propietarioId || userObj.id;
       } catch {}
     }
     const body = {

@@ -71,7 +71,7 @@ export class PropietarioFormComponent implements OnInit {
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
-        idPropietario = this.propietarioId;
+        idPropietario = this.propietarioId || userObj.id;
       } catch { }
     }
 
@@ -151,7 +151,7 @@ export class PropietarioFormComponent implements OnInit {
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
-        propietarioId = this.propietarioId
+        propietarioId = this.propietarioId || userObj.id;
         
       } catch { }
     }

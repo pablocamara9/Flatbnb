@@ -2,7 +2,10 @@
 
 <div class="container-fluid my-5 px-4">
     <section class="mb-4 w-100">
-        <h3 class="fw-bold mb-2">Gestión de usuarios</h3>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="fw-bold mb-0">Gestión de usuarios</h3>
+            <button class="btn btn-success mt-3" (click)="agregarUsuario()">Nuevo usuario</button>
+        </div>
         <div class="table-responsive w-100" style="max-height: 400px; overflow-y: auto;">
             <table class="table table-sm table-striped w-100 align-middle" style="font-size: 0.93rem;">
                 <thead>
@@ -16,7 +19,7 @@
                         <th class="py-1 px-2">Rol</th>
                         <th class="py-1 px-2">Habilitado</th>
                         <th class="py-1 px-2">Creado</th>
-                        <th class="py-1 px-2">Operaciones</th>
+                        <th class="py-1 px-2 text-end">Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,18 +30,25 @@
                         <td class="py-1 px-2">{{ usuario.apellidos }}</td>
                         <td class="py-1 px-2">{{ usuario.email }}</td>
                         <td class="py-1 px-2">{{ usuario.telefono || 'No disponible' }}</td>
-                        <td class="py-1 px-2">
+                        <!--<td class="py-1 px-2">
                           <span *ngIf="usuario.role === '[ADMIN]'" style="color: #ffc107; font-weight: bold;">[ADMIN]</span>
                           <span *ngIf="usuario.role === '[USER]'" style="color: #007bff; font-weight: bold;">[USER]</span>
                           <span *ngIf="usuario.role === '[PROPIETARIO]'" style="color: #dc3545; font-weight: bold;">[PROPIETARIO]</span>
+                        </td>-->
+                        <td>
+                            <span *ngIf="usuario.role === '[ADMIN]'" class="badge bg-warning text-dark">ADMIN</span>
+                            <span *ngIf="usuario.role === '[USER]'" class="badge bg-primary">USER</span>
+                            <span *ngIf="usuario.role === '[PROPIETARIO]'" class="badge bg-danger">PROPIETARIO</span>
                         </td>
                         <td class="py-1 px-2">{{ usuario.enabled ? 'Sí' : 'No' }}</td>
                         <td class="py-1 px-2">{{ usuario.createdAt | date:'shortDate' }}</td>
-                        <td class="py-1 px-2">
+                        <td class="py-1 px-2 text-end">
                             <button class="btn btn-outline-primary btn-sm rounded-pill me-2"
-                              [disabled]="usuario.role === '[ADMIN]'" (click)="editarUsuario(usuario.id)">Editar</button>
+                                [disabled]="usuario.role === '[ADMIN]'"
+                                (click)="editarUsuario(usuario.id)">Editar</button>
                             <button class="btn btn-outline-danger btn-sm rounded-pill"
-                              [disabled]="usuario.role === '[ADMIN]'" (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+                                [disabled]="usuario.role === '[ADMIN]'"
+                                (click)="eliminarUsuario(usuario.id)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -48,7 +58,10 @@
     </section>
 
     <section class="mb-4 w-100">
-        <h3 class="fw-bold mb-2">Gestión de anuncios</h3>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="fw-bold mb-0">Gestión de anuncios</h3>
+            <button class="btn btn-success mt-3" (click)="agregarAnuncio()">Nuevo anuncio</button>
+        </div>
         <div class="table-responsive w-85" style="max-height: 600px; overflow-y: auto;">
             <table class="table table-sm table-striped w-100 align-middle" style="font-size: 0.93rem;">
                 <thead>
@@ -57,7 +70,7 @@
                         <th class="py-1 px-2">Descripción</th>
                         <th class="py-1 px-2">Precio</th>
                         <th class="py-1 px-2">Imagen</th>
-                        <th class="py-1 px-2">Operaciones</th>
+                        <th class="py-1 px-2 text-end">Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -70,9 +83,11 @@
                             <img *ngIf="anuncio.urlImagen" [src]="anuncio.urlImagen || '/assets/placeholder.jpg'"
                                 alt="Imagen" class="img-thumbnail" style="max-width: 60px; max-height: 60px;">
                         </td>
-                        <td class="py-1 px-2">
-                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2" (click)="editarAnuncio(anuncio.id)">Editar</button>
-                            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarAnuncio(anuncio.id)">Eliminar</button>
+                        <td class="py-1 px-2 text-end">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2"
+                                (click)="editarAnuncio(anuncio.id)">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill"
+                                (click)="eliminarAnuncio(anuncio.id)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -82,7 +97,10 @@
     </section>
 
     <section class="w-100">
-        <h3 class="fw-bold mb-2">Gestión de pisos</h3>
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="fw-bold mb-0">Gestión de pisos</h3>
+            <button class="btn btn-success mt-3" (click)="agregarPiso()">Nuevo piso</button>
+        </div>
         <div class="table-responsive w-100" style="max-height: 400px; overflow-y: auto;">
             <table class="table table-sm table-striped w-100 align-middle" style="font-size: 0.93rem;">
                 <thead>
@@ -92,7 +110,7 @@
                         <th class="py-1 px-2">Metros²</th>
                         <th class="py-1 px-2">Habitaciones</th>
                         <th class="py-1 px-2">Observaciones</th>
-                        <th class="py-1 px-2">Operaciones</th>
+                        <th class="py-1 px-2 text-end">Operaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,9 +122,11 @@
                         <td class="py-1 px-2">{{ piso.numHabitaciones }}</td>
                         <td class="py-1 px-2">{{ piso.observaciones || 'No disponible' | slice:0:25 }}<span
                                 *ngIf="piso.observaciones?.length > 25">…</span></td>
-                        <td class="py-1 px-2">
-                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2" (click)="editarPiso(piso.id)">Editar</button>
-                            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarPiso(piso.id)">Eliminar</button>
+                        <td class="py-1 px-2 text-end">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2"
+                                (click)="editarPiso(piso.id)">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill"
+                                (click)="eliminarPiso(piso.id)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>

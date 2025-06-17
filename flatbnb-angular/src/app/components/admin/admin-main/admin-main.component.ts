@@ -178,4 +178,16 @@ export class AdminMainComponent implements OnInit {
       this.router.navigate(['editar-piso/', id]);
     }
 
+    agregarUsuario() {
+
+    }
+
+    agregarAnuncio() {
+      
+    }
+
+    agregarPiso() {
+      this.router.navigate(['agregar-piso']);
+    }
+
 }

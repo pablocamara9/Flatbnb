@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth-service.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements DoCheck {
+
   logoPath: string = 'assets/logo.png';
   userRole: string | null = null;
   userId: string | null = null;
@@ -53,5 +54,9 @@ export class HeaderComponent implements DoCheck {
     this.userRole = null;
     this.userId = null;
     this.router.navigate(['/main']);
+  }
+
+  miPerfil(id: string|null) {
+    this.router.navigate(['/profile', id]);
   }
 }

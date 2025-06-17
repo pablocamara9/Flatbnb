@@ -21,7 +21,7 @@
                     <a class="nav-link" [routerLink]="['/reservas', userId]">Mis reservas</a>
                 </li>
                 <li class="nav-item" *ngIf="userRole === 'ADMIN'">
-                    <a class="nav-link" [routerLink]="['/admin', userId]">Panel de administración</a>
+                    <a class="nav-link" [routerLink]="['/admin']">Panel de administración</a>
                 </li>
                 <li class="nav-item" *ngIf="userRole === 'PROPIETARIO'">
                     <a class="nav-link" [routerLink]="['/propietario/', userId]">Mis anuncios</a>
@@ -36,7 +36,7 @@
                     <a href="/login" class="btn btn-danger ms-2">Iniciar sesión</a>
                 </ng-container>
                 <ng-template #logged>
-                    <a href="#" class="btn btn-danger">Mi perfil</a>
+                    <a [routerLink]="['/profile/', userId]" class="btn btn-danger">Mi perfil</a>
                     <button type="button" class="btn btn-danger ms-2" (click)="logout()">Cerrar sesión</button>
                 </ng-template>
             </form>

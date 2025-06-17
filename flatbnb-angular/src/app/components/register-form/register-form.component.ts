@@ -54,6 +54,13 @@ export class RegisterFormComponent {
   }
 
   register() {
+    let endpoint = '';
+    if (this.rol === '2') {
+      endpoint = 'http://localhost:8080/propietario/';
+    } else {
+      endpoint = 'http://localhost:8080/user/auth/register';
+    }
+
     this.authService.register(
       this.username,
       this.password,
@@ -61,7 +68,8 @@ export class RegisterFormComponent {
       this.apellidos,
       this.email,
       this.telefono,
-      this.rol
+      this.rol,
+      endpoint
     );
 
     this.router.navigate(['/main']);

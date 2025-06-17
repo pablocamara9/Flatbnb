@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Piso } from '../../../models/piso.model';
+import { AuthService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-propietario-piso-form',
@@ -18,11 +19,13 @@ export class PropietarioPisoFormComponent implements OnInit {
   observaciones: string = '';
   pisoId: string | null = null;
   isEdit: boolean = false;
+  propietarioId: string | null = null;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +41,7 @@ export class PropietarioPisoFormComponent implements OnInit {
           this.metrosCuadrados = data.metrosCuadrados;
           this.numHabitaciones = data.numHabitaciones;
           this.observaciones = data.observaciones;
+          this.propietarioId = data.propietario.id;
         },
         error: () => {
           Swal.fire('Error', 'No se pudo cargar el piso.', 'error');
@@ -59,7 +63,7 @@ export class PropietarioPisoFormComponent implements OnInit {
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
-        idPropietario = userObj.id;
+        idPropietario = this.propietarioId;
       } catch {}
     }
     const body = {
@@ -74,15 +78,21 @@ export class PropietarioPisoFormComponent implements OnInit {
       this.http.put(`http://localhost:8080/piso/${this.pisoId}`, body, { headers }).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Piso actualizado correctamente.', 'success').then(() => {
-            window.location.reload();
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario-pisos/', idPropietario]);
+            }
           });
-          this.router.navigate(['/propietario-pisos/', idPropietario]);
         },
         error: () => {
           Swal.fire('Error', 'No se pudo actualizar el piso.', 'error').then(() => {
-            window.location.reload();
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario-pisos/', idPropietario]);
+            }
           });
-          this.router.navigate(['/propietario-pisos/', idPropietario]);
         }
       });
     } else {

@@ -175,6 +175,7 @@ export class AdminMainComponent implements OnInit {
     }
 
     editarPiso(id: string) {
+      this.router.navigate(['editar-piso/', id]);
     }
 
 }

@@ -105,8 +105,8 @@
                         <td class="py-1 px-2">{{ piso.observaciones || 'No disponible' | slice:0:25 }}<span
                                 *ngIf="piso.observaciones?.length > 25">…</span></td>
                         <td class="py-1 px-2">
-                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2">Editar</button>
-                            <button class="btn btn-outline-danger btn-sm rounded-pill">Eliminar</button>
+                            <button class="btn btn-outline-primary btn-sm rounded-pill me-2" (click)="editarPiso(piso.id)">Editar</button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill" (click)="eliminarPiso(piso.id)">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>

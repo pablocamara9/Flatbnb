@@ -1,21 +1,41 @@
 <app-header></app-header>
 
 <div class="container mt-4 d-flex flex-column align-items-center">
-  <h2>Agregar Nuevo Anuncio</h2>
-  <form (ngSubmit)="onSubmit()" #anuncioForm="ngForm" class="w-100" style="max-width: 700px;">
+  <h2>{{ isEdit ? 'Editar Anuncio' : 'Agregar Nuevo Anuncio' }}</h2>
+  <form (ngSubmit)="agregarAnuncio()" #anuncioForm="ngForm" class="w-100" style="max-width: 700px;">
     <div class="mb-3 w-100">
       <label for="descripcion" class="form-label">Descripción</label>
-      <textarea id="descripcion" class="form-control" name="descripcion" rows="3" required [(ngModel)]="anuncio.descripcion"></textarea>
+      <textarea id="descripcion" class="form-control" name="descripcion" rows="3" required [(ngModel)]="descripcion"></textarea>
     </div>
     <div class="mb-3 w-100">
       <label for="precio" class="form-label">Precio</label>
-      <input type="number" id="precio" class="form-control" name="precio" required min="0" [(ngModel)]="anuncio.precio">
+      <input type="number" id="precio" class="form-control" name="precio" required min="0" [(ngModel)]="precio">
     </div>
     <div class="mb-3 w-100">
-      <label for="imagenUrl" class="form-label">URL de la Imagen</label>
-      <input type="url" id="imagenUrl" class="form-control" name="imagenUrl" required [(ngModel)]="anuncio.imagenUrl">
+      <label for="urlImagen" class="form-label">URL de la Imagen</label>
+      <input type="url" id="urlImagen" class="form-control" name="urlImagen" required [(ngModel)]="urlImagen">
     </div>
-    <button type="submit" class="btn btn-primary">Agregar Anuncio</button>
+    
+    <!-- Nuevo select de propietarios solo para admin -->
+    <div *ngIf="admin" class="mb-3 w-100">
+      <label for="propietarioSelect" class="form-label">Propietario</label>
+      <select id="propietarioSelect" class="form-select" name="propietarioId" [(ngModel)]="propietarioId" required (change)="cargarPisos()">
+        <option value="" disabled selected>Seleccione un propietario</option>
+        <option *ngFor="let propietario of propietarios" [value]="propietario.id">
+          {{ propietario.nombre }} {{ propietario.apellidos }} ({{ propietario.email }})
+        </option>
+      </select>
+    </div>
+    <div class="mb-3 w-100">
+      <label for="piso" class="form-label">Piso</label>
+      <select id="piso" class="form-select" name="piso" required [(ngModel)]="pisoId">
+        <option value="" disabled selected>Seleccione un piso</option>
+        <option *ngFor="let piso of pisos" [value]="piso.id">
+          {{ piso.direccion }} ({{ piso.metrosCuadrados }} m², {{ piso.numHabitaciones }} hab.)
+        </option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ isEdit ? 'Guardar Cambios' : 'Agregar Anuncio' }}</button>
   </form>
 </div>
 

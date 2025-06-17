@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-announcement-detail',
@@ -11,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class AnnouncementDetailComponent implements OnInit {
   anuncio: any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private router2: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -21,5 +22,16 @@ export class AnnouncementDetailComponent implements OnInit {
         error: () => this.anuncio = null
       });
     }
+  }
+
+  reservar() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Reserva realizada',
+      text: 'Tu reserva se ha realizado correctamente.',
+      timer: 3000
+    }).then(() => {
+      this.router2.navigate(['/main']);
+    });
   }
 }

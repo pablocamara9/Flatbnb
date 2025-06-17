@@ -19,6 +19,14 @@
       <label for="observaciones" class="form-label">Observaciones</label>
       <textarea id="observaciones" class="form-control" name="observaciones" rows="3" [(ngModel)]="observaciones"></textarea>
     </div>
+    <div *ngIf="isAdmin" class="mb-3 w-100">
+      <label for="propietarioSelect" class="form-label">Propietario</label>
+      <select id="propietarioSelect" class="form-select" [(ngModel)]="propietarioId" name="propietarioId" required>
+        <option *ngFor="let propietario of propietarios" [ngValue]="propietario.id">
+          {{ propietario?.nombre }} {{ propietario?.apellidos }} ({{ propietario?.email }})
+        </option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">{{ isEdit ? 'Guardar cambios' : 'Agregar piso' }}</button>
   </form>
 </div>

@@ -70,7 +70,7 @@ public class AnuncioController {
     })
     @GetMapping
     public ResponseEntity<Page<GetAnuncioDto>> findAll(
-            @PageableDefault(page = 0, size = 5) Pageable pageable
+            @PageableDefault(page = 0, size = 6) Pageable pageable
     ) {
         Page<Anuncio> pagedResult = anuncioService.findAllPaged(pageable);
 
@@ -161,7 +161,7 @@ public class AnuncioController {
     })
     @GetMapping("/precio")
     public ResponseEntity<Page<GetAnuncioDto>> findAllOrderByPrecio(
-            @PageableDefault(page = 0, size = 5) Pageable pageable
+            @PageableDefault(page = 0, size = 6) Pageable pageable
     ) {
         Page<Anuncio> pagedResult = anuncioService.findAllOrderByPrecio(pageable);
 
@@ -184,7 +184,7 @@ public class AnuncioController {
     })
     @GetMapping("/precioDesc")
     public ResponseEntity<Page<GetAnuncioDto>> findAllOrderByPrecioDesc(
-            @PageableDefault(page = 0, size = 5) Pageable pageable
+            @PageableDefault(page = 0, size = 6) Pageable pageable
     ) {
         Page<Anuncio> pagedResult = anuncioService.findAllOrderByPrecioDesc(pageable);
 
@@ -206,7 +206,7 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioEntre/{min}/{max}")
-    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioBetween(@PathVariable double min, @PathVariable double max, @PageableDefault(page = 0, size = 5) Pageable pageable) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioBetween(@PathVariable double min, @PathVariable double max, @PageableDefault(page = 0, size = 6) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPrecioBetween(min, max, pageable);
 
         if(pagedResult.isEmpty()) {
@@ -227,7 +227,7 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioMayor/{precio}")
-    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioGreaterThan(@PathVariable double precio, @PageableDefault(page = 0, size = 5) Pageable pageable) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioGreaterThan(@PathVariable double precio, @PageableDefault(page = 0, size = 6) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPrecioGreaterThan(precio, pageable);
 
         if(pagedResult.isEmpty()) {
@@ -248,7 +248,7 @@ public class AnuncioController {
                     content = @Content)
     })
     @GetMapping("/precioMenor/{precio}")
-    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioLessThan(@PathVariable double precio, @PageableDefault(page = 0, size = 5) Pageable pageable) {
+    public ResponseEntity<Page<GetAnuncioDto>> findAllByPrecioLessThan(@PathVariable double precio, @PageableDefault(page = 0, size = 6) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPrecioLessThan(precio, pageable);
 
         if(pagedResult.isEmpty()) {
@@ -261,6 +261,90 @@ public class AnuncioController {
     @GetMapping("/propietario/{id}")
     public ResponseEntity<Page<GetAnuncioDto>> findAllByPropietarioId(@PathVariable UUID id, @PageableDefault(page = 0, size = 6) Pageable pageable) {
         Page<Anuncio> pagedResult = anuncioService.findAllByPropietarioId(id, pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pagedResult.map(GetAnuncioDto::of));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios ordenando por espacio (metros cuadrados) de mayor a menor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/espacio")
+    public ResponseEntity<Page<GetAnuncioDto>> findAnunciosByEspacio(@PageableDefault(page = 0, size = 6) Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAnunciosByEspacio(pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pagedResult.map(GetAnuncioDto::of));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios ordenando por espacio (metros cuadrados) de mayor a menor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/espacioMenor")
+    public ResponseEntity<Page<GetAnuncioDto>> findAnunciosByMenorEspacio(@PageableDefault(page = 0, size = 6) Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAnunciosByMenorEspacio(pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pagedResult.map(GetAnuncioDto::of));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios ordenando por número de habitaciones de mayor a menor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/habitaciones")
+    public ResponseEntity<Page<GetAnuncioDto>> findAnunciosByHabitaciones(@PageableDefault(page = 0, size = 6) Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAnunciosByHabitaciones(pageable);
+
+        if(pagedResult.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(pagedResult.map(GetAnuncioDto::of));
+    }
+
+    @Operation(summary = "Obtiene un un listado de anuncios ordenando por número de habitaciones de menor a mayor")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado los Anuncios",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Anuncio.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se encontraron los anuncios",
+                    content = @Content)
+    })
+    @GetMapping("/habitacionesMenor")
+    public ResponseEntity<Page<GetAnuncioDto>> findAnunciosByMenorHabitaciones(@PageableDefault(page = 0, size = 6) Pageable pageable) {
+        Page<Anuncio> pagedResult = anuncioService.findAnunciosByHabitacionesMenor(pageable);
 
         if(pagedResult.isEmpty()) {
             return ResponseEntity.noContent().build();

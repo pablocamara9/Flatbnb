@@ -8,11 +8,16 @@ import { PropietarioComponent } from './components/propietario/propietario-anunc
 import { PropietarioFormComponent } from './components/propietario/propietario-form/propietario-form.component';
 import { PropietarioPisosComponent } from './components/propietario/propietario-pisos/propietario-pisos.component';
 import { PropietarioPisoFormComponent } from './components/propietario/propietario-piso-form/propietario-piso-form.component';
+import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
+import { AdminUserFormComponent } from './components/admin/admin-user-form/admin-user-form.component';
+import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { PropietarioListComponent } from './components/propietario-list/propietario-list.component';
 
 const routes: Routes = [
   { path: 'main', component: MainPageComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },
+  { path: 'propietario-list', component: PropietarioListComponent},
   { path: 'anuncio/:id', component: AnnouncementDetailComponent },
   { path: 'propietario/:id', component: PropietarioComponent},
   { path: 'agregar-anuncio', component: PropietarioFormComponent },
@@ -20,6 +25,9 @@ const routes: Routes = [
   { path: 'propietario-pisos/:id', component: PropietarioPisosComponent},
   { path: 'agregar-piso', component: PropietarioPisoFormComponent},
   { path: 'editar-piso/:id', component: PropietarioPisoFormComponent},
+  { path: 'admin', component: AdminMainComponent},
+  { path: 'admin/editar-usuario/:id', component: AdminUserFormComponent },
+  {path: 'profile/:id', component: UserDetailComponent},
   { path: '', redirectTo: '/main', pathMatch: 'full' },
 ];
 

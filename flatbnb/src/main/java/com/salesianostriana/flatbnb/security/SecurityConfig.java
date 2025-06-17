@@ -75,25 +75,26 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authz -> authz
                 //USUARIOS
-                .requestMatchers(HttpMethod.GET, "user/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.POST, "user/auth/register", "user/activate/account", "/user/auth/login", "/user/auth/refresh/token").permitAll()
-                .requestMatchers(HttpMethod.PUT, "user/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "user/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/user/").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/user/{id}").permitAll()
+                .requestMatchers(HttpMethod.POST, "/user/auth/register", "/user/activate/account", "/user/auth/login", "/user/auth/refresh/token").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/user/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/user/**").permitAll()
                 //PISOS
-                .requestMatchers(HttpMethod.GET, "piso/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.PUT, "piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.DELETE, "piso/**").hasAnyRole( "ADMIN","PROPIETARIO")
+                .requestMatchers(HttpMethod.GET, "/piso/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.PUT, "/piso/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "/piso/**").hasAnyRole( "ADMIN","PROPIETARIO")
                 //PROPIETARIOS
-                .requestMatchers(HttpMethod.GET, "propietario/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "propietario/**").authenticated()
-                .requestMatchers(HttpMethod.PUT, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.DELETE, "propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.GET, "/propietario/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/propietario/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "/propietario/**").hasAnyRole("ADMIN", "PROPIETARIO")
                 //ANUNCIOS
-                .requestMatchers(HttpMethod.GET, "anuncio/**").permitAll()
-                /*.requestMatchers(HttpMethod.POST, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
-                .requestMatchers(HttpMethod.PUT, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")*/
-                .requestMatchers(HttpMethod.DELETE, "anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.GET, "/anuncio/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.PUT, "/anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
+                .requestMatchers(HttpMethod.DELETE, "/anuncio/**").hasAnyRole("ADMIN", "PROPIETARIO")
 
                 //OTRAS COSAS
                 //.requestMatchers("/h2-console/**").permitAll()

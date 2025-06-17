@@ -59,4 +59,32 @@ public interface AnuncioRepository
         WHERE a.propietario.id = :propietarioID
     """)
     Page<Anuncio> findAnunciosByPropietarioId(UUID propietarioID, Pageable pageable);
+
+    @Query("""
+        SELECT a
+        FROM Anuncio a
+        ORDER BY a.piso.metrosCuadrados DESC
+    """)
+    Page<Anuncio> findAnunciosByEspacio(Pageable pageable);
+
+    @Query("""
+        SELECT a
+        FROM Anuncio a
+        ORDER BY a.piso.metrosCuadrados ASC
+    """)
+    Page<Anuncio> findAnunciosByMenorEspacio(Pageable pageable);
+
+    @Query("""
+        SELECT a
+        FROM Anuncio a
+        ORDER BY a.piso.numHabitaciones DESC
+    """)
+    Page<Anuncio> findAnunciosByHabitaciones(Pageable pageable);
+
+    @Query("""
+        SELECT a
+        FROM Anuncio a
+        ORDER BY a.piso.numHabitaciones ASC
+    """)
+    Page<Anuncio> findAnunciosByHabitacionesMenor(Pageable pageable);
 }

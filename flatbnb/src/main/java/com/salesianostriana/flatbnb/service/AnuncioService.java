@@ -165,4 +165,36 @@ public class AnuncioService {
         return anuncios;
     }
 
+    public Page<Anuncio> findAnunciosByEspacio(Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAnunciosByEspacio(pageable);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
+    public Page<Anuncio> findAnunciosByMenorEspacio(Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAnunciosByMenorEspacio(pageable);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
+    public Page<Anuncio> findAnunciosByHabitaciones(Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAnunciosByHabitaciones(pageable);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
+    public Page<Anuncio> findAnunciosByHabitacionesMenor(Pageable pageable) {
+        Page<Anuncio> anuncios = anuncioRepository.findAnunciosByHabitacionesMenor(pageable);
+        if(anuncios.isEmpty()) {
+            throw new EntityNotFoundException("No se encontraron anuncios.");
+        }
+        return anuncios;
+    }
+
 }

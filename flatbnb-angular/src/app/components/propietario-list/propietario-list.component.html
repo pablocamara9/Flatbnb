@@ -1,0 +1,58 @@
+<app-header></app-header>
+<div class="container-fluid min-vh-100 d-flex flex-column justify-content-between p-0 bg-white">
+    <h2 class="mb-4 mt-5 text-center fw-bold">Lista de propietarios</h2>
+
+    <!-- Filtros -->
+    <div class="d-flex justify-content-center gap-2 mt-3 mb-2 flex-wrap">
+        <button class="btn btn-light rounded-pill px-3" (click)="mejorValorados()">Mejor valorados primero</button>
+        <button class="btn btn-light rounded-pill px-3" (click)="peorValorados()">Peor valorados primero</button>
+    </div>
+
+    <div class="container mt-4 flex-grow-1">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center"
+             *ngIf="propietariosPagina && propietariosPagina.length > 0; else sinPropietarios">
+            <div class="col" *ngFor="let propietario of propietariosPagina">
+                <div class="card h-100 border-0 shadow rounded-4" style="min-height: 220px; max-width: 420px;">
+                    <div class="d-flex justify-content-center mt-3">
+                        <img src="assets/profilepicture.png"
+                             class="rounded-circle border"
+                             alt="Imagen propietario"
+                             style="width: 110px; height: 110px; object-fit: cover;">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">
+                            <i class="bi bi-person-circle me-2"></i>
+                            {{ propietario.nombre }} {{ propietario.apellidos }}
+                        </h5>
+                        <p class="card-text mb-1"><strong>Email:</strong> {{ propietario.email }}</p>
+                        <p class="card-text mb-1"><strong>Teléfono:</strong> {{ propietario.telefono }}</p>
+                        <p class="card-text mb-1"><strong>Valoración:</strong> {{ propietario.valoracion }} / 5</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #sinPropietarios>
+            <div class="col-12 text-center text-muted py-5">
+                No hay propietarios disponibles.
+            </div>
+        </ng-template>
+        <!-- Controles de paginación -->
+        <div class="d-flex justify-content-center mt-5" *ngIf="totalPaginas > 1">
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item" [class.disabled]="paginaActual === 0">
+                        <button class="page-link" (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 0">&laquo;</button>
+                    </li>
+                    <li class="page-item" *ngFor="let page of [].constructor(totalPaginas); let i = index"
+                        [class.active]="i === paginaActual">
+                        <button class="page-link" (click)="cambiarPagina(i)">{{ i + 1 }}</button>
+                    </li>
+                    <li class="page-item" [class.disabled]="paginaActual === totalPaginas - 1">
+                        <button class="page-link" (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas - 1">&raquo;</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <app-footer></app-footer>

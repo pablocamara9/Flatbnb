@@ -5,7 +5,7 @@ services:
        environment:
            - POSTGRES_USER=postgres
            - POSTGRES_PASSWORD=12345678
-           - POSTGRES_DB=postgres
+           - POSTGRES_DB=flatbnb
        healthcheck:
            test: ["CMD-SHELL", "pg_isready -U postgres"]
            interval: 30s
@@ -29,6 +29,36 @@ services:
          PGADMIN_DEFAULT_PASSWORD: 1
        volumes:
          - pgadmin-data:/var/lib/pgadmin
+
+   app:
+      build:
+        context: .
+        dockerfile: DockerFileBack
+      container_name: flatbnb-backend
+      environment:
+        
+        - SPRING_DATASOURCE_URL=jdbc:postgresql://pg:5432/flatbnb
+        - SPRING_DATASOURCE_USERNAME=postgres
+        - SPRING_DATASOURCE_PASSWORD=12345678
+      ports:
+        - "8080:8080"
+      depends_on:
+        pg:
+          condition: service_healthy
+      restart: on-failure
+      volumes:
+        - ./uploads:/app/uploads
+
+   frontend:
+    build:
+      context: .
+      dockerfile: DockerFileFront
+    container_name: flatbnb-frontend
+    ports:
+      - "4200:4200"
+    restart: on-failure
+    depends_on:
+      - app
           
 volumes:
   pgdata:

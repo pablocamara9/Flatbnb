@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="container mt-5" *ngIf="user">
+  <h2 class="text-center mb-4 fw-bold">Mis datos</h2>
+  <div class="card mx-auto" style="max-width: 400px;">
+    <div class="card-body">
+      <h4 class="card-title mb-3">Datos del usuario</h4>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Nombre:</strong> {{ user.nombre }}</li>
+        <li class="list-group-item"><strong>Apellidos:</strong> {{ user.apellidos }}</li>
+        <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+        <li class="list-group-item"><strong>Teléfono:</strong> {{ user.telefono }}</li>
+        <li class="list-group-item"><strong>Username:</strong> {{ user.username }}</li>
+        <!--<li class="list-group-item"><strong>Rol:</strong> {{ getRoleText(user.role) }}</li>-->
+        <li class="list-group-item"><strong>Rol:</strong> {{ user.role === '[USER]' ? 'Cliente' : user.role === '[PROPIETARIO]' ? 'Propietario' : 'Administrador' }}</li>
+        <li class="list-group-item"><strong>Fecha de creación:</strong> {{ formatDate(user.createdAt) }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center mt-3">
+    <button class="btn btn-outline-danger" (click)="eliminarCuenta()">
+      Eliminar cuenta
+    </button>
+  </div>
+</div>
+<div class="container mt-5" *ngIf="!user">
+  <div class="alert alert-warning text-center">
+    No se pudo cargar la información del usuario.
+  </div>
+</div>
+
+<app-footer></app-footer>

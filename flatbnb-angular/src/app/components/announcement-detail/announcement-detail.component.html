@@ -119,6 +119,12 @@
       {{ anuncio.precio | currency:'EUR':'symbol':'1.0-0' }}
     </div>
   </div>
+
+  <div class="mb-4">
+    <button (click)="reservar()" class="btn btn-danger rounded-pill py-2 px-4 fw-semibold" style="font-size: 1.1rem;">
+      Reservar
+    </button>
+  </div>
 </div>
 
 <ng-template #sinAnuncio>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-detail',
@@ -10,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserDetailComponent implements OnInit {
   user: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit() {
     // Obtener el usuario logado del localStorage
@@ -45,5 +47,33 @@ export class UserDetailComponent implements OnInit {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
+  }
+
+  eliminarCuenta() {
+    if (!this.user || !this.user.id) return;
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Esta acción eliminará tu cuenta permanentemente.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.http.delete(`http://localhost:8080/user/${this.user.id}`).subscribe({
+          next: () => {
+            localStorage.removeItem('user');
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('refreshToken');
+            Swal.fire('Eliminado', 'Tu cuenta ha sido eliminada.', 'success').then(() => {
+              this.router.navigate(['/main']);
+            });
+          },
+          error: () => {
+            Swal.fire('Error', 'No se pudo eliminar la cuenta.', 'error');
+          }
+        });
+      }
+    });
   }
 }

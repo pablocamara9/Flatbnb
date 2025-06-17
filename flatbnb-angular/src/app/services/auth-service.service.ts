@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  
   constructor(private http: HttpClient) { }
 
   logout() {
@@ -140,6 +141,24 @@ export class AuthService {
           })
         }
       });
+  }
+
+  isAdmin(): boolean {
+    const userStr = localStorage.getItem('user') || sessionStorage.getItem('user');
+    if (userStr) {
+      try {
+        const user = JSON.parse(userStr);
+        if (user.token) {
+          const decoded: any = jwtDecode(user.token);
+          if (decoded.roles && Array.isArray(decoded.roles)) {
+            return decoded.roles.includes('ADMIN');
+          }
+        }
+      } catch (e) {
+        console.error('Error decodificando el token:', e);
+      }
+    }
+    return false;
   }
 
 }

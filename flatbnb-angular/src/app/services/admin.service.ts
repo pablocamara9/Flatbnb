@@ -25,4 +25,13 @@ export class AdminService {
     }
     return this.http.put(`http://localhost:8080/user/${id}`, { headers });
   }
+
+  eliminarAnuncio(id: string) {
+    const token = localStorage.getItem('accessToken');
+    let headers = undefined;
+    if (token) {
+      headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    }
+    return this.http.delete(`http://localhost:8080/anuncio/${id}`, { headers });
+  }
 }

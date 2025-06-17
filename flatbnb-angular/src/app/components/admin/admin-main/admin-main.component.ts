@@ -118,5 +118,34 @@ export class AdminMainComponent implements OnInit {
             });
           }
         });
-  }
+    }
+
+    eliminarAnuncio(id: string) {
+    Swal.fire({
+          title: "¿Estás seguro?",
+          text: "No podrás deshacer esta acción!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Sí, bórralo!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.service.eliminarAnuncio(id).subscribe({
+              next: () => {
+                Swal.fire('Eliminado!', 'El anuncio ha sido eliminado.', 'success').then(() => {
+                  window.location.reload();
+                });
+              },
+              error: () => {
+                Swal.fire('Error', 'No se pudo eliminar el anuncio.', 'error');
+              }
+            });
+          }
+        });
+    }
+
+    editarAnuncio(id: string) {
+      this.router.navigate(['editar-anuncio/', id]);
+    }
 }

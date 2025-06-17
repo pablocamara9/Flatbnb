@@ -12,6 +12,7 @@ export interface Piso {
     numHabitaciones: number;
     observaciones: string;
     anuncio: Anuncio;
+    propietario: Propietario;
 }
 
 export interface Root {

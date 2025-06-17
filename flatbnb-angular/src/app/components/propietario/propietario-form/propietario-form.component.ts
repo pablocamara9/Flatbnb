@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Anuncio } from '../../../models/anuncio.model';
 import { Piso } from '../../../models/piso.model';
+import { AuthService } from '../../../services/auth-service.service';
 
 @Component({
   selector: 'app-propietario-form',
@@ -18,14 +19,16 @@ export class PropietarioFormComponent implements OnInit {
   precio: number | null = null;
   urlImagen: string = '';
   anuncioId: string | null = null;
+  propietarioId: string | null = null;
 
-  pisoId: string = ''; // Cambia de Piso | null a number | null
+  pisoId: string = '';
   pisos: Piso[] = [];
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -40,14 +43,17 @@ export class PropietarioFormComponent implements OnInit {
           this.descripcion = data.descripcion;
           this.precio = data.precio;
           this.urlImagen = data.urlImagen;
-          this.pisoId = data.piso?.id ?? null; // Asigna el id del piso si existe
+          this.pisoId = data.piso?.id ?? null;
+          this.propietarioId = data.piso.propietario.id
+          this.cargarPisos(); // <-- Mueve la llamada aquí
         },
         error: () => {
           Swal.fire('Error', 'No se pudo cargar el anuncio.', 'error');
         }
       });
 
-      this.cargarPisos();
+      // Elimina esta línea:
+      // this.cargarPisos();
     } else {
       this.cargarPisos();
     }
@@ -60,16 +66,15 @@ export class PropietarioFormComponent implements OnInit {
       return;
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    // Obtener el id del propietario desde el objeto 'user' en localStorage
     let idPropietario = null;
     const userStr = localStorage.getItem('user');
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
-        idPropietario = userObj.id;
+        idPropietario = this.propietarioId;
       } catch { }
     }
-    
+
     let idPiso = this.pisoId
     const body = {
       descripcion: this.descripcion,
@@ -83,30 +88,34 @@ export class PropietarioFormComponent implements OnInit {
       this.http.put(`http://localhost:8080/anuncio/${this.anuncioId}`, body, { headers }).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Anuncio actualizado correctamente.', 'success').then(() => {
-            window.location.reload();
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario/', idPropietario]);
+            }
           });
-          this.router.navigate(['/propietario/', idPropietario]);
         },
         error: () => {
           Swal.fire('Error', 'No se pudo actualizar el anuncio.', 'error').then(() => {
-            window.location.reload();
+            if(this.authService.isAdmin()) {
+              this.router.navigate(['/admin']);
+            } else {
+              this.router.navigate(['/propietario/', idPropietario]);
+            }
           });
-          this.router.navigate(['/propietario/', idPropietario]);
         }
       });
     } else {
       this.http.post('http://localhost:8080/anuncio/', body, { headers }).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Anuncio agregado correctamente.', 'success').then(() => {
-            window.location.reload();
+            this.router.navigate(['/propietario/', idPropietario]);
           });
-          this.router.navigate(['/propietario/', idPropietario]);
         },
         error: () => {
           Swal.fire('Error', 'No se pudo agregar el anuncio.', 'error').then(() => {
-            window.location.reload();
+            this.router.navigate(['/propietario/', idPropietario]);
           });
-          this.router.navigate(['/propietario/', idPropietario]);
         }
       });
     }
@@ -142,7 +151,8 @@ export class PropietarioFormComponent implements OnInit {
     if (userStr) {
       try {
         const userObj = JSON.parse(userStr);
-        propietarioId = userObj.id;
+        propietarioId = this.propietarioId
+        
       } catch { }
     }
     if (propietarioId && token) {

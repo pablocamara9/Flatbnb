@@ -19,6 +19,7 @@ import { PropietarioPisoFormComponent } from './components/propietario/propietar
 import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
 import { AdminUserFormComponent } from './components/admin/admin-user-form/admin-user-form.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { PropietarioListComponent } from './components/propietario-list/propietario-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
     AdminMainComponent,
     AdminUserFormComponent,
     UserDetailComponent,
+    PropietarioListComponent,
   ],
   imports: [
     BrowserModule,

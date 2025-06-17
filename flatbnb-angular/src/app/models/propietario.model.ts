@@ -11,6 +11,7 @@ export interface Propietario {
     apellidos: string;
     email: string;
     telefono: string;
+    valoracion: number;
     pisos: Piso[];
     anuncios: Anuncio[];
 }

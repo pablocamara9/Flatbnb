@@ -11,11 +11,13 @@ import { PropietarioPisoFormComponent } from './components/propietario/propietar
 import { AdminMainComponent } from './components/admin/admin-main/admin-main.component';
 import { AdminUserFormComponent } from './components/admin/admin-user-form/admin-user-form.component';
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
+import { PropietarioListComponent } from './components/propietario-list/propietario-list.component';
 
 const routes: Routes = [
   { path: 'main', component: MainPageComponent },
   { path: 'login', component: LoginFormComponent },
   { path: 'register', component: RegisterFormComponent },
+  { path: 'propietario-list', component: PropietarioListComponent},
   { path: 'anuncio/:id', component: AnnouncementDetailComponent },
   { path: 'propietario/:id', component: PropietarioComponent},
   { path: 'agregar-anuncio', component: PropietarioFormComponent },
